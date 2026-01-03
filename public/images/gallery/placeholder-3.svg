@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="100%" stop-color="#2B2B2E"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0%" stop-color="#E08F6F" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#E08F6F" stop-opacity="0.45"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="80" y="90" width="1040" height="620" rx="36" fill="url(#accent)"/>
+  <g fill="#EAEAEA" opacity="0.35" font-family="'Arial', sans-serif" font-size="28" letter-spacing="4">
+    <text x="120" y="160">THE SHADOW</text>
+  </g>
+  <g stroke="#E08F6F" stroke-width="2" opacity="0.6">
+    <line x1="160" y1="240" x2="1040" y2="240"/>
+    <line x1="160" y1="560" x2="1040" y2="560"/>
+  </g>
+</svg>
