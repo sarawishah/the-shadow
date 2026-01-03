@@ -11,10 +11,30 @@ type ServiceItem = {
   icon: string;
 };
 
+type PackageItem = {
+  title: string;
+  description: string;
+  badge?: string;
+  features: string[];
+  ctaLabel: string;
+};
+
+type HighlightItem = {
+  title: string;
+  description: string;
+  icon: string;
+};
+
+type IndustryItem = {
+  title: string;
+  description: string;
+};
+
 type StatItem = {
   label: string;
-  value: number;
+  value?: number;
   suffix?: string;
+  display?: string;
   isPlaceholder?: boolean;
 };
 
@@ -59,7 +79,13 @@ type SiteContent = {
       description: string;
       nameLabel: string;
       phoneLabel: string;
-      serviceLabel: string;
+      cityLabel: string;
+      propertyLabel: string;
+      cameraLabel: string;
+      preferenceLabel: string;
+      propertyOptions: string[];
+      cameraOptions: string[];
+      preferenceOptions: string[];
       button: string;
       note: string;
     };
@@ -76,12 +102,29 @@ type SiteContent = {
     subtitle: string;
     items: ServiceItem[];
   };
+  packages: {
+    title: string;
+    subtitle: string;
+    note: string;
+    items: PackageItem[];
+  };
+  highlights: {
+    title: string;
+    subtitle: string;
+    items: HighlightItem[];
+  };
+  industries: {
+    title: string;
+    subtitle: string;
+    items: IndustryItem[];
+  };
   why: {
     title: string;
     subtitle: string;
     bullets: string[];
     promiseTitle: string;
     promiseText: string;
+    chips: string[];
   };
   coverage: {
     title: string;
@@ -105,7 +148,7 @@ type SiteContent = {
     subtitle: string;
     items: Testimonial[];
   };
-  clients: {
+  brands: {
     title: string;
     subtitle: string;
     items: string[];
@@ -143,13 +186,22 @@ type SiteContent = {
     formName: string;
     formPhone: string;
     formEmail: string;
-    formService: string;
+    formCity: string;
+    formProperty: string;
+    formCameraCount: string;
+    formPreference: string;
     formMessage: string;
     formVerification: string;
     formSubmit: string;
     formNote: string;
     verificationAnswer: string;
     mapTitle: string;
+    propertyOptions: string[];
+    cameraOptions: string[];
+    preferenceOptions: string[];
+    freeVisitTitle: string;
+    freeVisitDescription: string;
+    freeVisitItems: string[];
   };
   footer: {
     tagline: string;
@@ -162,9 +214,9 @@ type SiteContent = {
 export const siteContent: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "THE SHADOW | CCTV Systems in Jordan",
+      title: "CCTV Systems in Jordan | Installation & Maintenance",
       description:
-        "CCTV system design, installation, and monitoring support across Jordan. Professional technicians, clean cabling, and reliable storage.",
+        "CCTV system design, supply, installation, and maintenance across Jordan. Clean cabling, reliable storage, and remote viewing setup.",
     },
     topBar: {
       phoneLabel: "Call",
@@ -176,83 +228,227 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "home", label: "Home" },
       { id: "about", label: "About" },
       { id: "services", label: "Services" },
+      { id: "packages", label: "Packages" },
       { id: "why", label: "Why Us" },
       { id: "coverage", label: "Coverage" },
       { id: "gallery", label: "Gallery" },
-      { id: "clients", label: "Clients" },
+      { id: "proof", label: "Proof" },
       { id: "faqs", label: "FAQs" },
       { id: "contact", label: "Contact" },
     ],
     hero: {
-      badge: "CCTV & Surveillance Systems in Jordan",
-      headline: "CCTV Systems You Can Rely On.",
+      badge: "CCTV Systems & Security Solutions in Jordan",
+      headline: "CCTV Systems That Actually Protect Your Business.",
       subheadline:
-        "Design, supply, installation, and monitoring support for CCTV and security systems across Jordan - built for clarity, compliance, and dependable coverage.",
-      primaryCta: "Request a CCTV Quote",
-      secondaryCta: "Call Now",
-      tertiaryCta: "WhatsApp",
-      chips: ["Professional Install", "Remote Access Setup", "Ongoing Support"],
+        "Design, supply, installation, configuration, and maintenance for homes, shops, warehouses, offices, and compounds.",
+      primaryCta: "Get a Free Site Visit",
+      secondaryCta: "WhatsApp Now",
+      tertiaryCta: "View Packages",
+      chips: ["HD/4K Options", "Remote Viewing", "Fast Installation"],
       quickQuote: {
         title: "Quick CCTV Quote",
         description:
-          "Tell us your site size and coverage goals and we will propose the right CCTV system.",
+          "Share your site size and we will recommend the right system.",
         nameLabel: "Full name",
         phoneLabel: "Phone number",
-        serviceLabel: "CCTV service needed",
-        button: "Send Request",
+        cityLabel: "City",
+        propertyLabel: "Property type",
+        cameraLabel: "Number of cameras",
+        preferenceLabel: "System preference",
+        propertyOptions: [
+          "Home",
+          "Shop/Retail",
+          "Warehouse",
+          "Office",
+          "Building/Compound",
+        ],
+        cameraOptions: ["4 cameras", "8 cameras", "16 cameras", "Custom"],
+        preferenceOptions: ["DVR", "NVR", "Not sure"],
+        button: "Get My Quote",
         note: "By submitting, you agree to be contacted by THE SHADOW.",
       },
     },
     about: {
       title: "About THE SHADOW",
       short:
-        "THE SHADOW delivers CCTV and surveillance systems for businesses, facilities, and residences across Jordan.",
+        "THE SHADOW designs and installs CCTV systems built for real-world sites across Jordan.",
       long:
-        "We handle site surveys, system design, installation, and structured handover. Our technicians focus on clean cabling, reliable storage, and simple monitoring workflows.",
+        "From site surveys to cabling, configuration, and handover, we deliver clean installations with reliable storage and clear monitoring workflows.",
       bullets: [
         "Licensed operations aligned with local regulations",
-        "Trained technicians and clean installations",
+        "Trained installers and neat cabling",
         "Documented handover and user training",
-        "Maintenance and support plans",
+        "Maintenance and upgrade plans",
       ],
-      imageAlt: "THE SHADOW CCTV monitoring room",
+      imageAlt: "THE SHADOW CCTV installation",
     },
     services: {
-      title: "CCTV Solutions",
-      subtitle:
-        "End-to-end CCTV and security system services tailored for every site.",
+      title: "CCTV Services",
+      subtitle: "Design, installation, and support for every CCTV requirement.",
       items: [
         {
-          title: "Site Survey & System Design",
+          title: "CCTV Installation (Home/Business)",
           description:
-            "Coverage planning, camera placement, and infrastructure assessment.",
-          icon: "risk",
+            "Indoor and outdoor camera installation planned for full coverage.",
+          icon: "install",
         },
         {
-          title: "CCTV Camera Installation",
-          description:
-            "Indoor and outdoor cameras installed for clarity and coverage.",
-          icon: "camera",
+          title: "IP Cameras & NVR Systems",
+          description: "High-definition IP systems with flexible management.",
+          icon: "ip",
         },
         {
-          title: "Recording & Storage Setup",
-          description: "NVR/DVR configuration with reliable retention.",
-          icon: "command",
+          title: "Analog (DVR) Systems",
+          description: "Cost-effective DVR setups with dependable recording.",
+          icon: "dvr",
         },
         {
-          title: "Remote Viewing & Mobile Access",
-          description: "Secure access setup for mobile and desktop.",
+          title: "PTZ Cameras (Zoom/Tracking)",
+          description: "Zoom and tracking for critical zones and perimeters.",
+          icon: "ptz",
+        },
+        {
+          title: "Access Control (Door/Gate)",
+          description: "Secure entry integration for doors and gates.",
           icon: "access",
         },
         {
-          title: "Perimeter & Outdoor Coverage",
-          description: "Weather-ready cameras and perimeter protection.",
-          icon: "shield",
+          title: "Video Intercom",
+          description: "Visual door communication for buildings and villas.",
+          icon: "intercom",
         },
         {
-          title: "Maintenance & Health Checks",
-          description: "Preventive maintenance, testing, and upgrades.",
-          icon: "patrol",
+          title: "Network & Cabling",
+          description: "Structured wiring, trunking, and clean cable routes.",
+          icon: "network",
+        },
+        {
+          title: "Maintenance & Upgrades",
+          description: "Health checks, firmware updates, and system upgrades.",
+          icon: "maintenance",
+        },
+      ],
+    },
+    packages: {
+      title: "CCTV Packages",
+      subtitle: "Start with a package and customize after the site visit.",
+      note: "Storage days, camera counts, and equipment are finalized after assessment.",
+      items: [
+        {
+          title: "Starter",
+          description: "A focused setup for small spaces and shops.",
+          features: [
+            "4 cameras (upgradeable)",
+            "1080p/2K/4K options",
+            "Remote viewing setup",
+            "Recording storage configured per site",
+            "Installation and handover",
+          ],
+          ctaLabel: "Get Starter Quote",
+        },
+        {
+          title: "Business",
+          badge: "Most Popular",
+          description: "Balanced coverage for offices and retail.",
+          features: [
+            "8 cameras (configurable)",
+            "IP or DVR options",
+            "Mobile app setup",
+            "Up to X days storage (configurable)",
+            "Installation and warranty briefing",
+          ],
+          ctaLabel: "Get Business Quote",
+        },
+        {
+          title: "Pro",
+          description: "Large sites, warehouses, and multi-zone coverage.",
+          features: [
+            "16 cameras (configurable)",
+            "PTZ and specialty options",
+            "Central recording and monitoring",
+            "Redundancy planning",
+            "On-site training",
+          ],
+          ctaLabel: "Get Pro Quote",
+        },
+        {
+          title: "Custom",
+          description: "Tailored systems for complex sites.",
+          features: [
+            "Site assessment required",
+            "Custom camera count",
+            "Access control integration",
+            "Cabling and infrastructure planning",
+            "Support plan options",
+          ],
+          ctaLabel: "Request Custom Quote",
+        },
+      ],
+    },
+    highlights: {
+      title: "What You Get",
+      subtitle:
+        "Practical features that keep your footage clear and accessible.",
+      items: [
+        {
+          title: "Mobile Remote View",
+          description: "Secure iOS and Android access with live view.",
+          icon: "mobile",
+        },
+        {
+          title: "Motion Alerts",
+          description: "Configurable notifications for activity zones.",
+          icon: "motion",
+        },
+        {
+          title: "Night Vision",
+          description: "Reliable coverage in low-light conditions.",
+          icon: "night",
+        },
+        {
+          title: "Smart Playback & Export",
+          description: "Quick search, playback, and exporting clips.",
+          icon: "playback",
+        },
+        {
+          title: "Secure System Configuration",
+          description: "Hardened setup with user permissions.",
+          icon: "secure",
+        },
+        {
+          title: "Cloud/Backup Options",
+          description: "Optional backup workflows when required.",
+          icon: "cloud",
+        },
+      ],
+    },
+    industries: {
+      title: "Industries We Serve",
+      subtitle: "CCTV systems tailored to real sites and use cases.",
+      items: [
+        {
+          title: "Retail & Shops",
+          description: "Cover entrances, cash points, and aisles.",
+        },
+        {
+          title: "Warehouses & Logistics",
+          description: "Monitor loading bays and storage zones.",
+        },
+        {
+          title: "Offices & Corporate",
+          description: "Secure lobbies, corridors, and access points.",
+        },
+        {
+          title: "Residential Villas",
+          description: "Perimeter and entry coverage with remote view.",
+        },
+        {
+          title: "Buildings & Compounds",
+          description: "Shared areas, parking, and gates.",
+        },
+        {
+          title: "Schools & Clinics",
+          description: "Safety monitoring with privacy considerations.",
         },
       ],
     },
@@ -261,18 +457,19 @@ export const siteContent: Record<Language, SiteContent> = {
       subtitle: "Clean installs, clear coverage plans, and dependable support.",
       bullets: [
         "Compliance with local regulations",
-        "Trained technicians & safe cabling",
-        "Documented coverage plans",
-        "Tested recording and storage",
-        "Ongoing support and maintenance",
+        "Professional site survey and coverage plan",
+        "Clean cabling with labeling",
+        "Secure configuration and documented handover",
+        "Responsive maintenance options",
       ],
       promiseTitle: "Quality Promise",
       promiseText:
-        "We deliver compliant CCTV systems with documented handover, performance checks, and clear support plans.",
+        "We deliver CCTV systems with tested recording, clear handover, and support you can rely on.",
+      chips: ["Site Assessment", "Clean Cabling", "Rapid Support"],
     },
     coverage: {
-      title: "Coverage Across Jordan",
-      subtitle: "Installations and support across Jordan.",
+      title: "Installation Coverage Across Jordan",
+      subtitle: "We install and support CCTV systems across Jordan.",
       regionsLabel: "Key areas",
       regions: [
         "Amman",
@@ -284,184 +481,196 @@ export const siteContent: Record<Language, SiteContent> = {
         "Jerash",
         "Karak",
       ],
-      responseNote:
-        "Deployment timing depends on site size, hardware availability, and installation scope.",
+      responseNote: "Same-day assessment when available.",
     },
     stats: {
-      title: "CCTV Highlights",
-      subtitle:
-        "Placeholder metrics - replace with verified figures when available.",
-      note:
-        "These numbers are placeholders for presentation only. Update with verified company metrics.",
+      title: "Service Snapshot",
+      subtitle: "Configurable metrics - replace with verified figures.",
+      note: "Replace these placeholders with verified company numbers when available.",
       items: [
-        { label: "Sites Protected", value: 180, suffix: "+", isPlaceholder: true },
-        { label: "Cameras Installed", value: 950, suffix: "+", isPlaceholder: true },
-        { label: "Years of Experience", value: 12, suffix: "+", isPlaceholder: true },
-        { label: "Cities Covered", value: 8, suffix: "+", isPlaceholder: true },
+        { label: "Projects Delivered", display: "Configurable" },
+        { label: "System Designs", display: "Site-based" },
+        { label: "Coverage Cities", display: "Across Jordan" },
+        { label: "Support Response", display: "Scheduled" },
       ],
     },
     process: {
       title: "How We Work",
       steps: [
-        "Site Survey",
+        "Site Assessment",
         "Coverage Plan",
         "Installation",
-        "Testing & Handover",
-        "Maintenance & Support",
+        "Configuration & Testing",
+        "Training & Support",
       ],
     },
     testimonials: {
-      title: "Client Confidence",
-      subtitle: "Clear coverage plans, clean installs, and reliable support.",
+      title: "Client Feedback",
+      subtitle: "Clear communication and reliable CCTV coverage.",
       items: [
         {
           quote:
-            "The coverage plan was clear and the installation was clean and professional.",
-          name: "Facility Manager",
-          role: "Commercial Site",
+            "The team mapped coverage carefully and delivered a clean installation.",
+          name: "Operations Manager",
+          role: "Retail Group",
         },
         {
           quote:
-            "Remote viewing works smoothly and the storage setup is dependable.",
-          name: "Operations Lead",
-          role: "Warehouse",
+            "Remote viewing setup was smooth and the system is easy to use.",
+          name: "Facility Lead",
+          role: "Office Building",
         },
         {
           quote:
-            "They delivered a full handover with testing and clear guidance.",
+            "They explained the storage plan and handled training professionally.",
           name: "Site Owner",
-          role: "Residential Compound",
+          role: "Warehouse",
         },
       ],
     },
-    clients: {
-      title: "Trusted By",
-      subtitle: "Replace these placeholders with confirmed client logos.",
+    brands: {
+      title: "Brands We Support",
+      subtitle:
+        "Replace these placeholders with confirmed brands or platforms you install.",
       items: [
-        "Retail & Commercial",
-        "Residential Compounds",
-        "Warehouses",
-        "Schools & Campuses",
-        "Hospitality",
-        "Healthcare",
+        "Brand Placeholder",
+        "Brand Placeholder",
+        "Brand Placeholder",
+        "Brand Placeholder",
       ],
     },
     gallery: {
       title: "Gallery",
-      subtitle: "CCTV installations, control rooms, and system snapshots.",
+      subtitle: "Installation snapshots and CCTV system details.",
       items: [
-        { src: "/images/gallery/placeholder-1.svg", alt: "Gallery placeholder" },
-        { src: "/images/gallery/placeholder-2.svg", alt: "Gallery placeholder" },
-        { src: "/images/gallery/placeholder-3.svg", alt: "Gallery placeholder" },
-        { src: "/images/gallery/placeholder-4.svg", alt: "Gallery placeholder" },
-        { src: "/images/gallery/placeholder-5.svg", alt: "Gallery placeholder" },
-        { src: "/images/gallery/placeholder-6.svg", alt: "Gallery placeholder" },
+        { src: "/images/gallery/placeholder-1.svg", alt: "CCTV gallery placeholder" },
+        { src: "/images/gallery/placeholder-2.svg", alt: "CCTV gallery placeholder" },
+        { src: "/images/gallery/placeholder-3.svg", alt: "CCTV gallery placeholder" },
+        { src: "/images/gallery/placeholder-4.svg", alt: "CCTV gallery placeholder" },
+        { src: "/images/gallery/placeholder-5.svg", alt: "CCTV gallery placeholder" },
+        { src: "/images/gallery/placeholder-6.svg", alt: "CCTV gallery placeholder" },
       ],
     },
     faqs: {
       title: "Frequently Asked Questions",
       items: [
         {
-          question: "Do you supply and install cameras?",
+          question: "Which is better for my site: DVR or NVR?",
           answer:
-            "Yes. We design the system, supply the hardware, and install cameras with proper coverage.",
+            "It depends on your infrastructure and budget. We recommend the right option after assessment.",
         },
         {
-          question: "Can I view cameras remotely?",
+          question: "How many days of recording will I get?",
           answer:
-            "Yes. We set up secure mobile and desktop access so you can view your system anywhere.",
+            "Storage duration depends on camera count and resolution. We calculate this with you.",
         },
         {
-          question: "Do you provide site surveys?",
+          question: "Can I view cameras from my phone?",
           answer:
-            "Yes. We assess the site and propose camera placement and coverage zones.",
+            "Yes. We set up secure mobile and desktop access for live view and playback.",
         },
         {
-          question: "What types of cameras do you install?",
+          question: "Do you provide warranty and maintenance?",
           answer:
-            "We recommend indoor, outdoor, fixed, or PTZ cameras based on site needs and lighting.",
+            "We offer warranty and maintenance options based on the project scope.",
         },
         {
-          question: "How long does installation take?",
-          answer:
-            "Timing depends on site size and scope. We schedule installation promptly after survey.",
+          question: "Do you install in apartments, shops, and warehouses?",
+          answer: "Yes. We handle installations for all site types.",
         },
         {
-          question: "Do you offer maintenance?",
+          question: "What camera resolution should I choose?",
           answer:
-            "Yes. We provide preventive maintenance, testing, and upgrade options.",
+            "We recommend 1080p, 2K, or 4K based on distance, lighting, and detail needs.",
         },
         {
-          question: "Can you integrate access control or alarms?",
-          answer:
-            "Yes, where compatible. We can integrate CCTV with access control or alarm systems.",
+          question: "Do you hide cables or use trunking?",
+          answer: "We use clean cabling routes and appropriate trunking.",
         },
         {
-          question: "Do you handle storage and recording?",
-          answer:
-            "Yes. We configure NVR/DVR storage and retention based on your requirements.",
+          question: "Can you integrate access control or intercom?",
+          answer: "Yes, when compatible with the selected equipment.",
         },
         {
-          question: "What areas do you cover?",
-          answer:
-            "We serve clients across Jordan, including Amman, Zarqa, Irbid, and Aqaba.",
+          question: "Do you offer periodic maintenance visits?",
+          answer: "Yes. Scheduled maintenance plans are available.",
         },
         {
-          question: "How do I request a quote?",
+          question: "How do I get a quote?",
           answer:
-            "Use the quick quote form or contact us directly by phone, email, or WhatsApp.",
+            "Fill out the request form or contact us directly for a site visit.",
         },
       ],
     },
     cta: {
-      title: "Upgrade your CCTV coverage today.",
-      description:
-        "Tell us your site layout and we will design a CCTV system with the right cameras, storage, and monitoring.",
-      primary: "Request a CCTV Quote",
-      secondary: "WhatsApp",
+      title: "Secure your site today.",
+      description: "Book a free site visit and get a tailored CCTV package.",
+      primary: "Get a Free Site Visit",
+      secondary: "WhatsApp Now",
     },
     contact: {
-      title: "Contact THE SHADOW CCTV",
-      subtitle: "Reach us for CCTV design, installation, and support.",
+      title: "Contact THE SHADOW",
+      subtitle: "CCTV design, installation, and maintenance across Jordan.",
       addressLabelEn: "Address (EN)",
-      addressLabelAr: "العنوان",
+      addressLabelAr: "Address (AR)",
       addressEn:
         "Marj Al Hamam - Al Salam Road - Idris Commercial Complex - 1st Floor, Office 2",
-      addressAr: "مرج الحمام - طريق السلام - مجمع ادريس التجاري - الطابق الأول مكتب رقم 2",
+      addressAr:
+        "مرج الحمام - طريق السلام - مجمع ادريس التجاري - الطابق الأول مكتب رقم 2",
       phoneLabel: "Phone / WhatsApp",
       emailLabel: "Email",
       websiteLabel: "Website",
       socialLabel: "Social",
       hoursLabel: "Working Hours",
-      hoursPrimary: "Support Desk: Sunday-Thursday, 9:00-17:00",
+      hoursPrimary: "Office: Sunday-Thursday, 9:00-17:00",
       hoursSecondary: "Installations scheduled by appointment",
       formTitle: "Request a CCTV Quote",
       formName: "Full name",
       formPhone: "Phone number",
       formEmail: "Email address",
-      formService: "CCTV service needed",
+      formCity: "City",
+      formProperty: "Property type",
+      formCameraCount: "Number of cameras",
+      formPreference: "System preference",
       formMessage: "Site details",
       formVerification: "Anti-spam: What is 4 + 3?",
       formSubmit: "Send Request",
-      formNote: "We respond quickly during working hours and as soon as possible otherwise.",
+      formNote: "We respond quickly during working hours.",
       verificationAnswer: "7",
       mapTitle: "Find us on the map",
+      propertyOptions: [
+        "Home",
+        "Shop/Retail",
+        "Warehouse",
+        "Office",
+        "Building/Compound",
+      ],
+      cameraOptions: ["4 cameras", "8 cameras", "16 cameras", "Custom"],
+      preferenceOptions: ["DVR", "NVR", "Not sure"],
+      freeVisitTitle: "Free Site Visit",
+      freeVisitDescription:
+        "We assess coverage zones, cabling routes, and equipment needs.",
+      freeVisitItems: [
+        "On-site assessment",
+        "Coverage plan",
+        "Itemized quote",
+      ],
     },
     footer: {
       tagline: "YOUR UNSEEN POWER",
       quickLinks: "Quick Links",
       followUs: "Follow",
-      copyright: "© 2026 THE SHADOW. All rights reserved.",
+      copyright: "(c) 2026 THE SHADOW. All rights reserved.",
     },
   },
   ar: {
     meta: {
-      title: "الظل للأمن والحماية | أنظمة CCTV في الأردن",
+      title: "أنظمة CCTV في الأردن | تركيب وصيانة",
       description:
-        "تصميم وتركيب ودعم أنظمة كاميرات المراقبة في الأردن. فنيون محترفون، تمديدات نظيفة، وتخزين موثوق.",
+        "تصميم وتوريد وتركيب وصيانة أنظمة CCTV في الأردن. تمديدات نظيفة، تخزين موثوق، وإعداد مشاهدة عن بُعد.",
     },
     topBar: {
-      phoneLabel: "اتصال",
+      phoneLabel: "اتصل",
       whatsappLabel: "واتساب",
       emailLabel: "البريد",
       languageLabel: "اللغة",
@@ -470,104 +679,241 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "home", label: "الرئيسية" },
       { id: "about", label: "من نحن" },
       { id: "services", label: "الخدمات" },
+      { id: "packages", label: "الباقات" },
       { id: "why", label: "لماذا نحن" },
       { id: "coverage", label: "التغطية" },
       { id: "gallery", label: "المعرض" },
-      { id: "clients", label: "العملاء" },
+      { id: "proof", label: "آراء العملاء" },
       { id: "faqs", label: "الأسئلة" },
       { id: "contact", label: "تواصل" },
     ],
     hero: {
-      badge: "أنظمة كاميرات مراقبة في الأردن",
-      headline: "أنظمة CCTV يمكنك الاعتماد عليها.",
+      badge: "أنظمة CCTV وحلول المراقبة في الأردن",
+      headline: "أنظمة CCTV تحمي عملك بفعالية.",
       subheadline:
-        "تصميم وتوريد وتركيب ودعم مراقبة لأنظمة CCTV في الأردن - مبنية على وضوح الصورة، والالتزام، وتغطية موثوقة.",
-      primaryCta: "اطلب عرض CCTV",
-      secondaryCta: "اتصل الآن",
-      tertiaryCta: "واتساب",
-      chips: ["تركيب احترافي", "وصول عن بُعد", "دعم مستمر"],
+        "تصميم وتوريد وتركيب وتهيئة وصيانة للمنازل، والمحلات، والمستودعات، والمكاتب، والمجمعات.",
+      primaryCta: "زيارة موقع مجانية",
+      secondaryCta: "واتساب الآن",
+      tertiaryCta: "عرض الباقات",
+      chips: ["خيارات HD/4K", "مشاهدة عن بُعد", "تركيب سريع"],
       quickQuote: {
-        title: "عرض CCTV سريع",
-        description: "شارك مساحة الموقع واحتياجات التغطية لنقترح النظام الأنسب.",
+        title: "عرض سعر سريع",
+        description: "شاركنا تفاصيل موقعك لنقترح النظام الأنسب.",
         nameLabel: "الاسم الكامل",
         phoneLabel: "رقم الهاتف",
-        serviceLabel: "خدمة CCTV المطلوبة",
-        button: "إرسال الطلب",
+        cityLabel: "المدينة",
+        propertyLabel: "نوع الموقع",
+        cameraLabel: "عدد الكاميرات",
+        preferenceLabel: "نوع النظام",
+        propertyOptions: ["منزل", "محل/تجزئة", "مستودع", "مكتب", "مبنى/مجمع"],
+        cameraOptions: ["4 كاميرات", "8 كاميرات", "16 كاميرا", "تحديد لاحق"],
+        preferenceOptions: ["DVR", "NVR", "غير متأكد"],
+        button: "احصل على العرض",
         note: "بالإرسال، أنت توافق على أن نتواصل معك.",
       },
     },
     about: {
       title: "عن الظل",
-      short:
-        "الظل توفر أنظمة كاميرات مراقبة للمنشآت والأعمال والمنازل في الأردن.",
+      short: "الظل يصمم ويثبت أنظمة CCTV مبنية لمواقع واقعية في الأردن.",
       long:
-        "نقوم بمعاينة الموقع وتصميم النظام والتركيب والتسليم المنظم. نركز على تمديدات نظيفة وتخزين موثوق وسهولة الاستخدام.",
+        "من المعاينة وحتى التمديدات والتهيئة والتسليم، نوفر تركيباً مرتباً مع تخزين موثوق وتدريب واضح على الاستخدام.",
       bullets: [
-        "عمليات مرخصة ومتوافقة مع التشريعات",
-        "فنيون مدرّبون وتركيبات نظيفة",
+        "التزام بالأنظمة المحلية",
+        "فنيون مدربون وتمديدات مرتبة",
         "تسليم موثق وتدريب المستخدم",
-        "خطط صيانة ودعم",
+        "خطط صيانة وترقيات",
       ],
-      imageAlt: "غرفة مراقبة CCTV لدى الظل",
+      imageAlt: "تركيب أنظمة CCTV من الظل",
     },
     services: {
-      title: "حلول كاميرات المراقبة",
-      subtitle: "خدمات متكاملة لأنظمة CCTV تناسب كل موقع.",
+      title: "خدمات CCTV",
+      subtitle: "حلول تصميم وتركيب وصيانة لكل احتياج.",
       items: [
         {
-          title: "معاينة الموقع وتصميم النظام",
-          description:
-            "تخطيط التغطية وتحديد مواقع الكاميرات والبنية التحتية.",
-          icon: "risk",
+          title: "تركيب CCTV (منزل/أعمال)",
+          description: "تركيب كاميرات داخلية وخارجية وفق خطة تغطية واضحة.",
+          icon: "install",
         },
         {
-          title: "تركيب كاميرات المراقبة",
-          description:
-            "كاميرات داخلية وخارجية مع وضوح وتغطية مناسبة.",
-          icon: "camera",
+          title: "كاميرات IP وأنظمة NVR",
+          description: "حلول رقمية بدقة عالية وإدارة مرنة للتسجيل.",
+          icon: "ip",
         },
         {
-          title: "إعداد التسجيل والتخزين",
-          description: "تهيئة NVR/DVR مع حفظ موثوق.",
-          icon: "command",
+          title: "أنظمة تناظرية (DVR)",
+          description: "أنظمة DVR اقتصادية مع تسجيل موثوق.",
+          icon: "dvr",
         },
         {
-          title: "المشاهدة عن بُعد",
-          description: "إعداد وصول آمن للجوال والكمبيوتر.",
+          title: "كاميرات PTZ (تكبير وتتبع)",
+          description: "تكبير بصري وتتبع للمناطق الحساسة.",
+          icon: "ptz",
+        },
+        {
+          title: "التحكم بالدخول (أبواب/بوابات)",
+          description: "دمج آمن للتحكم في الدخول.",
           icon: "access",
         },
         {
-          title: "تغطية المحيط والخارج",
-          description: "حلول للبيئات الخارجية وتغطية المحيط.",
-          icon: "shield",
+          title: "انتركم فيديو",
+          description: "اتصال مرئي آمن للمداخل والأبواب.",
+          icon: "intercom",
         },
         {
-          title: "الصيانة والفحص الدوري",
-          description: "صيانة وقائية واختبارات وترقيات.",
-          icon: "patrol",
+          title: "شبكات وتمديدات",
+          description: "تمديدات منظمة ومسارات كابلات نظيفة.",
+          icon: "network",
+        },
+        {
+          title: "صيانة وترقيات",
+          description: "فحص دوري وتحديثات وتحسينات للنظام.",
+          icon: "maintenance",
+        },
+      ],
+    },
+    packages: {
+      title: "باقات CCTV",
+      subtitle: "ابدأ بباقة ثم نخصصها بعد المعاينة.",
+      note: "أيام التخزين وعدد الكاميرات والأجهزة تحدد بعد التقييم.",
+      items: [
+        {
+          title: "أساسية",
+          description: "حل عملي للمساحات الصغيرة والمحلات.",
+          features: [
+            "4 كاميرات (قابل للترقية)",
+            "خيارات 1080p/2K/4K",
+            "إعداد مشاهدة عن بُعد",
+            "تخزين يحدد حسب الموقع",
+            "تركيب وتسليم",
+          ],
+          ctaLabel: "عرض الباقة الأساسية",
+        },
+        {
+          title: "أعمال",
+          badge: "الأكثر طلباً",
+          description: "تغطية متوازنة للمكاتب والمتاجر.",
+          features: [
+            "8 كاميرات (قابل للضبط)",
+            "خيارات IP أو DVR",
+            "إعداد تطبيق الهاتف",
+            "تخزين حتى X أيام (قابل للتعديل)",
+            "شرح الضمان والتسليم",
+          ],
+          ctaLabel: "عرض باقة الأعمال",
+        },
+        {
+          title: "احترافية",
+          description: "للمستودعات والمواقع الكبيرة.",
+          features: [
+            "16 كاميرا (قابل للضبط)",
+            "خيارات PTZ وكاميرات متخصصة",
+            "تسجيل ومراقبة مركزية",
+            "خطة تكرار وحماية",
+            "تدريب في الموقع",
+          ],
+          ctaLabel: "عرض الباقة الاحترافية",
+        },
+        {
+          title: "مخصصة",
+          description: "حلول مفصلة للمواقع المعقدة.",
+          features: [
+            "تقييم موقع إلزامي",
+            "عدد كاميرات مخصص",
+            "دمج التحكم بالدخول",
+            "تخطيط التمديدات والبنية التحتية",
+            "خيارات دعم وصيانة",
+          ],
+          ctaLabel: "طلب عرض مخصص",
+        },
+      ],
+    },
+    highlights: {
+      title: "ماذا تحصل عليه",
+      subtitle: "مزايا عملية تساعدك على متابعة موقعك بثقة.",
+      items: [
+        {
+          title: "مشاهدة عن بُعد",
+          description: "وصول آمن عبر iOS وAndroid.",
+          icon: "mobile",
+        },
+        {
+          title: "تنبيهات حركة",
+          description: "إشعارات قابلة للضبط لمناطق النشاط.",
+          icon: "motion",
+        },
+        {
+          title: "رؤية ليلية",
+          description: "تغطية واضحة في الإضاءة المنخفضة.",
+          icon: "night",
+        },
+        {
+          title: "تشغيل وتصدير ذكي",
+          description: "بحث سريع وتصدير مقاطع الفيديو.",
+          icon: "playback",
+        },
+        {
+          title: "تهيئة آمنة للنظام",
+          description: "إعداد محمي مع صلاحيات مستخدمين.",
+          icon: "secure",
+        },
+        {
+          title: "خيارات سحابة/نسخ احتياطي",
+          description: "خيارات إضافية عند الحاجة.",
+          icon: "cloud",
+        },
+      ],
+    },
+    industries: {
+      title: "قطاعات نخدمها",
+      subtitle: "أنظمة CCTV مصممة حسب طبيعة الاستخدام.",
+      items: [
+        {
+          title: "متاجر وتجزئة",
+          description: "تغطية المداخل ونقاط البيع والممرات.",
+        },
+        {
+          title: "مستودعات ولوجستيات",
+          description: "مراقبة الأرصفة ومناطق التخزين.",
+        },
+        {
+          title: "مكاتب وشركات",
+          description: "تأمين المداخل والممرات والمرافق.",
+        },
+        {
+          title: "فلل سكنية",
+          description: "تغطية السور والمداخل مع مشاهدة عن بُعد.",
+        },
+        {
+          title: "مبانٍ ومجمعات",
+          description: "مواقف السيارات والمناطق المشتركة.",
+        },
+        {
+          title: "مدارس وعيادات",
+          description: "مراقبة السلامة مع مراعاة الخصوصية.",
         },
       ],
     },
     why: {
-      title: "لماذا تختار الظل؟",
-      subtitle: "تركيبات نظيفة وخطط تغطية واضحة ودعم موثوق.",
+      title: "لماذا الظل؟",
+      subtitle: "تركيب مرتب، تغطية مدروسة، ودعم يعتمد عليه.",
       bullets: [
-        "الالتزام بالتشريعات المحلية",
-        "فنيون مدربون وتمديدات آمنة",
-        "خطط تغطية موثقة",
-        "اختبار التسجيل والتخزين",
-        "دعم وصيانة مستمرة",
+        "التزام باللوائح المحلية",
+        "معاينة دقيقة وخطة تغطية واضحة",
+        "تمديدات نظيفة مع ترقيم",
+        "تهيئة آمنة وتسليم موثق",
+        "خيارات صيانة واستجابة سريعة",
       ],
       promiseTitle: "وعد الجودة",
       promiseText:
-        "نقدم أنظمة CCTV متوافقة مع الأنظمة مع تسليم موثق وفحوصات أداء وخطط دعم واضحة.",
+        "نوفر أنظمة CCTV مع اختبار تسجيل واضح، وتسليم موثق، ودعم مستمر.",
+      chips: ["معاينة موقع", "تمديدات نظيفة", "دعم سريع"],
     },
     coverage: {
-      title: "التغطية في جميع أنحاء الأردن",
-      subtitle: "تركيبات ودعم في مختلف مناطق المملكة.",
-      regionsLabel: "مناطق رئيسية",
+      title: "تغطية التركيب في الأردن",
+      subtitle: "نقوم بالتركيب والدعم في مختلف المدن.",
+      regionsLabel: "مدن رئيسية",
       regions: [
-        "عمّان",
+        "عمان",
         "الزرقاء",
         "إربد",
         "العقبة",
@@ -576,19 +922,17 @@ export const siteContent: Record<Language, SiteContent> = {
         "جرش",
         "الكرك",
       ],
-      responseNote:
-        "يعتمد زمن التنفيذ على حجم الموقع وتوفر الأجهزة ونطاق التركيب.",
+      responseNote: "إمكانية المعاينة في نفس اليوم حسب التوفر.",
     },
     stats: {
-      title: "مؤشرات CCTV",
-      subtitle:
-        "أرقام توضيحية فقط - يرجى تحديثها بأرقام مؤكدة عند توفرها.",
-      note: "هذه أرقام توضيحية للعرض فقط. يرجى تحديثها بأرقام مؤكدة.",
+      title: "لمحة عن الخدمة",
+      subtitle: "قيم قابلة للتعديل - استبدلها بأرقام موثقة.",
+      note: "هذه نصوص قابلة للتبديل حتى تتوفر أرقام دقيقة.",
       items: [
-        { label: "مواقع محمية", value: 180, suffix: "+", isPlaceholder: true },
-        { label: "كاميرات مركبة", value: 950, suffix: "+", isPlaceholder: true },
-        { label: "سنوات خبرة", value: 12, suffix: "+", isPlaceholder: true },
-        { label: "مدن مخدومة", value: 8, suffix: "+", isPlaceholder: true },
+        { label: "مشاريع منفذة", display: "حسب الموقع" },
+        { label: "تصاميم أنظمة", display: "قابل للضبط" },
+        { label: "مدن مغطاة", display: "في جميع الأردن" },
+        { label: "استجابة الدعم", display: "مجدولة" },
       ],
     },
     process: {
@@ -597,146 +941,143 @@ export const siteContent: Record<Language, SiteContent> = {
         "معاينة الموقع",
         "خطة التغطية",
         "التركيب",
-        "الاختبار والتسليم",
-        "الصيانة والدعم",
+        "التهيئة والاختبار",
+        "تدريب ودعم",
       ],
     },
     testimonials: {
-      title: "ثقة العملاء",
-      subtitle: "خطط تغطية واضحة وتركيبات نظيفة ودعم موثوق.",
+      title: "آراء العملاء",
+      subtitle: "تواصل واضح وتغطية CCTV يمكن الاعتماد عليها.",
       items: [
         {
-          quote: "خطة التغطية كانت واضحة والتركيب كان نظيفًا واحترافيًا.",
-          name: "مدير منشأة",
-          role: "قطاع تجاري",
-        },
-        {
-          quote: "الوصول عن بُعد يعمل بسلاسة والتخزين ثابت.",
+          quote: "الفريق رسم خطة التغطية بدقة وسلم تركيباً مرتباً.",
           name: "مدير عمليات",
-          role: "مستودعات",
+          role: "مجموعة متاجر",
         },
         {
-          quote: "تم التسليم مع اختبار كامل وإرشادات واضحة.",
-          name: "مالك منشأة",
-          role: "مجمع سكني",
+          quote: "إعداد المشاهدة عن بُعد كان سلساً والنظام واضح.",
+          name: "مسؤول مرافق",
+          role: "مبنى مكاتب",
+        },
+        {
+          quote: "شرحوا خطة التخزين وقدموا تدريباً احترافياً.",
+          name: "مالك الموقع",
+          role: "مستودع",
         },
       ],
     },
-    clients: {
-      title: "موثوقون لدى",
-      subtitle: "استبدل هذه العناصر بشعارات العملاء المعتمدة.",
-      items: [
-        "قطاع تجاري وتجزئة",
-        "مجمعات سكنية",
-        "مستودعات",
-        "مدارس وجامعات",
-        "ضيافة وفنادق",
-        "مرافق صحية",
-      ],
+    brands: {
+      title: "العلامات المدعومة",
+      subtitle: "استبدل هذه العناصر بعلامات أو منصات مؤكدة.",
+      items: ["علامة تجارية", "علامة تجارية", "علامة تجارية", "علامة تجارية"],
     },
     gallery: {
       title: "المعرض",
-      subtitle: "تركيبات CCTV وغرف تحكم ولقطات من الأنظمة.",
+      subtitle: "لقطات من التركيبات وتفاصيل الأنظمة.",
       items: [
-        { src: "/images/gallery/placeholder-1.svg", alt: "صورة معرض" },
-        { src: "/images/gallery/placeholder-2.svg", alt: "صورة معرض" },
-        { src: "/images/gallery/placeholder-3.svg", alt: "صورة معرض" },
-        { src: "/images/gallery/placeholder-4.svg", alt: "صورة معرض" },
-        { src: "/images/gallery/placeholder-5.svg", alt: "صورة معرض" },
-        { src: "/images/gallery/placeholder-6.svg", alt: "صورة معرض" },
+        { src: "/images/gallery/placeholder-1.svg", alt: "عنصر معرض CCTV" },
+        { src: "/images/gallery/placeholder-2.svg", alt: "عنصر معرض CCTV" },
+        { src: "/images/gallery/placeholder-3.svg", alt: "عنصر معرض CCTV" },
+        { src: "/images/gallery/placeholder-4.svg", alt: "عنصر معرض CCTV" },
+        { src: "/images/gallery/placeholder-5.svg", alt: "عنصر معرض CCTV" },
+        { src: "/images/gallery/placeholder-6.svg", alt: "عنصر معرض CCTV" },
       ],
     },
     faqs: {
       title: "الأسئلة الشائعة",
       items: [
         {
-          question: "هل توفرون وتقومون بتركيب الكاميرات؟",
+          question: "ما الأفضل لموقعي: DVR أم NVR؟",
           answer:
-            "نعم. نصمم النظام ونوفر الأجهزة ونقوم بالتركيب مع تغطية مناسبة.",
+            "يعتمد ذلك على البنية التحتية والميزانية. نوصي بالحل المناسب بعد المعاينة.",
         },
         {
-          question: "هل يمكنني مشاهدة الكاميرات عن بُعد؟",
-          answer: "نعم. نجهز وصولًا آمنًا للجوال والكمبيوتر.",
+          question: "كم يوماً من التسجيل سأحصل؟",
+          answer: "مدة التخزين تعتمد على عدد الكاميرات والدقة. نحددها معك.",
         },
         {
-          question: "هل تقدمون معاينة للموقع؟",
-          answer:
-            "نعم. نعاين الموقع ونقترح مواقع الكاميرات ومناطق التغطية.",
+          question: "هل يمكن مشاهدة الكاميرات من الهاتف؟",
+          answer: "نعم، نوفر إعداد مشاهدة آمن عبر الهاتف والكمبيوتر.",
         },
         {
-          question: "ما أنواع الكاميرات التي تنصحون بها؟",
-          answer:
-            "نوصي بكاميرات داخلية أو خارجية وثابتة أو متحركة حسب احتياج الموقع والإضاءة.",
+          question: "هل تقدمون ضماناً وصيانة؟",
+          answer: "نوفر خيارات ضمان وصيانة حسب نطاق المشروع.",
         },
         {
-          question: "كم يستغرق التركيب؟",
-          answer:
-            "يعتمد على حجم الموقع ونطاق العمل. نحدد المدة بعد المعاينة.",
+          question: "هل تركبون في الشقق والمتاجر والمستودعات؟",
+          answer: "نعم، نخدم مختلف أنواع المواقع.",
         },
         {
-          question: "هل تقدمون الصيانة؟",
-          answer: "نعم. نوفر صيانة وقائية واختبارات وخيارات ترقية.",
+          question: "ما الدقة التي تنصحون بها؟",
+          answer: "ننصح بدقة 1080p أو 2K أو 4K حسب المسافة والإضاءة.",
         },
         {
-          question: "هل يمكن دمج النظام مع التحكم بالدخول أو الإنذار؟",
-          answer:
-            "نعم عند التوافق. يمكن دمج CCTV مع أنظمة الدخول أو الإنذار.",
+          question: "هل تُخفون الكابلات أو تستخدمون ترنك؟",
+          answer: "نلتزم بتمديدات مرتبة واستخدام مجاري مناسبة.",
         },
         {
-          question: "هل توفرون التسجيل والتخزين؟",
-          answer: "نعم. نقوم بإعداد التخزين والتسجيل وفق احتياجاتكم.",
+          question: "هل يمكن دمج التحكم بالدخول أو الانتركم؟",
+          answer: "نعم عند توفر الأجهزة المناسبة.",
         },
         {
-          question: "ما المناطق التي تغطونها؟",
-          answer:
-            "نخدم العملاء في جميع أنحاء الأردن بما في ذلك عمّان والزرقاء وإربد والعقبة.",
+          question: "هل تقدمون زيارات صيانة دورية؟",
+          answer: "نعم، تتوفر خطط صيانة مجدولة.",
         },
         {
-          question: "كيف أطلب عرض سعر؟",
-          answer:
-            "يمكنك استخدام نموذج الطلب أو التواصل معنا عبر الهاتف أو البريد أو واتساب.",
+          question: "كيف أحصل على عرض سعر؟",
+          answer: "تواصل معنا أو املأ نموذج الطلب وسنعود إليك سريعاً.",
         },
       ],
     },
     cta: {
-      title: "طوّر تغطية كاميراتك اليوم.",
-      description:
-        "أخبرنا بتفاصيل الموقع لنصمم نظام CCTV مناسبًا بالكاميرات والتخزين والمراقبة.",
-      primary: "اطلب عرض CCTV",
-      secondary: "واتساب",
+      title: "أمّن موقعك اليوم.",
+      description: "احجز زيارة موقع مجانية واحصل على باقة CCTV مناسبة.",
+      primary: "زيارة موقع مجانية",
+      secondary: "واتساب الآن",
     },
     contact: {
-      title: "تواصل مع الظل - CCTV",
-      subtitle: "تواصل معنا لتصميم وتركيب ودعم أنظمة كاميرات المراقبة.",
+      title: "تواصل مع الظل",
+      subtitle: "تصميم وتركيب وصيانة CCTV في الأردن.",
       addressLabelEn: "Address (EN)",
-      addressLabelAr: "العنوان",
+      addressLabelAr: "العنوان (AR)",
       addressEn:
         "Marj Al Hamam - Al Salam Road - Idris Commercial Complex - 1st Floor, Office 2",
-      addressAr: "مرج الحمام - طريق السلام - مجمع ادريس التجاري - الطابق الأول مكتب رقم 2",
+      addressAr:
+        "مرج الحمام - طريق السلام - مجمع ادريس التجاري - الطابق الأول مكتب رقم 2",
       phoneLabel: "الهاتف / واتساب",
       emailLabel: "البريد الإلكتروني",
       websiteLabel: "الموقع الإلكتروني",
-      socialLabel: "التواصل الاجتماعي",
+      socialLabel: "حسابات التواصل",
       hoursLabel: "ساعات العمل",
-      hoursPrimary: "الدعم الفني: الأحد-الخميس، 9:00-17:00",
-      hoursSecondary: "التركيب حسب المواعيد",
+      hoursPrimary: "المكتب: الأحد-الخميس، 9:00-17:00",
+      hoursSecondary: "التركيبات حسب الموعد",
       formTitle: "طلب عرض CCTV",
       formName: "الاسم الكامل",
       formPhone: "رقم الهاتف",
       formEmail: "البريد الإلكتروني",
-      formService: "خدمة CCTV المطلوبة",
+      formCity: "المدينة",
+      formProperty: "نوع الموقع",
+      formCameraCount: "عدد الكاميرات",
+      formPreference: "تفضيل النظام",
       formMessage: "تفاصيل الموقع",
-      formVerification: "مكافحة الرسائل: كم يساوي 4 + 3؟",
+      formVerification: "مكافحة السبام: كم الناتج 4 + 3؟",
       formSubmit: "إرسال الطلب",
-      formNote: "سنرد بسرعة خلال ساعات العمل وبأقرب وقت ممكن.",
+      formNote: "نرد خلال ساعات العمل بأسرع وقت.",
       verificationAnswer: "7",
       mapTitle: "موقعنا على الخريطة",
+      propertyOptions: ["منزل", "محل/تجزئة", "مستودع", "مكتب", "مبنى/مجمع"],
+      cameraOptions: ["4 كاميرات", "8 كاميرات", "16 كاميرا", "تحديد لاحق"],
+      preferenceOptions: ["DVR", "NVR", "غير متأكد"],
+      freeVisitTitle: "زيارة موقع مجانية",
+      freeVisitDescription:
+        "نعاين نقاط التغطية ومسارات التمديد ونحدد الاحتياجات.",
+      freeVisitItems: ["معاينة الموقع", "خطة تغطية", "عرض سعر مفصل"],
     },
     footer: {
       tagline: "قوتك غير المرئية",
       quickLinks: "روابط سريعة",
       followUs: "تابعنا",
-      copyright: "© 2026 الظل للأمن والحماية. جميع الحقوق محفوظة.",
+      copyright: "(c) 2026 الظل. جميع الحقوق محفوظة.",
     },
   },
 };

@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useInView,
@@ -91,6 +91,67 @@ function ServiceIcon({ name, className }: IconProps) {
   };
 
   switch (name) {
+    case "install":
+      return (
+        <svg {...common}>
+          <rect x="3" y="7" width="18" height="12" rx="2" />
+          <circle cx="12" cy="13" r="3" />
+          <path d="M8 7l2-3h4l2 3" />
+          <path d="m7 15 2 2 4-4" />
+        </svg>
+      );
+    case "ip":
+      return (
+        <svg {...common}>
+          <circle cx="6" cy="12" r="2.5" />
+          <circle cx="18" cy="6" r="2.5" />
+          <circle cx="18" cy="18" r="2.5" />
+          <path d="M8.5 11 15.5 7" />
+          <path d="M8.5 13 15.5 17" />
+        </svg>
+      );
+    case "dvr":
+      return (
+        <svg {...common}>
+          <rect x="3" y="7" width="18" height="10" rx="2" />
+          <path d="M7 17v2M17 17v2" />
+          <circle cx="8" cy="12" r="1" />
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="16" cy="12" r="1" />
+        </svg>
+      );
+    case "ptz":
+      return (
+        <svg {...common}>
+          <rect x="6" y="4" width="12" height="5" rx="2" />
+          <circle cx="12" cy="14" r="4" />
+          <path d="M12 2v2M12 18v2M4 14h2M18 14h2" />
+        </svg>
+      );
+    case "intercom":
+      return (
+        <svg {...common}>
+          <rect x="7" y="3" width="10" height="18" rx="2" />
+          <circle cx="12" cy="14" r="1.5" />
+          <path d="M12 7v3" />
+        </svg>
+      );
+    case "network":
+      return (
+        <svg {...common}>
+          <rect x="3" y="6" width="6" height="6" rx="1" />
+          <rect x="9" y="9" width="6" height="6" rx="1" />
+          <rect x="15" y="12" width="6" height="6" rx="1" />
+          <path d="M9 9 6 6M15 12 12 9" />
+        </svg>
+      );
+    case "maintenance":
+      return (
+        <svg {...common}>
+          <path d="M14 6a4 4 0 0 0 4 4l-6 6-4-4 6-6z" />
+          <path d="M5 19l3-3" />
+        </svg>
+      );
     case "shield":
       return (
         <svg {...common}>
@@ -151,6 +212,65 @@ function ServiceIcon({ name, className }: IconProps) {
           <path d="M6 13v4a2 2 0 0 0 2 2h1" />
           <path d="M18 13v4a2 2 0 0 1-2 2h-1" />
           <path d="M9 19h6" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function HighlightIcon({ name, className }: IconProps) {
+  const common = {
+    className,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  switch (name) {
+    case "mobile":
+      return (
+        <svg {...common}>
+          <rect x="7" y="2.5" width="10" height="19" rx="2" />
+          <path d="M11 18.5h2" />
+        </svg>
+      );
+    case "motion":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="3" />
+          <path d="M3 12a9 9 0 0 1 9-9" />
+          <path d="M21 12a9 9 0 0 0-9-9" />
+        </svg>
+      );
+    case "night":
+      return (
+        <svg {...common}>
+          <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.5 6.5 0 0 0 21 12.8z" />
+        </svg>
+      );
+    case "playback":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 8v4l3 2" />
+        </svg>
+      );
+    case "secure":
+      return (
+        <svg {...common}>
+          <path d="M12 3 5 7v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V7l-7-4z" />
+          <rect x="9" y="11" width="6" height="5" rx="1" />
+          <path d="M10.5 11V9a1.5 1.5 0 0 1 3 0v2" />
+        </svg>
+      );
+    case "cloud":
+      return (
+        <svg {...common}>
+          <path d="M7 18h10a4 4 0 0 0 0-8 5 5 0 0 0-9-2A4 4 0 0 0 7 18z" />
         </svg>
       );
     default:
@@ -282,7 +402,7 @@ export default function LandingPage() {
   const logoOffset = useTransform(scrollY, [0, 300], [0, -20]);
   const content = siteContent[lang];
   const rtl = lang === "ar";
-  const containerClass = "mx-auto w-full max-w-6xl px-6";
+  const containerClass = "mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8";
 
   useEffect(() => {
     const stored = window.localStorage.getItem("shadow-lang");
@@ -340,12 +460,18 @@ export default function LandingPage() {
     if (data.get("company")) return;
     const name = data.get("name");
     const phone = data.get("phone");
-    const service = data.get("service");
+    const city = data.get("city");
+    const property = data.get("property");
+    const cameraCount = data.get("cameraCount");
+    const preference = data.get("preference");
     const body = [
       content.hero.quickQuote.title,
       `${content.hero.quickQuote.nameLabel}: ${name}`,
       `${content.hero.quickQuote.phoneLabel}: ${phone}`,
-      `${content.hero.quickQuote.serviceLabel}: ${service}`,
+      `${content.hero.quickQuote.cityLabel}: ${city}`,
+      `${content.hero.quickQuote.propertyLabel}: ${property}`,
+      `${content.hero.quickQuote.cameraLabel}: ${cameraCount}`,
+      `${content.hero.quickQuote.preferenceLabel}: ${preference}`,
     ].join("\n");
     sendMail(content.hero.quickQuote.title, body);
     form.reset();
@@ -370,21 +496,16 @@ export default function LandingPage() {
       `${content.contact.formName}: ${data.get("name")}`,
       `${content.contact.formPhone}: ${data.get("phone")}`,
       `${content.contact.formEmail}: ${data.get("email")}`,
-      `${content.contact.formService}: ${data.get("service")}`,
+      `${content.contact.formCity}: ${data.get("city")}`,
+      `${content.contact.formProperty}: ${data.get("property")}`,
+      `${content.contact.formCameraCount}: ${data.get("cameraCount")}`,
+      `${content.contact.formPreference}: ${data.get("preference")}`,
       `${content.contact.formMessage}: ${data.get("message")}`,
     ].join("\n");
     sendMail(content.contact.formTitle, body);
     form.reset();
   };
 
-  const quickServiceOptions = useMemo(
-    () => content.services.items.map((service) => service.title),
-    [content.services.items]
-  );
-  const promiseChips =
-    lang === "ar"
-      ? ["تركيب احترافي", "وصول عن بُعد", "دعم مستمر"]
-      : ["Professional Install", "Remote Access", "Ongoing Support"];
   const brandName = lang === "ar" ? "الظل للأمن والحماية" : "THE SHADOW";
   const logoAlt = lang === "ar" ? "شعار الظل" : "THE SHADOW logo";
   const menuLabel = lang === "ar" ? "القائمة" : "Menu";
@@ -392,38 +513,73 @@ export default function LandingPage() {
 
   return (
     <div className="relative">
-      <div className="hidden md:block border-b border-white/5 text-xs text-white/70">
+      <div className="border-b border-white/10 bg-black/40 text-white/70 backdrop-blur">
         <div
-          className={`${containerClass} flex items-center justify-between py-2`}
+          className={`${containerClass} flex flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between`}
         >
           <div
-            className={`flex items-center gap-6 ${
-              rtl ? "flex-row-reverse" : ""
+            className={`flex flex-col gap-2 text-[0.65rem] md:flex-row md:flex-wrap md:items-center md:gap-4 ${
+              rtl ? "text-right items-end md:flex-row-reverse" : "text-left items-start"
             }`}
           >
             <a
               href={`tel:${CONTACT.phone}`}
-              className="flex items-center gap-2 transition hover:text-white"
+              className="group flex items-center gap-2 transition hover:text-white"
             >
-              <Icon name="phone" className="h-4 w-4" />
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
+                <Icon name="phone" className="h-3 w-3" />
+              </span>
               <span>{CONTACT.phoneDisplay}</span>
             </a>
+            <span className="hidden md:block h-3 w-px bg-white/10" aria-hidden="true" />
             <a
               href={CONTACT.whatsapp}
-              className="flex items-center gap-2 transition hover:text-white"
+              className="group flex items-center gap-2 transition hover:text-white"
             >
-              <Icon name="whatsapp" className="h-4 w-4" />
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
+                <Icon name="whatsapp" className="h-3 w-3" />
+              </span>
               <span>{content.topBar.whatsappLabel}</span>
             </a>
+            <span className="hidden md:block h-3 w-px bg-white/10" aria-hidden="true" />
             <a
               href={`mailto:${CONTACT.email}`}
-              className="flex items-center gap-2 transition hover:text-white"
+              className="group flex items-center gap-2 transition hover:text-white"
             >
-              <Icon name="mail" className="h-4 w-4" />
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
+                <Icon name="mail" className="h-3 w-3" />
+              </span>
               <span>{CONTACT.email}</span>
             </a>
           </div>
-          <LangToggle lang={lang} onChange={setLang} />
+          <div
+            className={`flex flex-col gap-2 md:flex-row md:items-center md:gap-3 ${
+              rtl ? "items-end md:flex-row-reverse" : "items-start"
+            }`}
+          >
+            <a
+              href="#contact"
+              className={`rounded-full border border-white/15 px-3 py-1 text-[0.6rem] text-white/80 transition hover:border-[color:var(--color-accent)] hover:text-white ${
+                rtl ? "" : "uppercase tracking-[0.25em]"
+              }`}
+            >
+              {content.contact.freeVisitTitle}
+            </a>
+            <div
+              className={`flex items-center gap-2 ${
+                rtl ? "flex-row-reverse" : ""
+              }`}
+            >
+              <span className="text-[0.6rem] uppercase tracking-[0.3em] text-white/40">
+                {content.topBar.languageLabel}
+              </span>
+              <LangToggle
+                lang={lang}
+                onChange={setLang}
+                className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -491,9 +647,34 @@ export default function LandingPage() {
         </div>
 
         {menuOpen && (
-          <div className="xl:hidden border-t border-white/10 bg-black/90">
-            <div className={`${containerClass} py-6`}>
-              <nav className="flex flex-col gap-4 text-sm uppercase tracking-[0.3em] text-white/70">
+          <div className="fixed inset-0 z-[60] xl:hidden">
+            <button
+              type="button"
+              className="absolute inset-0 bg-black/70"
+              aria-label={closeLabel}
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: reduceMotion ? 0 : rtl ? -320 : 320 }}
+              animate={{ x: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.35 }}
+              className={`absolute top-0 h-full w-72 border-white/10 bg-black/90 p-6 ${
+                rtl ? "left-0 border-r" : "right-0 border-l"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                  {menuLabel}
+                </p>
+                <button
+                  type="button"
+                  className="btn-outline"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {closeLabel}
+                </button>
+              </div>
+              <nav className="mt-8 flex flex-col gap-4 text-sm uppercase tracking-[0.3em] text-white/70">
                 {content.nav.map((item) => (
                   <a
                     key={item.id}
@@ -505,13 +686,13 @@ export default function LandingPage() {
                   </a>
                 ))}
               </nav>
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-8 flex flex-col gap-4">
                 <LangToggle lang={lang} onChange={setLang} />
-                <a href="#contact" className="btn-primary">
+                <a href="#contact" className="btn-primary w-full">
                   {content.hero.primaryCta}
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
       </header>
@@ -564,18 +745,18 @@ export default function LandingPage() {
                   {content.hero.subheadline}
                 </motion.p>
                 <motion.div
-                  className={`flex flex-wrap gap-4 ${
-                    rtl ? "justify-end" : "justify-start"
+                  className={`flex flex-col gap-4 sm:flex-row ${
+                    rtl ? "items-end sm:justify-end" : "items-start sm:justify-start"
                   }`}
                   {...reveal(0.2)}
                 >
-                  <a href="#contact" className="btn-primary">
+                  <a href="#contact" className="btn-primary w-full sm:w-auto">
                     {content.hero.primaryCta}
                   </a>
-                  <a href={`tel:${CONTACT.phone}`} className="btn-secondary">
+                  <a href={CONTACT.whatsapp} className="btn-secondary w-full sm:w-auto">
                     {content.hero.secondaryCta}
                   </a>
-                  <a href={CONTACT.whatsapp} className="btn-outline">
+                  <a href="#packages" className="btn-outline w-full sm:w-auto">
                     {content.hero.tertiaryCta}
                   </a>
                 </motion.div>
@@ -607,7 +788,10 @@ export default function LandingPage() {
                       {content.hero.quickQuote.description}
                     </h3>
                   </div>
-                  <form className="grid gap-4" onSubmit={handleQuickQuoteSubmit}>
+                  <form
+                    className="grid gap-4 sm:grid-cols-2"
+                    onSubmit={handleQuickQuoteSubmit}
+                  >
                     <input
                       type="text"
                       name="company"
@@ -634,27 +818,72 @@ export default function LandingPage() {
                       />
                     </label>
                     <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.serviceLabel}
+                      {content.hero.quickQuote.cityLabel}
+                      <input
+                        name="city"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.hero.quickQuote.cityLabel}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.hero.quickQuote.propertyLabel}
                       <select
-                        name="service"
+                        name="property"
                         className="input-field mt-2"
                         defaultValue=""
                         required
                       >
                         <option value="" disabled>
-                          {content.hero.quickQuote.serviceLabel}
+                          {content.hero.quickQuote.propertyLabel}
                         </option>
-                        {quickServiceOptions.map((option) => (
+                        {content.hero.quickQuote.propertyOptions.map((option) => (
                           <option key={option} value={option}>
                             {option}
                           </option>
                         ))}
                       </select>
                     </label>
-                    <button type="submit" className="btn-primary">
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.hero.quickQuote.cameraLabel}
+                      <select
+                        name="cameraCount"
+                        className="input-field mt-2"
+                        defaultValue=""
+                        required
+                      >
+                        <option value="" disabled>
+                          {content.hero.quickQuote.cameraLabel}
+                        </option>
+                        {content.hero.quickQuote.cameraOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.hero.quickQuote.preferenceLabel}
+                      <select
+                        name="preference"
+                        className="input-field mt-2"
+                        defaultValue=""
+                        required
+                      >
+                        <option value="" disabled>
+                          {content.hero.quickQuote.preferenceLabel}
+                        </option>
+                        {content.hero.quickQuote.preferenceOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <button type="submit" className="btn-primary w-full sm:col-span-2">
                       {content.hero.quickQuote.button}
                     </button>
-                    <p className="text-xs text-white/50">
+                    <p className="text-xs text-white/50 sm:col-span-2">
                       {content.hero.quickQuote.note}
                     </p>
                   </form>
@@ -740,8 +969,129 @@ export default function LandingPage() {
                   <p className="text-sm text-white/60">{service.description}</p>
                   <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1">
                     {lang === "ar" ? "اعرف المزيد" : "Learn More"}
-                    <span aria-hidden="true">→</span>
+                    <span aria-hidden="true">-&gt;</span>
                   </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="packages" className="section">
+          <div className={containerClass}>
+            <motion.div
+              className={`flex flex-col gap-4 ${
+                rtl ? "text-right items-end" : "text-left items-start"
+              }`}
+              {...reveal()}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                {content.packages.title}
+              </p>
+              <h2 className="section-title text-white">
+                {content.packages.subtitle}
+              </h2>
+            </motion.div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {content.packages.items.map((pkg, index) => {
+                const featured = Boolean(pkg.badge);
+                return (
+                  <motion.div
+                    key={pkg.title}
+                    className={`card flex h-full flex-col gap-4 p-6 ${
+                      featured
+                        ? "border-[color:var(--color-accent)] shadow-[0_24px_70px_rgba(223,128,99,0.18)]"
+                        : ""
+                    }`}
+                    {...reveal(0.05 * index)}
+                  >
+                    {pkg.badge && (
+                      <span className="chip border-[color:var(--color-accent)] text-[color:var(--color-accent)]">
+                        {pkg.badge}
+                      </span>
+                    )}
+                    <h3 className="text-xl text-white">{pkg.title}</h3>
+                    <p className="text-sm text-white/70">{pkg.description}</p>
+                    <ul className="grid gap-2 text-sm text-white/60">
+                      {pkg.features.map((feature) => (
+                        <li key={feature} className="flex items-start gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href="#contact"
+                      className={featured ? "btn-primary w-full" : "btn-outline w-full"}
+                    >
+                      {pkg.ctaLabel}
+                    </a>
+                  </motion.div>
+                );
+              })}
+            </div>
+            <p className="mt-6 text-xs text-white/40">{content.packages.note}</p>
+          </div>
+        </section>
+
+        <section id="highlights" className="section">
+          <div className={containerClass}>
+            <motion.div
+              className={`flex flex-col gap-4 ${
+                rtl ? "text-right items-end" : "text-left items-start"
+              }`}
+              {...reveal()}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                {content.highlights.title}
+              </p>
+              <h2 className="section-title text-white">
+                {content.highlights.subtitle}
+              </h2>
+            </motion.div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {content.highlights.items.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  className="card card-hover flex h-full flex-col gap-4 p-6"
+                  {...reveal(0.05 * index)}
+                >
+                  <HighlightIcon
+                    name={item.icon}
+                    className="h-9 w-9 text-[color:var(--color-accent)]"
+                  />
+                  <h3 className="text-lg text-white">{item.title}</h3>
+                  <p className="text-sm text-white/60">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="industries" className="section">
+          <div className={containerClass}>
+            <motion.div
+              className={`flex flex-col gap-4 ${
+                rtl ? "text-right items-end" : "text-left items-start"
+              }`}
+              {...reveal()}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                {content.industries.title}
+              </p>
+              <h2 className="section-title text-white">
+                {content.industries.subtitle}
+              </h2>
+            </motion.div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {content.industries.items.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  className="card flex h-full flex-col gap-3 p-6"
+                  {...reveal(0.05 * index)}
+                >
+                  <h3 className="text-lg text-white">{item.title}</h3>
+                  <p className="text-sm text-white/60">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -777,7 +1127,7 @@ export default function LandingPage() {
                 {content.why.promiseText}
               </h3>
               <div className="mt-6 flex flex-wrap gap-3">
-                {promiseChips.map((chip) => (
+                {content.why.chips.map((chip) => (
                   <span key={chip} className="chip">
                     {chip}
                   </span>
@@ -837,11 +1187,17 @@ export default function LandingPage() {
                   className="card flex flex-col gap-3 p-6 text-center"
                   {...reveal(0.05 * index)}
                 >
-                  <Counter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    reducedMotion={Boolean(reduceMotion)}
-                  />
+                  {stat.display ? (
+                    <span className="text-xl font-semibold text-white md:text-2xl">
+                      {stat.display}
+                    </span>
+                  ) : stat.value !== undefined ? (
+                    <Counter
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      reducedMotion={Boolean(reduceMotion)}
+                    />
+                  ) : null}
                   <p className="text-xs uppercase tracking-[0.2em] text-white/50">
                     {stat.label}
                   </p>
@@ -881,7 +1237,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="clients" className="section">
+        <section id="proof" className="section">
           <div className={containerClass}>
             <motion.div
               className={`flex flex-col gap-4 ${
@@ -919,14 +1275,14 @@ export default function LandingPage() {
               {...reveal(0.1)}
             >
               <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {content.clients.title}
+                {content.brands.title}
               </p>
-              <p className="text-sm text-white/60">{content.clients.subtitle}</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-3">
-                {content.clients.items.map((client) => (
-                  <div key={client} className="card p-5 text-center">
+              <p className="text-sm text-white/60">{content.brands.subtitle}</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-4">
+                {content.brands.items.map((brand) => (
+                  <div key={brand} className="card p-5 text-center">
                     <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                      {client}
+                      {brand}
                     </p>
                   </div>
                 ))}
@@ -1014,11 +1370,11 @@ export default function LandingPage() {
                 <h2 className="text-2xl text-white">{content.cta.title}</h2>
                 <p className="text-sm text-white/70">{content.cta.description}</p>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <a href="#contact" className="btn-primary">
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <a href="#contact" className="btn-primary w-full sm:w-auto">
                   {content.cta.primary}
                 </a>
-                <a href={CONTACT.whatsapp} className="btn-outline">
+                <a href={CONTACT.whatsapp} className="btn-outline w-full sm:w-auto">
                   {content.cta.secondary}
                 </a>
               </div>
@@ -1137,99 +1493,174 @@ export default function LandingPage() {
               </div>
             </motion.div>
 
-            <motion.div className="card p-8" {...reveal(0.1)}>
-              <div
-                className={`flex flex-col gap-4 ${
-                  rtl ? "text-right" : "text-left"
-                }`}
-              >
-                <h3 className="text-2xl text-white">
-                  {content.contact.formTitle}
-                </h3>
-                <form className="grid gap-4" onSubmit={handleContactSubmit}>
-                  <input
-                    type="text"
-                    name="company"
-                    className="hidden"
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formName}
-                    <input
-                      name="name"
-                      required
-                      className="input-field mt-2"
-                      placeholder={content.contact.formName}
-                    />
-                  </label>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formPhone}
-                    <input
-                      name="phone"
-                      required
-                      className="input-field mt-2"
-                      placeholder={content.contact.formPhone}
-                    />
-                  </label>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formEmail}
-                    <input
-                      name="email"
-                      type="email"
-                      required
-                      className="input-field mt-2"
-                      placeholder={content.contact.formEmail}
-                    />
-                  </label>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formService}
-                    <select
-                      name="service"
-                      className="input-field mt-2"
-                      defaultValue=""
-                      required
-                    >
-                      <option value="" disabled>
-                        {content.contact.formService}
-                      </option>
-                      {quickServiceOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formMessage}
-                    <textarea
-                      name="message"
-                      rows={4}
-                      className="input-field mt-2"
-                      placeholder={content.contact.formMessage}
-                    />
-                  </label>
-                  <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {content.contact.formVerification}
-                    <input
-                      name="verification"
-                      required
-                      className="input-field mt-2"
-                      placeholder={content.contact.formVerification}
-                    />
-                  </label>
-                  {formError && (
-                    <p className="text-xs text-[color:var(--color-accent)]">
-                      {formError}
-                    </p>
-                  )}
-                  <button type="submit" className="btn-primary">
-                    {content.contact.formSubmit}
-                  </button>
-                  <p className="text-xs text-white/50">
-                    {content.contact.formNote}
+            <motion.div className="flex flex-col gap-6" {...reveal(0.1)}>
+              <div className="card p-6">
+                <div
+                  className={`flex flex-col gap-3 ${
+                    rtl ? "text-right" : "text-left"
+                  }`}
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                    {content.contact.freeVisitTitle}
                   </p>
-                </form>
+                  <p className="text-sm text-white/70">
+                    {content.contact.freeVisitDescription}
+                  </p>
+                  <ul className="grid gap-2 text-sm text-white/60">
+                    {content.contact.freeVisitItems.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="card p-8">
+                <div
+                  className={`flex flex-col gap-4 ${
+                    rtl ? "text-right" : "text-left"
+                  }`}
+                >
+                  <h3 className="text-2xl text-white">
+                    {content.contact.formTitle}
+                  </h3>
+                  <form
+                    className="grid gap-4 sm:grid-cols-2"
+                    onSubmit={handleContactSubmit}
+                  >
+                    <input
+                      type="text"
+                      name="company"
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formName}
+                      <input
+                        name="name"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.contact.formName}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formPhone}
+                      <input
+                        name="phone"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.contact.formPhone}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formEmail}
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.contact.formEmail}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formCity}
+                      <input
+                        name="city"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.contact.formCity}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formProperty}
+                      <select
+                        name="property"
+                        className="input-field mt-2"
+                        defaultValue=""
+                        required
+                      >
+                        <option value="" disabled>
+                          {content.contact.formProperty}
+                        </option>
+                        {content.contact.propertyOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formCameraCount}
+                      <select
+                        name="cameraCount"
+                        className="input-field mt-2"
+                        defaultValue=""
+                        required
+                      >
+                        <option value="" disabled>
+                          {content.contact.formCameraCount}
+                        </option>
+                        {content.contact.cameraOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {content.contact.formPreference}
+                      <select
+                        name="preference"
+                        className="input-field mt-2"
+                        defaultValue=""
+                        required
+                      >
+                        <option value="" disabled>
+                          {content.contact.formPreference}
+                        </option>
+                        {content.contact.preferenceOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50 sm:col-span-2">
+                      {content.contact.formMessage}
+                      <textarea
+                        name="message"
+                        rows={4}
+                        className="input-field mt-2"
+                        placeholder={content.contact.formMessage}
+                      />
+                    </label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-white/50 sm:col-span-2">
+                      {content.contact.formVerification}
+                      <input
+                        name="verification"
+                        required
+                        className="input-field mt-2"
+                        placeholder={content.contact.formVerification}
+                      />
+                    </label>
+                    {formError && (
+                      <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
+                        {formError}
+                      </p>
+                    )}
+                    <button
+                      type="submit"
+                      className="btn-primary w-full sm:col-span-2"
+                    >
+                      {content.contact.formSubmit}
+                    </button>
+                    <p className="text-xs text-white/50 sm:col-span-2">
+                      {content.contact.formNote}
+                    </p>
+                  </form>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -1282,6 +1713,16 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      <a
+        href={CONTACT.whatsapp}
+        className={`fixed bottom-6 z-[70] flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/80 text-[color:var(--color-accent)] shadow-lg backdrop-blur transition hover:border-[color:var(--color-accent)] hover:shadow-[0_0_24px_rgba(223,128,99,0.5)] ${
+          rtl ? "left-6" : "right-6"
+        }`}
+        aria-label={content.topBar.whatsappLabel}
+      >
+        <Icon name="whatsapp" className="h-5 w-5" />
+      </a>
 
       {galleryItem && (
         <div

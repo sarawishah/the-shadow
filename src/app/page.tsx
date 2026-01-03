@@ -2,12 +2,12 @@ import LandingPage from "@/components/LandingPage";
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SecuritySystemSupplier",
+  "@type": ["LocalBusiness", "SecuritySystemSupplier"],
   name: "THE SHADOW",
   alternateName: "الظل للأمن والحماية",
   url: "https://shadowjo.com",
   description:
-    "CCTV system design, installation, and monitoring support across Jordan.",
+    "CCTV system design, supply, installation, and maintenance across Jordan.",
   logo: "https://shadowjo.com/assets/logo-render-2.jpeg",
   image: "https://shadowjo.com/assets/logo-render-2.jpeg",
   telephone: "+962790000157",
