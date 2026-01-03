@@ -383,8 +383,8 @@ export default function LandingPage() {
   );
   const promiseChips =
     lang === "ar"
-      ? ["مرخص", "متوافق", "خاضع للإشراف"]
-      : ["Licensed", "Compliant", "Supervised"];
+      ? ["تركيب احترافي", "وصول عن بُعد", "دعم مستمر"]
+      : ["Professional Install", "Remote Access", "Ongoing Support"];
   const brandName = lang === "ar" ? "الظل للأمن والحماية" : "THE SHADOW";
   const logoAlt = lang === "ar" ? "شعار الظل" : "THE SHADOW logo";
   const menuLabel = lang === "ar" ? "القائمة" : "Menu";

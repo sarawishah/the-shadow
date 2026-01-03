@@ -162,9 +162,9 @@ type SiteContent = {
 export const siteContent: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "THE SHADOW | Security & Protection in Jordan",
+      title: "THE SHADOW | CCTV Systems in Jordan",
       description:
-        "Licensed Jordanian security and protection services for facilities, events, VIPs, and businesses. Professional teams, clear SOPs, and rapid coordination.",
+        "CCTV system design, installation, and monitoring support across Jordan. Professional technicians, clean cabling, and reliable storage.",
     },
     topBar: {
       phoneLabel: "Call",
@@ -184,21 +184,21 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "Contact" },
     ],
     hero: {
-      badge: "Licensed Jordanian Security Services",
-      headline: "Security & Protection You Can Trust.",
+      badge: "CCTV & Surveillance Systems in Jordan",
+      headline: "CCTV Systems You Can Rely On.",
       subheadline:
-        "Licensed Jordanian security services for facilities, events, VIPs, and businesses — built on discipline, discretion, and rapid response.",
-      primaryCta: "Request a Quote",
+        "Design, supply, installation, and monitoring support for CCTV and security systems across Jordan - built for clarity, compliance, and dependable coverage.",
+      primaryCta: "Request a CCTV Quote",
       secondaryCta: "Call Now",
       tertiaryCta: "WhatsApp",
-      chips: ["24/7 Operations", "Trained Personnel", "Rapid Response"],
+      chips: ["Professional Install", "Remote Access Setup", "Ongoing Support"],
       quickQuote: {
-        title: "Quick Quote",
+        title: "Quick CCTV Quote",
         description:
-          "Share your needs and our team will coordinate a response quickly.",
+          "Tell us your site size and coverage goals and we will propose the right CCTV system.",
         nameLabel: "Full name",
         phoneLabel: "Phone number",
-        serviceLabel: "Service needed",
+        serviceLabel: "CCTV service needed",
         button: "Send Request",
         note: "By submitting, you agree to be contacted by THE SHADOW.",
       },
@@ -206,91 +206,73 @@ export const siteContent: Record<Language, SiteContent> = {
     about: {
       title: "About THE SHADOW",
       short:
-        "THE SHADOW is a Jordan-based security and protection company delivering disciplined, discreet coverage for facilities, events, and VIPs.",
+        "THE SHADOW delivers CCTV and surveillance systems for businesses, facilities, and residences across Jordan.",
       long:
-        "We operate with clear SOPs, on-site supervision, and consistent reporting. Our teams are trained to maintain respectful conduct, confidentiality, and rapid coordination across every assignment.",
+        "We handle site surveys, system design, installation, and structured handover. Our technicians focus on clean cabling, reliable storage, and simple monitoring workflows.",
       bullets: [
         "Licensed operations aligned with local regulations",
-        "Professional screening and ongoing training",
-        "Site supervisors and structured reporting",
-        "Discreet, respectful, and service-first approach",
+        "Trained technicians and clean installations",
+        "Documented handover and user training",
+        "Maintenance and support plans",
       ],
-      imageAlt: "THE SHADOW security team on duty",
+      imageAlt: "THE SHADOW CCTV monitoring room",
     },
     services: {
-      title: "Core Services",
+      title: "CCTV Solutions",
       subtitle:
-        "Integrated protection services designed for sites, events, and high-profile assignments.",
+        "End-to-end CCTV and security system services tailored for every site.",
       items: [
         {
-          title: "Manned Guarding",
+          title: "Site Survey & System Design",
           description:
-            "Licensed guards for facilities, compounds, and businesses with clear SOPs.",
-          icon: "shield",
-        },
-        {
-          title: "VIP / Close Protection",
-          description:
-            "Discreet close protection and secure logistics for principals.",
-          icon: "vip",
-        },
-        {
-          title: "Event Security & Crowd Control",
-          description:
-            "Planning, screening, and crowd flow management for events.",
-          icon: "event",
-        },
-        {
-          title: "Mobile Patrols",
-          description:
-            "Patrol routes with incident logging and rapid coordination.",
-          icon: "patrol",
-        },
-        {
-          title: "CCTV & Surveillance Support",
-          description:
-            "Operational oversight and monitoring support for existing systems.",
-          icon: "camera",
-        },
-        {
-          title: "Access Control & Perimeter",
-          description:
-            "Entry management, badge checks, and perimeter patrols.",
-          icon: "access",
-        },
-        {
-          title: "Risk Assessment & Planning",
-          description:
-            "Site surveys, vulnerability assessment, and tailored security plans.",
+            "Coverage planning, camera placement, and infrastructure assessment.",
           icon: "risk",
         },
         {
-          title: "24/7 Coordination",
+          title: "CCTV Camera Installation",
           description:
-            "Central coordination, supervision, and reporting for deployments.",
+            "Indoor and outdoor cameras installed for clarity and coverage.",
+          icon: "camera",
+        },
+        {
+          title: "Recording & Storage Setup",
+          description: "NVR/DVR configuration with reliable retention.",
           icon: "command",
+        },
+        {
+          title: "Remote Viewing & Mobile Access",
+          description: "Secure access setup for mobile and desktop.",
+          icon: "access",
+        },
+        {
+          title: "Perimeter & Outdoor Coverage",
+          description: "Weather-ready cameras and perimeter protection.",
+          icon: "shield",
+        },
+        {
+          title: "Maintenance & Health Checks",
+          description: "Preventive maintenance, testing, and upgrades.",
+          icon: "patrol",
         },
       ],
     },
     why: {
       title: "Why Choose THE SHADOW?",
-      subtitle:
-        "Professional, compliant, and accountable security coverage for every environment.",
+      subtitle: "Clean installs, clear coverage plans, and dependable support.",
       bullets: [
         "Compliance with local regulations",
-        "Professional screening & training",
-        "Site supervisors + reporting",
-        "Clear SOPs and escalation",
-        "Discreet, respectful conduct",
+        "Trained technicians & safe cabling",
+        "Documented coverage plans",
+        "Tested recording and storage",
+        "Ongoing support and maintenance",
       ],
       promiseTitle: "Quality Promise",
       promiseText:
-        "We deliver licensed, compliant services with measurable supervision, transparent reporting, and a focus on rapid coordination.",
+        "We deliver compliant CCTV systems with documented handover, performance checks, and clear support plans.",
     },
     coverage: {
       title: "Coverage Across Jordan",
-      subtitle:
-        "Coordinated teams positioned to serve facilities and events throughout Jordan.",
+      subtitle: "Installations and support across Jordan.",
       regionsLabel: "Key areas",
       regions: [
         "Amman",
@@ -303,53 +285,52 @@ export const siteContent: Record<Language, SiteContent> = {
         "Karak",
       ],
       responseNote:
-        "Response is coordinated based on site needs, risk level, and deployment scope.",
+        "Deployment timing depends on site size, hardware availability, and installation scope.",
     },
     stats: {
-      title: "Operational Highlights",
+      title: "CCTV Highlights",
       subtitle:
-        "Placeholder metrics — replace with verified figures when available.",
+        "Placeholder metrics - replace with verified figures when available.",
       note:
         "These numbers are placeholders for presentation only. Update with verified company metrics.",
       items: [
-        { label: "Sites Secured", value: 120, suffix: "+", isPlaceholder: true },
-        { label: "Trained Guards", value: 260, suffix: "+", isPlaceholder: true },
+        { label: "Sites Protected", value: 180, suffix: "+", isPlaceholder: true },
+        { label: "Cameras Installed", value: 950, suffix: "+", isPlaceholder: true },
         { label: "Years of Experience", value: 12, suffix: "+", isPlaceholder: true },
-        { label: "24/7 Coverage", value: 24, suffix: "/7", isPlaceholder: true },
+        { label: "Cities Covered", value: 8, suffix: "+", isPlaceholder: true },
       ],
     },
     process: {
       title: "How We Work",
       steps: [
-        "Site Assessment",
-        "Security Plan",
-        "Deployment",
-        "Supervision & Reporting",
-        "Continuous Improvement",
+        "Site Survey",
+        "Coverage Plan",
+        "Installation",
+        "Testing & Handover",
+        "Maintenance & Support",
       ],
     },
     testimonials: {
       title: "Client Confidence",
-      subtitle:
-        "Professional coverage with respectful conduct and clear reporting.",
+      subtitle: "Clear coverage plans, clean installs, and reliable support.",
       items: [
         {
           quote:
-            "Their team was professional, discreet, and well supervised from day one.",
+            "The coverage plan was clear and the installation was clean and professional.",
           name: "Facility Manager",
           role: "Commercial Site",
         },
         {
           quote:
-            "Rapid coordination and clear reporting gave us confidence during our event.",
-          name: "Event Organizer",
-          role: "Corporate Event",
+            "Remote viewing works smoothly and the storage setup is dependable.",
+          name: "Operations Lead",
+          role: "Warehouse",
         },
         {
           quote:
-            "Structured coverage and respectful guards made a real difference.",
-          name: "Operations Lead",
-          role: "Hospitality Venue",
+            "They delivered a full handover with testing and clear guidance.",
+          name: "Site Owner",
+          role: "Residential Compound",
         },
       ],
     },
@@ -357,17 +338,17 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "Trusted By",
       subtitle: "Replace these placeholders with confirmed client logos.",
       items: [
-        "Commercial Facilities",
-        "Retail & Malls",
+        "Retail & Commercial",
         "Residential Compounds",
-        "Corporate Events",
+        "Warehouses",
+        "Schools & Campuses",
         "Hospitality",
-        "VIP & Executive",
+        "Healthcare",
       ],
     },
     gallery: {
       title: "Gallery",
-      subtitle: "Instagram-inspired snapshots from operations and events.",
+      subtitle: "CCTV installations, control rooms, and system snapshots.",
       items: [
         { src: "/images/gallery/placeholder-1.svg", alt: "Gallery placeholder" },
         { src: "/images/gallery/placeholder-2.svg", alt: "Gallery placeholder" },
@@ -381,34 +362,44 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "Frequently Asked Questions",
       items: [
         {
-          question: "Are you licensed?",
+          question: "Do you supply and install cameras?",
           answer:
-            "Yes. Our operations are licensed and aligned with local regulations for security services in Jordan.",
+            "Yes. We design the system, supply the hardware, and install cameras with proper coverage.",
         },
         {
-          question: "Do you offer event security?",
+          question: "Can I view cameras remotely?",
           answer:
-            "Yes. We handle event security, crowd flow management, and on-site coordination.",
+            "Yes. We set up secure mobile and desktop access so you can view your system anywhere.",
         },
         {
-          question: "How fast can you deploy guards?",
+          question: "Do you provide site surveys?",
           answer:
-            "Deployment speed depends on site requirements and staffing availability. We coordinate promptly after assessment.",
+            "Yes. We assess the site and propose camera placement and coverage zones.",
         },
         {
-          question: "How do you train personnel?",
+          question: "What types of cameras do you install?",
           answer:
-            "Personnel are screened and trained for discipline, SOPs, and respectful conduct with ongoing supervision.",
+            "We recommend indoor, outdoor, fixed, or PTZ cameras based on site needs and lighting.",
         },
         {
-          question: "Do you provide site supervisors?",
+          question: "How long does installation take?",
           answer:
-            "Yes. Supervisors oversee teams, ensure compliance, and deliver structured updates in regular reports.",
+            "Timing depends on site size and scope. We schedule installation promptly after survey.",
         },
         {
-          question: "How do I request a quote?",
+          question: "Do you offer maintenance?",
           answer:
-            "Use the quick quote form or contact us directly by phone, email, or WhatsApp.",
+            "Yes. We provide preventive maintenance, testing, and upgrade options.",
+        },
+        {
+          question: "Can you integrate access control or alarms?",
+          answer:
+            "Yes, where compatible. We can integrate CCTV with access control or alarm systems.",
+        },
+        {
+          question: "Do you handle storage and recording?",
+          answer:
+            "Yes. We configure NVR/DVR storage and retention based on your requirements.",
         },
         {
           question: "What areas do you cover?",
@@ -416,32 +407,22 @@ export const siteContent: Record<Language, SiteContent> = {
             "We serve clients across Jordan, including Amman, Zarqa, Irbid, and Aqaba.",
         },
         {
-          question: "What industries do you serve?",
+          question: "How do I request a quote?",
           answer:
-            "Commercial facilities, residential compounds, hospitality, retail, and events.",
-        },
-        {
-          question: "Do you provide mobile patrols?",
-          answer:
-            "Yes. Mobile patrols are available with incident reporting and rapid coordination.",
-        },
-        {
-          question: "Do you support CCTV systems?",
-          answer:
-            "We provide operational oversight and monitoring support for existing systems.",
+            "Use the quick quote form or contact us directly by phone, email, or WhatsApp.",
         },
       ],
     },
     cta: {
-      title: "Secure your site today.",
+      title: "Upgrade your CCTV coverage today.",
       description:
-        "Tell us what you need and we will build a compliant, supervised security plan.",
-      primary: "Request a Quote",
+        "Tell us your site layout and we will design a CCTV system with the right cameras, storage, and monitoring.",
+      primary: "Request a CCTV Quote",
       secondary: "WhatsApp",
     },
     contact: {
-      title: "Contact THE SHADOW",
-      subtitle: "Reach us anytime for rapid coordination and professional coverage.",
+      title: "Contact THE SHADOW CCTV",
+      subtitle: "Reach us for CCTV design, installation, and support.",
       addressLabelEn: "Address (EN)",
       addressLabelAr: "العنوان",
       addressEn:
@@ -452,17 +433,17 @@ export const siteContent: Record<Language, SiteContent> = {
       websiteLabel: "Website",
       socialLabel: "Social",
       hoursLabel: "Working Hours",
-      hoursPrimary: "Operations Desk: 24/7",
-      hoursSecondary: "Office: Sunday–Thursday, 9:00–17:00",
-      formTitle: "Request a Quote",
+      hoursPrimary: "Support Desk: Sunday-Thursday, 9:00-17:00",
+      hoursSecondary: "Installations scheduled by appointment",
+      formTitle: "Request a CCTV Quote",
       formName: "Full name",
       formPhone: "Phone number",
       formEmail: "Email address",
-      formService: "Service needed",
-      formMessage: "Message",
+      formService: "CCTV service needed",
+      formMessage: "Site details",
       formVerification: "Anti-spam: What is 4 + 3?",
       formSubmit: "Send Request",
-      formNote: "We respond quickly during operations hours and as soon as possible otherwise.",
+      formNote: "We respond quickly during working hours and as soon as possible otherwise.",
       verificationAnswer: "7",
       mapTitle: "Find us on the map",
     },
@@ -475,9 +456,9 @@ export const siteContent: Record<Language, SiteContent> = {
   },
   ar: {
     meta: {
-      title: "الظل للأمن والحماية | خدمات أمنية في الأردن",
+      title: "الظل للأمن والحماية | أنظمة CCTV في الأردن",
       description:
-        "خدمات أمن وحماية أردنية مرخصة للمنشآت والفعاليات وكبار الشخصيات والأعمال. كوادر محترفة وإجراءات واضحة وتنسيق سريع.",
+        "تصميم وتركيب ودعم أنظمة كاميرات المراقبة في الأردن. فنيون محترفون، تمديدات نظيفة، وتخزين موثوق.",
     },
     topBar: {
       phoneLabel: "اتصال",
@@ -497,20 +478,20 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "تواصل" },
     ],
     hero: {
-      badge: "خدمات أمن وحماية أردنية مرخصة",
-      headline: "أمن وحماية يمكنك الوثوق بها.",
+      badge: "أنظمة كاميرات مراقبة في الأردن",
+      headline: "أنظمة CCTV يمكنك الاعتماد عليها.",
       subheadline:
-        "خدمات أمن وحماية أردنية مرخصة للمنشآت والفعاليات وكبار الشخصيات والأعمال — مبنية على الانضباط والسرية وسرعة الاستجابة.",
-      primaryCta: "اطلب عرض سعر",
+        "تصميم وتوريد وتركيب ودعم مراقبة لأنظمة CCTV في الأردن - مبنية على وضوح الصورة، والالتزام، وتغطية موثوقة.",
+      primaryCta: "اطلب عرض CCTV",
       secondaryCta: "اتصل الآن",
       tertiaryCta: "واتساب",
-      chips: ["عمليات على مدار الساعة", "كوادر مدرّبة", "استجابة سريعة"],
+      chips: ["تركيب احترافي", "وصول عن بُعد", "دعم مستمر"],
       quickQuote: {
-        title: "عرض سعر سريع",
-        description: "شارك احتياجاتك وسننسق استجابة بسرعة.",
+        title: "عرض CCTV سريع",
+        description: "شارك مساحة الموقع واحتياجات التغطية لنقترح النظام الأنسب.",
         nameLabel: "الاسم الكامل",
         phoneLabel: "رقم الهاتف",
-        serviceLabel: "الخدمة المطلوبة",
+        serviceLabel: "خدمة CCTV المطلوبة",
         button: "إرسال الطلب",
         note: "بالإرسال، أنت توافق على أن نتواصل معك.",
       },
@@ -518,82 +499,72 @@ export const siteContent: Record<Language, SiteContent> = {
     about: {
       title: "عن الظل",
       short:
-        "الظل للأمن والحماية شركة أردنية تقدم تغطية أمنية منضبطة وسرية للمنشآت والفعاليات وكبار الشخصيات.",
+        "الظل توفر أنظمة كاميرات مراقبة للمنشآت والأعمال والمنازل في الأردن.",
       long:
-        "نعمل وفق إجراءات تشغيل معيارية واضحة، مع إشراف ميداني وتقارير دورية. نركز على الالتزام بالأنظمة، والاحترافية، والسلوك اللائق، مع تنسيق سريع عند الحاجة.",
+        "نقوم بمعاينة الموقع وتصميم النظام والتركيب والتسليم المنظم. نركز على تمديدات نظيفة وتخزين موثوق وسهولة الاستخدام.",
       bullets: [
         "عمليات مرخصة ومتوافقة مع التشريعات",
-        "فحص وتدريب مهني مستمر",
-        "مشرفون ميدانيون وتقارير منظمة",
-        "سلوك محترم وسرية عالية",
+        "فنيون مدرّبون وتركيبات نظيفة",
+        "تسليم موثق وتدريب المستخدم",
+        "خطط صيانة ودعم",
       ],
-      imageAlt: "فريق الظل الأمني أثناء العمل",
+      imageAlt: "غرفة مراقبة CCTV لدى الظل",
     },
     services: {
-      title: "الخدمات الأساسية",
-      subtitle:
-        "حلول حماية متكاملة مصممة للمواقع والفعاليات والمهام الحساسة.",
+      title: "حلول كاميرات المراقبة",
+      subtitle: "خدمات متكاملة لأنظمة CCTV تناسب كل موقع.",
       items: [
         {
-          title: "حراسة مواقع ثابتة",
+          title: "معاينة الموقع وتصميم النظام",
           description:
-            "حراس مرخصون للمنشآت والمجمعات والأعمال بإجراءات تشغيل واضحة.",
-          icon: "shield",
-        },
-        {
-          title: "حماية لصيقة لكبار الشخصيات",
-          description: "حماية ميدانية متحفظة وتنظيم الحركة بأمان.",
-          icon: "vip",
-        },
-        {
-          title: "أمن الفعاليات وضبط الحشود",
-          description: "تخطيط وتفتيش وتنظيم تدفق الحضور للفعاليات.",
-          icon: "event",
-        },
-        {
-          title: "دوريات متحركة",
-          description: "مسارات دورية مع توثيق الحوادث وتنسيق سريع.",
-          icon: "patrol",
-        },
-        {
-          title: "دعم أنظمة المراقبة",
-          description: "مساندة تشغيلية ومتابعة للأنظمة القائمة.",
-          icon: "camera",
-        },
-        {
-          title: "ضبط الدخول وحماية المحيط",
-          description: "إدارة المداخل والتحقق من الهويات ودوريات المحيط.",
-          icon: "access",
-        },
-        {
-          title: "تقييم المخاطر والتخطيط الأمني",
-          description: "معاينة المواقع وتحليل الثغرات وخطط مخصصة.",
+            "تخطيط التغطية وتحديد مواقع الكاميرات والبنية التحتية.",
           icon: "risk",
         },
         {
-          title: "تنسيق 24/7",
-          description: "تنسيق مركزي وإشراف وتقارير لجميع المواقع.",
+          title: "تركيب كاميرات المراقبة",
+          description:
+            "كاميرات داخلية وخارجية مع وضوح وتغطية مناسبة.",
+          icon: "camera",
+        },
+        {
+          title: "إعداد التسجيل والتخزين",
+          description: "تهيئة NVR/DVR مع حفظ موثوق.",
           icon: "command",
+        },
+        {
+          title: "المشاهدة عن بُعد",
+          description: "إعداد وصول آمن للجوال والكمبيوتر.",
+          icon: "access",
+        },
+        {
+          title: "تغطية المحيط والخارج",
+          description: "حلول للبيئات الخارجية وتغطية المحيط.",
+          icon: "shield",
+        },
+        {
+          title: "الصيانة والفحص الدوري",
+          description: "صيانة وقائية واختبارات وترقيات.",
+          icon: "patrol",
         },
       ],
     },
     why: {
       title: "لماذا تختار الظل؟",
-      subtitle: "تغطية أمنية محترفة ومتوافقة مع الأنظمة ويمكن قياسها.",
+      subtitle: "تركيبات نظيفة وخطط تغطية واضحة ودعم موثوق.",
       bullets: [
         "الالتزام بالتشريعات المحلية",
-        "فحص وتدريب مهني",
-        "مشرفون ميدانيون وتقارير",
-        "إجراءات تشغيل وتصعيد واضحة",
-        "سلوك محترم وسري",
+        "فنيون مدربون وتمديدات آمنة",
+        "خطط تغطية موثقة",
+        "اختبار التسجيل والتخزين",
+        "دعم وصيانة مستمرة",
       ],
       promiseTitle: "وعد الجودة",
       promiseText:
-        "نعدكم بخدمة مرخصة ومتوافقة مع الأنظمة، بإشراف قابل للقياس وتقارير شفافة وتركيز على سرعة التنسيق.",
+        "نقدم أنظمة CCTV متوافقة مع الأنظمة مع تسليم موثق وفحوصات أداء وخطط دعم واضحة.",
     },
     coverage: {
       title: "التغطية في جميع أنحاء الأردن",
-      subtitle: "فرق منسقة لخدمة المواقع والفعاليات في مختلف مناطق المملكة.",
+      subtitle: "تركيبات ودعم في مختلف مناطق المملكة.",
       regionsLabel: "مناطق رئيسية",
       regions: [
         "عمّان",
@@ -605,48 +576,49 @@ export const siteContent: Record<Language, SiteContent> = {
         "جرش",
         "الكرك",
       ],
-      responseNote: "تتم الاستجابة حسب احتياجات الموقع ومستوى المخاطر ونطاق الانتشار.",
+      responseNote:
+        "يعتمد زمن التنفيذ على حجم الموقع وتوفر الأجهزة ونطاق التركيب.",
     },
     stats: {
-      title: "مؤشرات تشغيلية",
+      title: "مؤشرات CCTV",
       subtitle:
-        "أرقام توضيحية فقط — يرجى تحديثها بأرقام مؤكدة عند توفرها.",
+        "أرقام توضيحية فقط - يرجى تحديثها بأرقام مؤكدة عند توفرها.",
       note: "هذه أرقام توضيحية للعرض فقط. يرجى تحديثها بأرقام مؤكدة.",
       items: [
-        { label: "مواقع مؤمنة", value: 120, suffix: "+", isPlaceholder: true },
-        { label: "حراس مدربون", value: 260, suffix: "+", isPlaceholder: true },
+        { label: "مواقع محمية", value: 180, suffix: "+", isPlaceholder: true },
+        { label: "كاميرات مركبة", value: 950, suffix: "+", isPlaceholder: true },
         { label: "سنوات خبرة", value: 12, suffix: "+", isPlaceholder: true },
-        { label: "تغطية 24/7", value: 24, suffix: "/7", isPlaceholder: true },
+        { label: "مدن مخدومة", value: 8, suffix: "+", isPlaceholder: true },
       ],
     },
     process: {
       title: "كيف نعمل",
       steps: [
         "معاينة الموقع",
-        "خطة أمنية",
-        "نشر الكوادر",
-        "الإشراف والتقارير",
-        "تحسين مستمر",
+        "خطة التغطية",
+        "التركيب",
+        "الاختبار والتسليم",
+        "الصيانة والدعم",
       ],
     },
     testimonials: {
       title: "ثقة العملاء",
-      subtitle: "تغطية منظمة وسلوك محترم وتقارير واضحة.",
+      subtitle: "خطط تغطية واضحة وتركيبات نظيفة ودعم موثوق.",
       items: [
         {
-          quote: "فريق محترف وسري مع إشراف واضح منذ البداية.",
+          quote: "خطة التغطية كانت واضحة والتركيب كان نظيفًا واحترافيًا.",
           name: "مدير منشأة",
-          role: "موقع تجاري",
+          role: "قطاع تجاري",
         },
         {
-          quote: "التنسيق السريع والتقارير أعطتنا راحة بال أثناء الفعالية.",
-          name: "منظم فعالية",
-          role: "فعالية مؤسسية",
-        },
-        {
-          quote: "تغطية منظمة وسلوك محترم أحدثا فرقًا واضحًا.",
+          quote: "الوصول عن بُعد يعمل بسلاسة والتخزين ثابت.",
           name: "مدير عمليات",
-          role: "منشأة ضيافة",
+          role: "مستودعات",
+        },
+        {
+          quote: "تم التسليم مع اختبار كامل وإرشادات واضحة.",
+          name: "مالك منشأة",
+          role: "مجمع سكني",
         },
       ],
     },
@@ -654,17 +626,17 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "موثوقون لدى",
       subtitle: "استبدل هذه العناصر بشعارات العملاء المعتمدة.",
       items: [
-        "منشآت تجارية",
-        "مراكز تسوق",
+        "قطاع تجاري وتجزئة",
         "مجمعات سكنية",
-        "فعاليات مؤسسية",
+        "مستودعات",
+        "مدارس وجامعات",
         "ضيافة وفنادق",
-        "كبار الشخصيات",
+        "مرافق صحية",
       ],
     },
     gallery: {
       title: "المعرض",
-      subtitle: "لقطات مستوحاة من إنستغرام للعمليات والفعاليات.",
+      subtitle: "تركيبات CCTV وغرف تحكم ولقطات من الأنظمة.",
       items: [
         { src: "/images/gallery/placeholder-1.svg", alt: "صورة معرض" },
         { src: "/images/gallery/placeholder-2.svg", alt: "صورة معرض" },
@@ -678,34 +650,41 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "الأسئلة الشائعة",
       items: [
         {
-          question: "هل أنتم مرخصون؟",
+          question: "هل توفرون وتقومون بتركيب الكاميرات؟",
           answer:
-            "نعم. عملياتنا مرخصة ومتوافقة مع الأنظمة المحلية لخدمات الأمن في الأردن.",
+            "نعم. نصمم النظام ونوفر الأجهزة ونقوم بالتركيب مع تغطية مناسبة.",
         },
         {
-          question: "هل تقدمون أمن الفعاليات؟",
-          answer:
-            "نعم. نقدم أمن الفعاليات وضبط الحشود والتنسيق الميداني.",
+          question: "هل يمكنني مشاهدة الكاميرات عن بُعد؟",
+          answer: "نعم. نجهز وصولًا آمنًا للجوال والكمبيوتر.",
         },
         {
-          question: "ما مدى سرعة نشر الحراس؟",
+          question: "هل تقدمون معاينة للموقع؟",
           answer:
-            "تعتمد سرعة النشر على احتياجات الموقع وتوفر الكوادر. ننسق بسرعة بعد المعاينة.",
+            "نعم. نعاين الموقع ونقترح مواقع الكاميرات ومناطق التغطية.",
         },
         {
-          question: "كيف تدربون الكوادر؟",
+          question: "ما أنواع الكاميرات التي تنصحون بها؟",
           answer:
-            "يتم فحص الكوادر وتدريبهم على الانضباط وإجراءات التشغيل والسلوك اللائق مع إشراف مستمر.",
+            "نوصي بكاميرات داخلية أو خارجية وثابتة أو متحركة حسب احتياج الموقع والإضاءة.",
         },
         {
-          question: "هل توفرون مشرفين ميدانيين؟",
+          question: "كم يستغرق التركيب؟",
           answer:
-            "نعم. المشرفون يتابعون الالتزام ويقدمون تقارير دورية.",
+            "يعتمد على حجم الموقع ونطاق العمل. نحدد المدة بعد المعاينة.",
         },
         {
-          question: "كيف أطلب عرض سعر؟",
+          question: "هل تقدمون الصيانة؟",
+          answer: "نعم. نوفر صيانة وقائية واختبارات وخيارات ترقية.",
+        },
+        {
+          question: "هل يمكن دمج النظام مع التحكم بالدخول أو الإنذار؟",
           answer:
-            "يمكنك استخدام نموذج الطلب أو التواصل معنا عبر الهاتف أو البريد أو واتساب.",
+            "نعم عند التوافق. يمكن دمج CCTV مع أنظمة الدخول أو الإنذار.",
+        },
+        {
+          question: "هل توفرون التسجيل والتخزين؟",
+          answer: "نعم. نقوم بإعداد التخزين والتسجيل وفق احتياجاتكم.",
         },
         {
           question: "ما المناطق التي تغطونها؟",
@@ -713,31 +692,22 @@ export const siteContent: Record<Language, SiteContent> = {
             "نخدم العملاء في جميع أنحاء الأردن بما في ذلك عمّان والزرقاء وإربد والعقبة.",
         },
         {
-          question: "ما القطاعات التي تخدمونها؟",
+          question: "كيف أطلب عرض سعر؟",
           answer:
-            "المنشآت التجارية والمجمعات السكنية والضيافة والمتاجر والفعاليات.",
-        },
-        {
-          question: "هل تقدمون دوريات متحركة؟",
-          answer:
-            "نعم. نوفر دوريات متحركة مع توثيق الحوادث والتنسيق السريع.",
-        },
-        {
-          question: "هل تدعمون أنظمة المراقبة؟",
-          answer:
-            "نقدم متابعة تشغيلية ومساندة لأنظمة المراقبة القائمة.",
+            "يمكنك استخدام نموذج الطلب أو التواصل معنا عبر الهاتف أو البريد أو واتساب.",
         },
       ],
     },
     cta: {
-      title: "أمّن موقعك اليوم.",
-      description: "أخبرنا باحتياجاتك لنضع خطة أمنية مرخصة ومشرفة.",
-      primary: "اطلب عرض سعر",
+      title: "طوّر تغطية كاميراتك اليوم.",
+      description:
+        "أخبرنا بتفاصيل الموقع لنصمم نظام CCTV مناسبًا بالكاميرات والتخزين والمراقبة.",
+      primary: "اطلب عرض CCTV",
       secondary: "واتساب",
     },
     contact: {
-      title: "تواصل مع الظل",
-      subtitle: "نحن هنا للتنسيق السريع والتغطية الاحترافية.",
+      title: "تواصل مع الظل - CCTV",
+      subtitle: "تواصل معنا لتصميم وتركيب ودعم أنظمة كاميرات المراقبة.",
       addressLabelEn: "Address (EN)",
       addressLabelAr: "العنوان",
       addressEn:
@@ -748,14 +718,14 @@ export const siteContent: Record<Language, SiteContent> = {
       websiteLabel: "الموقع الإلكتروني",
       socialLabel: "التواصل الاجتماعي",
       hoursLabel: "ساعات العمل",
-      hoursPrimary: "غرفة العمليات: على مدار الساعة",
-      hoursSecondary: "الدوام المكتبي: الأحد–الخميس، 9:00–17:00",
-      formTitle: "طلب عرض سعر",
+      hoursPrimary: "الدعم الفني: الأحد-الخميس، 9:00-17:00",
+      hoursSecondary: "التركيب حسب المواعيد",
+      formTitle: "طلب عرض CCTV",
       formName: "الاسم الكامل",
       formPhone: "رقم الهاتف",
       formEmail: "البريد الإلكتروني",
-      formService: "الخدمة المطلوبة",
-      formMessage: "تفاصيل الطلب",
+      formService: "خدمة CCTV المطلوبة",
+      formMessage: "تفاصيل الموقع",
       formVerification: "مكافحة الرسائل: كم يساوي 4 + 3؟",
       formSubmit: "إرسال الطلب",
       formNote: "سنرد بسرعة خلال ساعات العمل وبأقرب وقت ممكن.",

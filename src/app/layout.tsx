@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   description: siteContent.en.meta.description,
   applicationName: "THE SHADOW",
   keywords: [
-    "security services Jordan",
-    "protection company Amman",
-    "VIP protection Jordan",
-    "event security Jordan",
-    "manned guarding",
+    "CCTV systems Jordan",
+    "camera installation Amman",
+    "surveillance systems Jordan",
+    "CCTV maintenance",
+    "security cameras",
     "THE SHADOW",
   ],
   openGraph: {
