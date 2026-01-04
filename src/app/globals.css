@@ -17,6 +17,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 160px;
   }
 
   body {
@@ -53,7 +54,7 @@
   }
 
   section {
-    scroll-margin-top: 120px;
+    scroll-margin-top: 160px;
   }
 
   a {
@@ -206,7 +207,7 @@ html[dir="rtl"] .tracking-\[0\.2em\] {
 .card-hover:hover {
   transform: translateY(-6px);
   border-color: rgba(223, 128, 99, 0.35);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45), 0 0 26px rgba(223, 128, 99, 0.16);
 }
 
 .section-title {

@@ -91,6 +91,16 @@ function ServiceIcon({ name, className }: IconProps) {
   };
 
   switch (name) {
+    case "alarm":
+      return (
+        <svg {...common}>
+          <path d="M12 9a5 5 0 0 0-5 5v3h10v-3a5 5 0 0 0-5-5z" />
+          <path d="M9 18v1a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1" />
+          <path d="M12 4v2" />
+          <path d="M4.5 8.5 6 10" />
+          <path d="M19.5 8.5 18 10" />
+        </svg>
+      );
     case "install":
       return (
         <svg {...common}>
@@ -397,6 +407,10 @@ export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
+  const [formContext, setFormContext] = useState<"quick-quote" | "contact" | null>(
+    null
+  );
   const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
   const logoOffset = useTransform(scrollY, [0, 300], [0, -20]);
@@ -446,64 +460,92 @@ export default function LandingPage() {
   const galleryItem =
     lightboxIndex !== null ? content.gallery.items[lightboxIndex] : null;
 
-  const sendMail = (subject: string, body: string) => {
-    const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+  const encodeFormBody = (data: FormData) => {
+    const params = new URLSearchParams();
+    data.forEach((value, key) => {
+      params.append(key, String(value));
+    });
+    return params.toString();
   };
 
-  const handleQuickQuoteSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitNetlifyForm = async (formName: string, data: FormData) => {
+    data.set("form-name", formName);
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encodeFormBody(data),
+    });
+    if (!response.ok) {
+      throw new Error("Form submission failed");
+    }
+  };
+
+  const handleQuickQuoteSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
     if (data.get("company")) return;
-    const name = data.get("name");
-    const phone = data.get("phone");
-    const city = data.get("city");
-    const property = data.get("property");
-    const cameraCount = data.get("cameraCount");
-    const preference = data.get("preference");
-    const body = [
-      content.hero.quickQuote.title,
-      `${content.hero.quickQuote.nameLabel}: ${name}`,
-      `${content.hero.quickQuote.phoneLabel}: ${phone}`,
-      `${content.hero.quickQuote.cityLabel}: ${city}`,
-      `${content.hero.quickQuote.propertyLabel}: ${property}`,
-      `${content.hero.quickQuote.cameraLabel}: ${cameraCount}`,
-      `${content.hero.quickQuote.preferenceLabel}: ${preference}`,
-    ].join("\n");
-    sendMail(content.hero.quickQuote.title, body);
-    form.reset();
-  };
-
-  const handleContactSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    if (data.get("company")) return;
-    const verification = String(data.get("verification") || "").trim();
-    if (verification !== content.contact.verificationAnswer) {
-      setFormError(
+    setFormError(null);
+    setFormSuccess(null);
+    setFormContext("quick-quote");
+    if (process.env.NODE_ENV === "development") {
+      setFormSuccess(
         lang === "ar"
-          ? "يرجى الإجابة بشكل صحيح على سؤال التحقق."
-          : "Please answer the verification question correctly."
+          ? "تم تجهيز النموذج. عند النشر على Netlify سيتم إرسال الطلب بنجاح."
+          : "Form is ready. On Netlify deployment, this request will submit successfully."
       );
+      form.reset();
       return;
     }
+    try {
+      await submitNetlifyForm("quick-quote", data);
+      setFormSuccess(
+        lang === "ar" ? "تم إرسال طلبك بنجاح. سنعود إليك قريباً." : "Request sent. We'll contact you shortly."
+      );
+      form.reset();
+    } catch {
+      setFormError(
+        lang === "ar"
+          ? "تعذر إرسال الطلب حالياً. يرجى المحاولة لاحقاً أو التواصل عبر واتساب."
+          : "We couldn't submit your request right now. Please try again or contact us on WhatsApp."
+      );
+    }
+  };
+
+  const handleContactSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    if (data.get("company")) return;
     setFormError(null);
-    const body = [
-      `${content.contact.formName}: ${data.get("name")}`,
-      `${content.contact.formPhone}: ${data.get("phone")}`,
-      `${content.contact.formEmail}: ${data.get("email")}`,
-      `${content.contact.formCity}: ${data.get("city")}`,
-      `${content.contact.formProperty}: ${data.get("property")}`,
-      `${content.contact.formCameraCount}: ${data.get("cameraCount")}`,
-      `${content.contact.formPreference}: ${data.get("preference")}`,
-      `${content.contact.formMessage}: ${data.get("message")}`,
-    ].join("\n");
-    sendMail(content.contact.formTitle, body);
-    form.reset();
+    setFormSuccess(null);
+    setFormContext("contact");
+    if (process.env.NODE_ENV === "development") {
+      setFormSuccess(
+        lang === "ar"
+          ? "تم تجهيز النموذج. عند النشر على Netlify سيتم إرسال الرسالة بنجاح."
+          : "Form is ready. On Netlify deployment, this message will submit successfully."
+      );
+      form.reset();
+      return;
+    }
+    try {
+      await submitNetlifyForm("contact", data);
+      setFormSuccess(
+        lang === "ar" ? "تم إرسال رسالتك بنجاح. سنعاود الاتصال بك قريباً." : "Message sent successfully. We'll get back to you shortly."
+      );
+      form.reset();
+    } catch {
+      setFormError(
+        lang === "ar"
+          ? "تعذر إرسال الرسالة حالياً. يرجى المحاولة لاحقاً أو التواصل عبر واتساب."
+          : "We couldn't submit your message right now. Please try again or contact us on WhatsApp."
+      );
+    }
   };
 
   const brandName = lang === "ar" ? "الظل للأمن والحماية" : "THE SHADOW";
@@ -511,132 +553,170 @@ export default function LandingPage() {
   const menuLabel = lang === "ar" ? "القائمة" : "Menu";
   const closeLabel = lang === "ar" ? "إغلاق" : "Close";
 
+  const serviceDetails = {
+    en: {
+      guarding: {
+        title: "Security & Protection for Facilities",
+        summary:
+          "On-site protection and guarding services designed for daily operations, visitors, and incident prevention.",
+        bullets: [
+          "Trained and vetted personnel",
+          "Shift planning (day/night) and reporting",
+          "Entry/visitor control procedures",
+          "Coordination with CCTV and alarm response",
+        ],
+      },
+      consultations: {
+        title: "Security Consultations",
+        summary:
+          "Expert guidance to reduce risk, improve coverage planning, and align with regulations and best practice.",
+        bullets: [
+          "Surveillance planning and camera placement",
+          "Policies, SOPs, and escalation workflows",
+          "Compliance-focused recommendations",
+          "Budget-friendly phased upgrade plans",
+        ],
+      },
+      risk: {
+        title: "Risk Assessment Services",
+        summary:
+          "A practical evaluation of threats and vulnerabilities with a clear mitigation plan.",
+        bullets: [
+          "Site walk-through and threat mapping",
+          "Vulnerability findings and priorities",
+          "Mitigation plan and implementation roadmap",
+          "Security system recommendations",
+        ],
+      },
+      alarms: {
+        title: "Safety & 911-Linked Alarm Systems",
+        summary:
+          "Alarm design and installation with monitoring/response workflows built for your facility.",
+        bullets: [
+          "Alarm system design and installation",
+          "Zoning and sensor placement",
+          "Emergency response workflow setup",
+          "Testing and user training",
+        ],
+      },
+      cctv: {
+        title: "CCTV Cameras",
+        summary:
+          "End-to-end CCTV delivery: design, supply, installation, configuration, and maintenance.",
+        bullets: [
+          "1080p / 2K / 4K options",
+          "Recording storage planning (7/14/30 days)",
+          "Secure remote viewing and user roles",
+          "Clean cabling, handover, and warranty",
+        ],
+      },
+    },
+    ar: {
+      guarding: {
+        title: "خدمات الأمن والحماية وحراسة المنشآت",
+        summary:
+          "حراسة وتنظيم عمليات الموقع واستقبال الزوار والحد من المخاطر بطريقة احترافية.",
+        bullets: [
+          "كوادر مدربة ومُعتمدة",
+          "تنظيم ورديات وتقارير دورية",
+          "إجراءات دخول وزوار",
+          "تنسيق مع كاميرات CCTV وأنظمة الإنذار",
+        ],
+      },
+      consultations: {
+        title: "الاستشارات الأمنية",
+        summary:
+          "استشارة عملية لتقليل المخاطر وتحسين خطة المراقبة والالتزام باللوائح.",
+        bullets: [
+          "تخطيط توزيع الكاميرات ونقاط التغطية",
+          "إجراءات تشغيل وتصعيد واضحة",
+          "توصيات تراعي الأنظمة",
+          "خطة تطوير مرحلية حسب الميزانية",
+        ],
+      },
+      risk: {
+        title: "تقديم خدمة تقدير المخاطر",
+        summary:
+          "تقييم شامل للتهديدات ونقاط الضعف مع خطة معالجة واضحة وقابلة للتطبيق.",
+        bullets: [
+          "معاينة الموقع وتحليل التهديدات",
+          "تحديد نقاط الضعف والأولويات",
+          "خطة معالجة وجدول تنفيذ",
+          "توصيات الأنظمة والإجراءات",
+        ],
+      },
+      alarms: {
+        title: "تركيب أجهزة الأمان والإنذار المرتبطة ب٩١١",
+        summary:
+          "تصميم وتركيب أنظمة إنذار مع آلية متابعة واستجابة تناسب طبيعة الموقع.",
+        bullets: [
+          "تصميم وتركيب أنظمة الإنذار",
+          "تقسيم مناطق وحساسات",
+          "تجهيز آلية الاستجابة والمتابعة",
+          "اختبار وتدريب المستخدم",
+        ],
+      },
+      cctv: {
+        title: "كاميرات المراقبة",
+        summary:
+          "حلول CCTV كاملة: تصميم وتوريد وتركيب وتهيئة وصيانة.",
+        bullets: [
+          "خيارات 1080p / 2K / 4K",
+          "خطة تخزين (7/14/30 يوم)",
+          "مشاهدة عن بُعد وصلاحيات مستخدمين",
+          "تمديدات مرتبة وتسليم وضمان",
+        ],
+      },
+    },
+  } as const;
+
+  const activeDetails = serviceDetails[lang];
+  const galleryFallbackSrc = "/assets/logo-render-2.jpeg";
+
   return (
     <div className="relative">
-      <div className="border-b border-white/10 bg-black/40 text-white/70 backdrop-blur">
-        <div
-          className={`${containerClass} flex flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between`}
-        >
-          <div
-            className={`flex flex-col gap-2 text-[0.65rem] md:flex-row md:flex-wrap md:items-center md:gap-4 ${
-              rtl ? "text-right items-end md:flex-row-reverse" : "text-left items-start"
-            }`}
-          >
-            <a
-              href={`tel:${CONTACT.phone}`}
-              className="group flex items-center gap-2 transition hover:text-white"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
-                <Icon name="phone" className="h-3 w-3" />
-              </span>
-              <span>{CONTACT.phoneDisplay}</span>
-            </a>
-            <span className="hidden md:block h-3 w-px bg-white/10" aria-hidden="true" />
-            <a
-              href={CONTACT.whatsapp}
-              className="group flex items-center gap-2 transition hover:text-white"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
-                <Icon name="whatsapp" className="h-3 w-3" />
-              </span>
-              <span>{content.topBar.whatsappLabel}</span>
-            </a>
-            <span className="hidden md:block h-3 w-px bg-white/10" aria-hidden="true" />
-            <a
-              href={`mailto:${CONTACT.email}`}
-              className="group flex items-center gap-2 transition hover:text-white"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition group-hover:text-white">
-                <Icon name="mail" className="h-3 w-3" />
-              </span>
-              <span>{CONTACT.email}</span>
-            </a>
-          </div>
-          <div
-            className={`flex flex-col gap-2 md:flex-row md:items-center md:gap-3 ${
-              rtl ? "items-end md:flex-row-reverse" : "items-start"
-            }`}
-          >
-            <a
-              href="#contact"
-              className={`rounded-full border border-white/15 px-3 py-1 text-[0.6rem] text-white/80 transition hover:border-[color:var(--color-accent)] hover:text-white ${
-                rtl ? "" : "uppercase tracking-[0.25em]"
-              }`}
-            >
-              {content.contact.freeVisitTitle}
-            </a>
-            <div
-              className={`flex items-center gap-2 ${
-                rtl ? "flex-row-reverse" : ""
-              }`}
-            >
-              <span className="text-[0.6rem] uppercase tracking-[0.3em] text-white/40">
-                {content.topBar.languageLabel}
-              </span>
-              <LangToggle
-                lang={lang}
-                onChange={setLang}
-                className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
       <header className="glass-header sticky top-0 z-50">
-        <div
-          className={`${containerClass} flex items-center justify-between py-4`}
-        >
+        <div className={`${containerClass} flex items-center justify-between py-3`}>
           <div
             className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}
           >
             <Image
               src="/assets/logo-render-1.jpeg"
               alt={logoAlt}
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-full object-cover"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full object-cover"
               priority
             />
-            <div>
-              <p className="text-sm tracking-[0.3em] text-white/60">
+            <div
+              className={`flex flex-col ${rtl ? "items-end text-right" : "items-start text-left"}`}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/60">
                 {brandName}
               </p>
-              <p className="text-xs text-white/40">{content.footer.tagline}</p>
+              <p className="text-[0.65rem] text-white/40">
+                {content.footer.tagline}
+              </p>
             </div>
           </div>
 
-          <nav
-            className={`hidden xl:flex items-center gap-6 text-xs uppercase tracking-[0.3em] text-white/70 ${
-              rtl ? "flex-row-reverse" : ""
-            }`}
-            aria-label="Primary"
-          >
-            {content.nav.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="transition hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a href="#contact" className="btn-primary hidden md:inline-flex">
+          <div className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
+            <a
+              href="#contact"
+              className="btn-primary !px-5 !py-2 !text-xs"
+            >
               {content.hero.primaryCta}
             </a>
             <a
               href={CONTACT.whatsapp}
-              className="icon-button text-[color:var(--color-accent)]"
+              className="icon-button !p-2 text-[color:var(--color-accent)]"
               aria-label={content.topBar.whatsappLabel}
             >
-              <Icon name="whatsapp" className="h-5 w-5" />
+              <Icon name="whatsapp" className="h-4 w-4" />
             </a>
             <button
               type="button"
-              className="xl:hidden btn-outline"
+              className="btn-outline !px-4 !py-2 !text-xs"
               aria-label={menuOpen ? closeLabel : menuLabel}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((prev) => !prev)}
@@ -647,7 +727,7 @@ export default function LandingPage() {
         </div>
 
         {menuOpen && (
-          <div className="fixed inset-0 z-[60] xl:hidden">
+          <div className="fixed inset-0 z-[60]">
             <button
               type="button"
               className="absolute inset-0 bg-black/70"
@@ -790,8 +870,15 @@ export default function LandingPage() {
                   </div>
                   <form
                     className="grid gap-4 sm:grid-cols-2"
+                    name="quick-quote"
+                    method="POST"
+                    data-netlify="true"
+                    data-netlify-honeypot="company"
+                    data-netlify-recaptcha="true"
                     onSubmit={handleQuickQuoteSubmit}
                   >
+                    <input type="hidden" name="form-name" value="quick-quote" />
+                    <input type="hidden" name="lang" value={lang} />
                     <input
                       type="text"
                       name="company"
@@ -880,6 +967,17 @@ export default function LandingPage() {
                         ))}
                       </select>
                     </label>
+                    <div className="sm:col-span-2">
+                      <div data-netlify-recaptcha="true" className="mt-2" />
+                    </div>
+                    {formContext === "quick-quote" && formError && (
+                      <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
+                        {formError}
+                      </p>
+                    )}
+                    {formContext === "quick-quote" && formSuccess && (
+                      <p className="text-xs text-white/70 sm:col-span-2">{formSuccess}</p>
+                    )}
                     <button type="submit" className="btn-primary w-full sm:col-span-2">
                       {content.hero.quickQuote.button}
                     </button>
@@ -943,14 +1041,14 @@ export default function LandingPage() {
               {...reveal()}
             >
               <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {content.services.title}
+                {content.security.title}
               </p>
               <h2 className="section-title text-white">
-                {content.services.subtitle}
+                {content.security.subtitle}
               </h2>
             </motion.div>
             <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {content.services.items.map((service, index) => (
+              {content.security.items.map((service, index) => (
                 <motion.div
                   key={service.title}
                   className="card card-hover group flex h-full flex-col gap-4 p-6"
@@ -967,10 +1065,97 @@ export default function LandingPage() {
                   </div>
                   <h3 className="text-lg text-white">{service.title}</h3>
                   <p className="text-sm text-white/60">{service.description}</p>
-                  <span className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1">
+                  <a
+                    href={service.href || "#contact"}
+                    className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
+                  >
                     {lang === "ar" ? "اعرف المزيد" : "Learn More"}
                     <span aria-hidden="true">-&gt;</span>
-                  </span>
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+              {content.security.items.map((service, index) => {
+                const detail = activeDetails[service.id as keyof typeof activeDetails];
+                if (!detail) return null;
+                return (
+                  <motion.div
+                    key={service.id}
+                    id={`service-${service.id}`}
+                    className="card p-6"
+                    {...reveal(0.03 * index)}
+                  >
+                    <div className={`flex items-start justify-between gap-4 ${rtl ? "flex-row-reverse" : ""}`}>
+                      <div className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
+                        <ServiceIcon
+                          name={service.icon}
+                          className="mt-0.5 h-8 w-8 text-[color:var(--color-accent)]"
+                        />
+                        <h3 className="text-lg text-white">{detail.title}</h3>
+                      </div>
+                      <a
+                        href="#contact"
+                        className="btn-outline shrink-0"
+                      >
+                        {lang === "ar" ? "اطلب استشارة" : "Request a Consultation"}
+                      </a>
+                    </div>
+                    <p className={`mt-4 text-sm text-white/70 ${rtl ? "text-right" : "text-left"}`}>
+                      {detail.summary}
+                    </p>
+                    <ul className={`mt-4 grid gap-2 text-sm text-white/60 ${rtl ? "text-right" : "text-left"}`}>
+                      {detail.bullets.map((item) => (
+                        <li key={item} className={`flex items-start gap-2 ${rtl ? "flex-row-reverse" : ""}`}>
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="cctv" className="section">
+          <div className={containerClass}>
+            <motion.div
+              className={`flex flex-col gap-4 ${rtl ? "text-right items-end" : "text-left items-start"}`}
+              {...reveal()}
+            >
+              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                {content.cctvServices.title}
+              </p>
+              <h2 className="section-title text-white">{content.cctvServices.subtitle}</h2>
+            </motion.div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {content.cctvServices.items.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  className="card card-hover group flex h-full flex-col gap-4 p-6"
+                  {...reveal(0.05 * index)}
+                >
+                  <div className="flex items-center justify-between">
+                    <ServiceIcon
+                      name={service.icon}
+                      className="h-9 w-9 text-[color:var(--color-accent)] transition group-hover:drop-shadow-[0_0_12px_rgba(223,128,99,0.6)]"
+                    />
+                    <span className="text-xs uppercase tracking-[0.3em] text-white/40">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="text-lg text-white">{service.title}</h3>
+                  <p className="text-sm text-white/60">{service.description}</p>
+                  <a
+                    href="#packages"
+                    className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
+                  >
+                    {lang === "ar" ? "عرض الباقات" : "View Packages"}
+                    <span aria-hidden="true">-&gt;</span>
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -998,7 +1183,7 @@ export default function LandingPage() {
                 return (
                   <motion.div
                     key={pkg.title}
-                    className={`card flex h-full flex-col gap-4 p-6 ${
+                    className={`card card-hover flex h-full flex-col gap-4 p-6 ${
                       featured
                         ? "border-[color:var(--color-accent)] shadow-[0_24px_70px_rgba(223,128,99,0.18)]"
                         : ""
@@ -1167,46 +1352,48 @@ export default function LandingPage() {
             </motion.div>
           </div>
         </section>
-        <section className="section">
-          <div className={containerClass}>
-            <motion.div
-              className={`flex flex-col gap-4 ${
-                rtl ? "text-right items-end" : "text-left items-start"
-              }`}
-              {...reveal()}
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {content.stats.title}
-              </p>
-              <h2 className="section-title text-white">{content.stats.subtitle}</h2>
-            </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-4">
-              {content.stats.items.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="card flex flex-col gap-3 p-6 text-center"
-                  {...reveal(0.05 * index)}
-                >
-                  {stat.display ? (
-                    <span className="text-xl font-semibold text-white md:text-2xl">
-                      {stat.display}
-                    </span>
-                  ) : stat.value !== undefined ? (
-                    <Counter
-                      value={stat.value}
-                      suffix={stat.suffix}
-                      reducedMotion={Boolean(reduceMotion)}
-                    />
-                  ) : null}
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/50">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
+        {content.stats.items.length > 0 && (
+          <section className="section">
+            <div className={containerClass}>
+              <motion.div
+                className={`flex flex-col gap-4 ${
+                  rtl ? "text-right items-end" : "text-left items-start"
+                }`}
+                {...reveal()}
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                  {content.stats.title}
+                </p>
+                <h2 className="section-title text-white">{content.stats.subtitle}</h2>
+              </motion.div>
+              <div className="mt-10 grid gap-6 md:grid-cols-4">
+                {content.stats.items.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="card flex flex-col gap-3 p-6 text-center"
+                    {...reveal(0.05 * index)}
+                  >
+                    {stat.display ? (
+                      <span className="text-xl font-semibold text-white md:text-2xl">
+                        {stat.display}
+                      </span>
+                    ) : stat.value !== undefined ? (
+                      <Counter
+                        value={stat.value}
+                        suffix={stat.suffix}
+                        reducedMotion={Boolean(reduceMotion)}
+                      />
+                    ) : null}
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+                      {stat.label}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+              <p className="mt-6 text-xs text-white/40">{content.stats.note}</p>
             </div>
-            <p className="mt-6 text-xs text-white/40">{content.stats.note}</p>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="section">
           <div className={containerClass}>
@@ -1318,6 +1505,11 @@ export default function LandingPage() {
                     src={item.src}
                     alt={item.alt}
                     loading="lazy"
+                    onError={(event) => {
+                      const img = event.currentTarget;
+                      if (img.src.includes(galleryFallbackSrc)) return;
+                      img.src = galleryFallbackSrc;
+                    }}
                     className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/10 opacity-0 transition group-hover:opacity-100" />
@@ -1527,8 +1719,15 @@ export default function LandingPage() {
                   </h3>
                   <form
                     className="grid gap-4 sm:grid-cols-2"
+                    name="contact"
+                    method="POST"
+                    data-netlify="true"
+                    data-netlify-honeypot="company"
+                    data-netlify-recaptcha="true"
                     onSubmit={handleContactSubmit}
                   >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="lang" value={lang} />
                     <input
                       type="text"
                       name="company"
@@ -1636,24 +1835,20 @@ export default function LandingPage() {
                         placeholder={content.contact.formMessage}
                       />
                     </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50 sm:col-span-2">
-                      {content.contact.formVerification}
-                      <input
-                        name="verification"
-                        required
-                        className="input-field mt-2"
-                        placeholder={content.contact.formVerification}
-                      />
-                    </label>
-                    {formError && (
+                    <div className="sm:col-span-2">
+                      <div data-netlify-recaptcha="true" className="mt-2" />
+                    </div>
+                    {formContext === "contact" && formError && (
                       <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
                         {formError}
                       </p>
                     )}
-                    <button
-                      type="submit"
-                      className="btn-primary w-full sm:col-span-2"
-                    >
+                    {formContext === "contact" && formSuccess && (
+                      <p className="text-xs text-white/70 sm:col-span-2">
+                        {formSuccess}
+                      </p>
+                    )}
+                    <button type="submit" className="btn-primary w-full sm:col-span-2">
                       {content.contact.formSubmit}
                     </button>
                     <p className="text-xs text-white/50 sm:col-span-2">
@@ -1745,6 +1940,11 @@ export default function LandingPage() {
             <img
               src={galleryItem.src}
               alt={galleryItem.alt}
+              onError={(event) => {
+                const img = event.currentTarget;
+                if (img.src.includes(galleryFallbackSrc)) return;
+                img.src = galleryFallbackSrc;
+              }}
               className="w-full object-cover"
             />
           </div>

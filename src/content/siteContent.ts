@@ -6,9 +6,11 @@ type NavItem = {
 };
 
 type ServiceItem = {
+  id: string;
   title: string;
   description: string;
   icon: string;
+  href?: string;
 };
 
 type PackageItem = {
@@ -97,7 +99,12 @@ type SiteContent = {
     bullets: string[];
     imageAlt: string;
   };
-  services: {
+  security: {
+    title: string;
+    subtitle: string;
+    items: ServiceItem[];
+  };
+  cctvServices: {
     title: string;
     subtitle: string;
     items: ServiceItem[];
@@ -214,9 +221,9 @@ type SiteContent = {
 export const siteContent: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "CCTV Systems in Jordan | Installation & Maintenance",
+      title: "Security & CCTV Services in Jordan | Installation, Guarding & Maintenance",
       description:
-        "CCTV system design, supply, installation, and maintenance across Jordan. Clean cabling, reliable storage, and remote viewing setup.",
+        "Security services across Jordan: CCTV design & installation, guarding for facilities, risk assessment, security consultations, and 911-linked alarm systems. Clean cabling, reliable recording, and rapid support.",
     },
     topBar: {
       phoneLabel: "Call",
@@ -227,7 +234,8 @@ export const siteContent: Record<Language, SiteContent> = {
     nav: [
       { id: "home", label: "Home" },
       { id: "about", label: "About" },
-      { id: "services", label: "Services" },
+      { id: "services", label: "Security" },
+      { id: "cctv", label: "CCTV" },
       { id: "packages", label: "Packages" },
       { id: "why", label: "Why Us" },
       { id: "coverage", label: "Coverage" },
@@ -237,10 +245,10 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "Contact" },
     ],
     hero: {
-      badge: "CCTV Systems & Security Solutions in Jordan",
-      headline: "CCTV Systems That Actually Protect Your Business.",
+      badge: "Security & Surveillance Solutions in Jordan",
+      headline: "Security Systems and Guarding That Protect Your Facility.",
       subheadline:
-        "Design, supply, installation, configuration, and maintenance for homes, shops, warehouses, offices, and compounds.",
+        "CCTV systems, 911-linked alarms, risk assessment, and trained on-site protection for homes, businesses, warehouses, offices, and compounds.",
       primaryCta: "Get a Free Site Visit",
       secondaryCta: "WhatsApp Now",
       tertiaryCta: "View Packages",
@@ -271,58 +279,111 @@ export const siteContent: Record<Language, SiteContent> = {
     about: {
       title: "About THE SHADOW",
       short:
-        "THE SHADOW designs and installs CCTV systems built for real-world sites across Jordan.",
+        "THE SHADOW delivers end-to-end security: guarding, risk assessment, alarms, and CCTV systems across Jordan.",
       long:
-        "From site surveys to cabling, configuration, and handover, we deliver clean installations with reliable storage and clear monitoring workflows.",
+        "From risk assessment and compliance planning to installation, configuration, training, and ongoing support, we deliver clean work with clear operating procedures and dependable response.",
       bullets: [
-        "Licensed operations aligned with local regulations",
-        "Trained installers and neat cabling",
-        "Documented handover and user training",
-        "Maintenance and upgrade plans",
+        "Licensed and compliant with Jordanian regulations",
+        "Trained, vetted personnel and professional technicians",
+        "Documented handover, user training, and clear SOPs",
+        "Maintenance, upgrades, and rapid support",
       ],
       imageAlt: "THE SHADOW CCTV installation",
     },
-    services: {
-      title: "CCTV Services",
-      subtitle: "Design, installation, and support for every CCTV requirement.",
+    security: {
+      title: "Security & Protection",
+      subtitle: "Guarding, assessments, alarms, and surveillance—built around your site and risks.",
       items: [
         {
-          title: "CCTV Installation (Home/Business)",
+          id: "guarding",
+          title: "Security & Protection for Facilities",
           description:
-            "Indoor and outdoor camera installation planned for full coverage.",
+            "On-site guarding for residential and commercial properties with 24/7 operations options.",
+          icon: "shield",
+          href: "#service-guarding",
+        },
+        {
+          id: "consultations",
+          title: "Security Consultations",
+          description:
+            "Expert guidance on surveillance planning, procedures, and compliance.",
+          icon: "command",
+          href: "#service-consultations",
+        },
+        {
+          id: "risk",
+          title: "Risk Assessment Services",
+          description:
+            "Threat and vulnerability assessment with a practical mitigation plan.",
+          icon: "risk",
+          href: "#service-risk",
+        },
+        {
+          id: "alarms",
+          title: "Safety & 911-Linked Alarm Systems",
+          description:
+            "Design and installation of alarm systems connected to emergency response (911).",
+          icon: "alarm",
+          href: "#service-alarms",
+        },
+        {
+          id: "cctv",
+          title: "CCTV Cameras",
+          description:
+            "Design, supply, installation, configuration, and maintenance of CCTV systems.",
+          icon: "camera",
+          href: "#service-cctv",
+        },
+      ],
+    },
+    cctvServices: {
+      title: "CCTV Solutions",
+      subtitle: "Professional design and installation with clean cabling, reliable recording, and secure remote access.",
+      items: [
+        {
+          id: "install",
+          title: "CCTV Installation (Home/Business)",
+          description: "Indoor and outdoor camera placement planned for full coverage.",
           icon: "install",
         },
         {
+          id: "ip",
           title: "IP Cameras & NVR Systems",
-          description: "High-definition IP systems with flexible management.",
+          description: "HD/2K/4K IP systems with flexible management and scalability.",
           icon: "ip",
         },
         {
+          id: "dvr",
           title: "Analog (DVR) Systems",
           description: "Cost-effective DVR setups with dependable recording.",
           icon: "dvr",
         },
         {
+          id: "ptz",
           title: "PTZ Cameras (Zoom/Tracking)",
-          description: "Zoom and tracking for critical zones and perimeters.",
+          description: "Zoom and tracking for critical zones, gates, and perimeters.",
           icon: "ptz",
         },
         {
+          id: "access",
           title: "Access Control (Door/Gate)",
           description: "Secure entry integration for doors and gates.",
           icon: "access",
         },
         {
+          id: "intercom",
           title: "Video Intercom",
           description: "Visual door communication for buildings and villas.",
           icon: "intercom",
         },
         {
+          id: "network",
           title: "Network & Cabling",
           description: "Structured wiring, trunking, and clean cable routes.",
           icon: "network",
         },
         {
+          id: "maintenance",
           title: "Maintenance & Upgrades",
           description: "Health checks, firmware updates, and system upgrades.",
           icon: "maintenance",
@@ -338,38 +399,38 @@ export const siteContent: Record<Language, SiteContent> = {
           title: "Starter",
           description: "A focused setup for small spaces and shops.",
           features: [
-            "4 cameras (upgradeable)",
-            "1080p/2K/4K options",
-            "Remote viewing setup",
-            "Recording storage configured per site",
-            "Installation and handover",
+            "4 cameras (1080p / 2K options)",
+            "Up to 7 days recording (expandable)",
+            "Remote viewing setup (mobile + desktop)",
+            "Professional installation + clean cabling",
+            "User training + 1-year warranty",
           ],
-          ctaLabel: "Get Starter Quote",
+          ctaLabel: "Choose Starter – 4 Cameras",
         },
         {
           title: "Business",
           badge: "Most Popular",
           description: "Balanced coverage for offices and retail.",
           features: [
-            "8 cameras (configurable)",
-            "IP or DVR options",
-            "Mobile app setup",
-            "Up to X days storage (configurable)",
-            "Installation and warranty briefing",
+            "8 cameras (1080p / 2K / 4K options)",
+            "IP (NVR) or DVR options based on site",
+            "Up to 14 days recording (expandable)",
+            "Mobile app setup + secure user permissions",
+            "Installation + training + 1-year warranty",
           ],
-          ctaLabel: "Get Business Quote",
+          ctaLabel: "Choose Business – 8 Cameras",
         },
         {
           title: "Pro",
           description: "Large sites, warehouses, and multi-zone coverage.",
           features: [
-            "16 cameras (configurable)",
-            "PTZ and specialty options",
-            "Central recording and monitoring",
-            "Redundancy planning",
-            "On-site training",
+            "16 cameras (2K / 4K options)",
+            "Up to 30 days recording (expandable)",
+            "PTZ/specialty cameras for gates and perimeters",
+            "Central monitoring + health checks",
+            "On-site training + 1-year warranty",
           ],
-          ctaLabel: "Get Pro Quote",
+          ctaLabel: "Choose Pro – 16 Cameras",
         },
         {
           title: "Custom",
@@ -377,11 +438,12 @@ export const siteContent: Record<Language, SiteContent> = {
           features: [
             "Site assessment required",
             "Custom camera count",
-            "Access control integration",
-            "Cabling and infrastructure planning",
-            "Support plan options",
+            "Mixed resolutions and camera types",
+            "Access control + alarm integration",
+            "Infrastructure planning (network, power, storage)",
+            "Training, warranty, and support plans",
           ],
-          ctaLabel: "Request Custom Quote",
+          ctaLabel: "Request Custom Design",
         },
       ],
     },
@@ -397,7 +459,7 @@ export const siteContent: Record<Language, SiteContent> = {
         },
         {
           title: "Motion Alerts",
-          description: "Configurable notifications for activity zones.",
+          description: "Smart motion alerts with zone-based detection for key areas.",
           icon: "motion",
         },
         {
@@ -485,14 +547,9 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     stats: {
       title: "Service Snapshot",
-      subtitle: "Configurable metrics - replace with verified figures.",
-      note: "Replace these placeholders with verified company numbers when available.",
-      items: [
-        { label: "Projects Delivered", display: "Configurable" },
-        { label: "System Designs", display: "Site-based" },
-        { label: "Coverage Cities", display: "Across Jordan" },
-        { label: "Support Response", display: "Scheduled" },
-      ],
+      subtitle: "",
+      note: "",
+      items: [],
     },
     process: {
       title: "How We Work",
@@ -530,30 +587,57 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     brands: {
       title: "Brands We Support",
-      subtitle:
-        "Replace these placeholders with confirmed brands or platforms you install.",
-      items: [
-        "Brand Placeholder",
-        "Brand Placeholder",
-        "Brand Placeholder",
-        "Brand Placeholder",
-      ],
+      subtitle: "Equipment options are selected based on site requirements and compatibility.",
+      items: ["Hikvision", "Dahua", "Uniview", "TP-Link (Networking)"],
     },
     gallery: {
       title: "Gallery",
       subtitle: "Installation snapshots and CCTV system details.",
       items: [
-        { src: "/images/gallery/placeholder-1.svg", alt: "CCTV gallery placeholder" },
-        { src: "/images/gallery/placeholder-2.svg", alt: "CCTV gallery placeholder" },
-        { src: "/images/gallery/placeholder-3.svg", alt: "CCTV gallery placeholder" },
-        { src: "/images/gallery/placeholder-4.svg", alt: "CCTV gallery placeholder" },
-        { src: "/images/gallery/placeholder-5.svg", alt: "CCTV gallery placeholder" },
-        { src: "/images/gallery/placeholder-6.svg", alt: "CCTV gallery placeholder" },
+        {
+          src: "https://images.unsplash.com/photo-1603791452906-bc2be0dbe3a9?auto=format&fit=crop&w=1400&q=80",
+          alt: "CCTV camera installed on a building exterior",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1581091215367-59ab6b5a3a85?auto=format&fit=crop&w=1400&q=80",
+          alt: "Security technician performing a site assessment",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558008258-3256797b43f3?auto=format&fit=crop&w=1400&q=80",
+          alt: "Control room monitoring multiple CCTV screens",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=1400&q=80",
+          alt: "Network cabling and rack equipment for surveillance",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558008258-89d0d4b38e4f?auto=format&fit=crop&w=1400&q=80",
+          alt: "Outdoor camera and perimeter security coverage",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1581091870630-3d0f7f68c2c3?auto=format&fit=crop&w=1400&q=80",
+          alt: "Technician configuring CCTV equipment",
+        },
       ],
     },
     faqs: {
       title: "Frequently Asked Questions",
       items: [
+        {
+          question: "Do you provide guarding services for facilities?",
+          answer:
+            "Yes. We provide trained on-site personnel for residential and commercial facilities, with shift planning and supervision options based on your needs.",
+        },
+        {
+          question: "Do you offer risk assessment and security planning?",
+          answer:
+            "Yes. We assess threats, vulnerabilities, and site workflow, then provide a practical mitigation plan including procedures and recommended systems.",
+        },
+        {
+          question: "Can you install 911-linked alarm systems?",
+          answer:
+            "Yes. We design and install alarm systems and configure monitoring/response workflows according to your site requirements.",
+        },
         {
           question: "Which is better for my site: DVR or NVR?",
           answer:
@@ -665,9 +749,9 @@ export const siteContent: Record<Language, SiteContent> = {
   },
   ar: {
     meta: {
-      title: "أنظمة CCTV في الأردن | تركيب وصيانة",
+      title: "خدمات الأمن وCCTV في الأردن | تركيب وحراسة وصيانة",
       description:
-        "تصميم وتوريد وتركيب وصيانة أنظمة CCTV في الأردن. تمديدات نظيفة، تخزين موثوق، وإعداد مشاهدة عن بُعد.",
+        "خدمات أمنية في الأردن تشمل: كاميرات CCTV، حراسة المنشآت، تقدير المخاطر، الاستشارات الأمنية، وأنظمة الإنذار المرتبطة بـ 911. تركيب مرتب وتخزين موثوق ودعم سريع.",
     },
     topBar: {
       phoneLabel: "اتصل",
@@ -678,7 +762,8 @@ export const siteContent: Record<Language, SiteContent> = {
     nav: [
       { id: "home", label: "الرئيسية" },
       { id: "about", label: "من نحن" },
-      { id: "services", label: "الخدمات" },
+      { id: "services", label: "الأمن والحماية" },
+      { id: "cctv", label: "كاميرات CCTV" },
       { id: "packages", label: "الباقات" },
       { id: "why", label: "لماذا نحن" },
       { id: "coverage", label: "التغطية" },
@@ -688,10 +773,10 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "تواصل" },
     ],
     hero: {
-      badge: "أنظمة CCTV وحلول المراقبة في الأردن",
-      headline: "أنظمة CCTV تحمي عملك بفعالية.",
+      badge: "حلول أمن ومراقبة في الأردن",
+      headline: "أنظمة أمن وحراسة تحمي منشأتك بفعالية.",
       subheadline:
-        "تصميم وتوريد وتركيب وتهيئة وصيانة للمنازل، والمحلات، والمستودعات، والمكاتب، والمجمعات.",
+        "كاميرات CCTV، أنظمة إنذار مرتبطة بـ 911، تقدير مخاطر، واستشارات أمنية وحراسة منشآت.",
       primaryCta: "زيارة موقع مجانية",
       secondaryCta: "واتساب الآن",
       tertiaryCta: "عرض الباقات",
@@ -714,57 +799,106 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     about: {
       title: "عن الظل",
-      short: "الظل يصمم ويثبت أنظمة CCTV مبنية لمواقع واقعية في الأردن.",
+      short: "الظل يقدم حلول أمن متكاملة: حراسة، تقدير مخاطر، إنذار، وكاميرات CCTV في الأردن.",
       long:
-        "من المعاينة وحتى التمديدات والتهيئة والتسليم، نوفر تركيباً مرتباً مع تخزين موثوق وتدريب واضح على الاستخدام.",
+        "من المعاينة وتقدير المخاطر وحتى التركيب والتهيئة والتسليم والتدريب والدعم، نوفر عملاً مرتباً وإجراءات تشغيل واضحة واستجابة موثوقة.",
       bullets: [
-        "التزام بالأنظمة المحلية",
-        "فنيون مدربون وتمديدات مرتبة",
-        "تسليم موثق وتدريب المستخدم",
-        "خطط صيانة وترقيات",
+        "مرخصون وملتزمون باللوائح الأردنية",
+        "كوادر مدربة ومُعتمدة وفنيون محترفون",
+        "تسليم موثق وتدريب وإجراءات تشغيل واضحة",
+        "صيانة وترقيات ودعم سريع",
       ],
       imageAlt: "تركيب أنظمة CCTV من الظل",
     },
-    services: {
-      title: "خدمات CCTV",
-      subtitle: "حلول تصميم وتركيب وصيانة لكل احتياج.",
+    security: {
+      title: "الأمن والحماية",
+      subtitle: "حراسة وتقدير مخاطر وإنذار ومراقبة—مصممة حسب احتياج موقعك.",
       items: [
         {
+          id: "guarding",
+          title: "خدمات الأمن والحماية وحراسة المنشآت",
+          description: "حراسة للمجمعات والمنازل والمنشآت التجارية مع خيارات تشغيل 24/7.",
+          icon: "shield",
+          href: "#service-guarding",
+        },
+        {
+          id: "consultations",
+          title: "الاستشارات الأمنية",
+          description: "إرشاد مهني لتخطيط المراقبة والإجراءات والالتزام باللوائح.",
+          icon: "command",
+          href: "#service-consultations",
+        },
+        {
+          id: "risk",
+          title: "تقديم خدمة تقدير المخاطر",
+          description: "تقييم شامل للتهديدات ونقاط الضعف مع خطة معالجة عملية.",
+          icon: "risk",
+          href: "#service-risk",
+        },
+        {
+          id: "alarms",
+          title: "تركيب أجهزة الأمان والإنذار المرتبطة ب٩١١",
+          description: "تصميم وتركيب أنظمة إنذار وربطها بإجراءات الاستجابة والطوارئ.",
+          icon: "alarm",
+          href: "#service-alarms",
+        },
+        {
+          id: "cctv",
+          title: "كاميرات المراقبة",
+          description: "تصميم وتوريد وتركيب وتهيئة وصيانة أنظمة CCTV.",
+          icon: "camera",
+          href: "#service-cctv",
+        },
+      ],
+    },
+    cctvServices: {
+      title: "حلول كاميرات CCTV",
+      subtitle: "تصميم وتركيب احترافي بتمديدات نظيفة وتسجيل موثوق ومشاهدة آمنة عن بُعد.",
+      items: [
+        {
+          id: "install",
           title: "تركيب CCTV (منزل/أعمال)",
           description: "تركيب كاميرات داخلية وخارجية وفق خطة تغطية واضحة.",
           icon: "install",
         },
         {
+          id: "ip",
           title: "كاميرات IP وأنظمة NVR",
-          description: "حلول رقمية بدقة عالية وإدارة مرنة للتسجيل.",
+          description: "حلول رقمية بدقة HD/2K/4K وإدارة مرنة للتسجيل.",
           icon: "ip",
         },
         {
+          id: "dvr",
           title: "أنظمة تناظرية (DVR)",
           description: "أنظمة DVR اقتصادية مع تسجيل موثوق.",
           icon: "dvr",
         },
         {
+          id: "ptz",
           title: "كاميرات PTZ (تكبير وتتبع)",
-          description: "تكبير بصري وتتبع للمناطق الحساسة.",
+          description: "تكبير بصري وتتبع للمناطق الحساسة والبوابات.",
           icon: "ptz",
         },
         {
+          id: "access",
           title: "التحكم بالدخول (أبواب/بوابات)",
           description: "دمج آمن للتحكم في الدخول.",
           icon: "access",
         },
         {
+          id: "intercom",
           title: "انتركم فيديو",
           description: "اتصال مرئي آمن للمداخل والأبواب.",
           icon: "intercom",
         },
         {
+          id: "network",
           title: "شبكات وتمديدات",
           description: "تمديدات منظمة ومسارات كابلات نظيفة.",
           icon: "network",
         },
         {
+          id: "maintenance",
           title: "صيانة وترقيات",
           description: "فحص دوري وتحديثات وتحسينات للنظام.",
           icon: "maintenance",
@@ -780,38 +914,38 @@ export const siteContent: Record<Language, SiteContent> = {
           title: "أساسية",
           description: "حل عملي للمساحات الصغيرة والمحلات.",
           features: [
-            "4 كاميرات (قابل للترقية)",
-            "خيارات 1080p/2K/4K",
-            "إعداد مشاهدة عن بُعد",
-            "تخزين يحدد حسب الموقع",
-            "تركيب وتسليم",
+            "4 كاميرات (1080p / 2K)",
+            "تسجيل حتى 7 أيام (قابل للزيادة)",
+            "إعداد مشاهدة عن بُعد (هاتف + كمبيوتر)",
+            "تركيب احترافي وتمديدات مرتبة",
+            "تدريب المستخدم + ضمان سنة",
           ],
-          ctaLabel: "عرض الباقة الأساسية",
+          ctaLabel: "اختر الأساسية – 4 كاميرات",
         },
         {
           title: "أعمال",
           badge: "الأكثر طلباً",
           description: "تغطية متوازنة للمكاتب والمتاجر.",
           features: [
-            "8 كاميرات (قابل للضبط)",
-            "خيارات IP أو DVR",
-            "إعداد تطبيق الهاتف",
-            "تخزين حتى X أيام (قابل للتعديل)",
-            "شرح الضمان والتسليم",
+            "8 كاميرات (1080p / 2K / 4K)",
+            "خيارات IP (NVR) أو DVR حسب الموقع",
+            "تسجيل حتى 14 يوم (قابل للزيادة)",
+            "إعداد التطبيق وصلاحيات مستخدمين آمنة",
+            "تركيب + تدريب + ضمان سنة",
           ],
-          ctaLabel: "عرض باقة الأعمال",
+          ctaLabel: "اختر الأعمال – 8 كاميرات",
         },
         {
           title: "احترافية",
           description: "للمستودعات والمواقع الكبيرة.",
           features: [
-            "16 كاميرا (قابل للضبط)",
-            "خيارات PTZ وكاميرات متخصصة",
-            "تسجيل ومراقبة مركزية",
-            "خطة تكرار وحماية",
-            "تدريب في الموقع",
+            "16 كاميرا (2K / 4K)",
+            "تسجيل حتى 30 يوم (قابل للزيادة)",
+            "خيارات PTZ وكاميرات متخصصة للبوابات والسور",
+            "مراقبة مركزية وفحوصات دورية",
+            "تدريب في الموقع + ضمان سنة",
           ],
-          ctaLabel: "عرض الباقة الاحترافية",
+          ctaLabel: "اختر الاحترافية – 16 كاميرا",
         },
         {
           title: "مخصصة",
@@ -819,11 +953,12 @@ export const siteContent: Record<Language, SiteContent> = {
           features: [
             "تقييم موقع إلزامي",
             "عدد كاميرات مخصص",
-            "دمج التحكم بالدخول",
-            "تخطيط التمديدات والبنية التحتية",
-            "خيارات دعم وصيانة",
+            "أنواع كاميرات ودقات متعددة",
+            "دمج التحكم بالدخول والإنذار",
+            "تخطيط الشبكة والطاقة والتخزين",
+            "تدريب وضمان وخيارات دعم وصيانة",
           ],
-          ctaLabel: "طلب عرض مخصص",
+          ctaLabel: "طلب تصميم مخصص",
         },
       ],
     },
@@ -838,7 +973,7 @@ export const siteContent: Record<Language, SiteContent> = {
         },
         {
           title: "تنبيهات حركة",
-          description: "إشعارات قابلة للضبط لمناطق النشاط.",
+          description: "تنبيهات حركة ذكية مع تحديد مناطق المراقبة حسب الحاجة.",
           icon: "motion",
         },
         {
@@ -926,14 +1061,9 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     stats: {
       title: "لمحة عن الخدمة",
-      subtitle: "قيم قابلة للتعديل - استبدلها بأرقام موثقة.",
-      note: "هذه نصوص قابلة للتبديل حتى تتوفر أرقام دقيقة.",
-      items: [
-        { label: "مشاريع منفذة", display: "حسب الموقع" },
-        { label: "تصاميم أنظمة", display: "قابل للضبط" },
-        { label: "مدن مغطاة", display: "في جميع الأردن" },
-        { label: "استجابة الدعم", display: "مجدولة" },
-      ],
+      subtitle: "",
+      note: "",
+      items: [],
     },
     process: {
       title: "كيف نعمل",
@@ -968,24 +1098,57 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     brands: {
       title: "العلامات المدعومة",
-      subtitle: "استبدل هذه العناصر بعلامات أو منصات مؤكدة.",
-      items: ["علامة تجارية", "علامة تجارية", "علامة تجارية", "علامة تجارية"],
+      subtitle: "نختار الأجهزة حسب احتياج الموقع والتوافق الفني.",
+      items: ["Hikvision", "Dahua", "Uniview", "TP-Link (شبكات)"],
     },
     gallery: {
       title: "المعرض",
       subtitle: "لقطات من التركيبات وتفاصيل الأنظمة.",
       items: [
-        { src: "/images/gallery/placeholder-1.svg", alt: "عنصر معرض CCTV" },
-        { src: "/images/gallery/placeholder-2.svg", alt: "عنصر معرض CCTV" },
-        { src: "/images/gallery/placeholder-3.svg", alt: "عنصر معرض CCTV" },
-        { src: "/images/gallery/placeholder-4.svg", alt: "عنصر معرض CCTV" },
-        { src: "/images/gallery/placeholder-5.svg", alt: "عنصر معرض CCTV" },
-        { src: "/images/gallery/placeholder-6.svg", alt: "عنصر معرض CCTV" },
+        {
+          src: "https://images.unsplash.com/photo-1603791452906-bc2be0dbe3a9?auto=format&fit=crop&w=1400&q=80",
+          alt: "كاميرا مراقبة مثبتة على واجهة مبنى",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1581091215367-59ab6b5a3a85?auto=format&fit=crop&w=1400&q=80",
+          alt: "فني أمن يقوم بمعاينة الموقع",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558008258-3256797b43f3?auto=format&fit=crop&w=1400&q=80",
+          alt: "غرفة تحكم لمراقبة شاشات متعددة",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=1400&q=80",
+          alt: "تمديدات شبكات وتجهيزات رف لمعدات المراقبة",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1558008258-89d0d4b38e4f?auto=format&fit=crop&w=1400&q=80",
+          alt: "مراقبة محيط خارجية بكاميرات",
+        },
+        {
+          src: "https://images.unsplash.com/photo-1581091870630-3d0f7f68c2c3?auto=format&fit=crop&w=1400&q=80",
+          alt: "تهيئة وبرمجة معدات CCTV",
+        },
       ],
     },
     faqs: {
       title: "الأسئلة الشائعة",
       items: [
+        {
+          question: "هل تقدمون خدمات حراسة للمنشآت؟",
+          answer:
+            "نعم. نوفر كوادر حراسة مدربة للمنشآت السكنية والتجارية مع خيارات ورديات وإشراف حسب الاحتياج.",
+        },
+        {
+          question: "هل تقدمون تقدير مخاطر وخطة أمنية؟",
+          answer:
+            "نعم. نقيم التهديدات ونقاط الضعف وآلية العمل في الموقع، ثم نقدم خطة معالجة عملية تشمل الإجراءات والأنظمة المقترحة.",
+        },
+        {
+          question: "هل يمكن تركيب أنظمة إنذار مرتبطة بـ 911؟",
+          answer:
+            "نعم. نصمم ونركب أنظمة الإنذار ونجهز آلية الاستجابة والمتابعة حسب احتياج الموقع.",
+        },
         {
           question: "ما الأفضل لموقعي: DVR أم NVR؟",
           answer:
