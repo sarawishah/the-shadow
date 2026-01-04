@@ -460,24 +460,11 @@ export default function LandingPage() {
   const galleryItem =
     lightboxIndex !== null ? content.gallery.items[lightboxIndex] : null;
 
-  const encodeFormBody = (data: FormData) => {
-    const params = new URLSearchParams();
-    data.forEach((value, key) => {
-      params.append(key, String(value));
-    });
-    return params.toString();
-  };
-
-  const submitNetlifyForm = async (formName: string, data: FormData) => {
-    data.set("form-name", formName);
-    const response = await fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encodeFormBody(data),
-    });
-    if (!response.ok) {
-      throw new Error("Form submission failed");
-    }
+  const sendMail = (subject: string, body: string) => {
+    const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   };
 
   const handleQuickQuoteSubmit = async (
@@ -490,28 +477,23 @@ export default function LandingPage() {
     setFormError(null);
     setFormSuccess(null);
     setFormContext("quick-quote");
-    if (process.env.NODE_ENV === "development") {
-      setFormSuccess(
-        lang === "ar"
-          ? "تم تجهيز النموذج. عند النشر على Netlify سيتم إرسال الطلب بنجاح."
-          : "Form is ready. On Netlify deployment, this request will submit successfully."
-      );
-      form.reset();
-      return;
-    }
-    try {
-      await submitNetlifyForm("quick-quote", data);
-      setFormSuccess(
-        lang === "ar" ? "تم إرسال طلبك بنجاح. سنعود إليك قريباً." : "Request sent. We'll contact you shortly."
-      );
-      form.reset();
-    } catch {
-      setFormError(
-        lang === "ar"
-          ? "تعذر إرسال الطلب حالياً. يرجى المحاولة لاحقاً أو التواصل عبر واتساب."
-          : "We couldn't submit your request right now. Please try again or contact us on WhatsApp."
-      );
-    }
+    const body = [
+      content.hero.quickQuote.title,
+      `${content.hero.quickQuote.nameLabel}: ${data.get("name")}`,
+      `${content.hero.quickQuote.phoneLabel}: ${data.get("phone")}`,
+      `${content.hero.quickQuote.cityLabel}: ${data.get("city")}`,
+      `${content.hero.quickQuote.propertyLabel}: ${data.get("property")}`,
+      `${content.hero.quickQuote.cameraLabel}: ${data.get("cameraCount")}`,
+      `${content.hero.quickQuote.preferenceLabel}: ${data.get("preference")}`,
+      `Language: ${data.get("lang") || lang}`,
+    ].join("\n");
+    sendMail(content.hero.quickQuote.title, body);
+    setFormSuccess(
+      lang === "ar"
+        ? "تم فتح مسودة البريد الإلكتروني. يرجى الإرسال لإكمال الطلب."
+        : "Email draft opened. Please send it to complete your request."
+    );
+    form.reset();
   };
 
   const handleContactSubmit = async (
@@ -524,28 +506,24 @@ export default function LandingPage() {
     setFormError(null);
     setFormSuccess(null);
     setFormContext("contact");
-    if (process.env.NODE_ENV === "development") {
-      setFormSuccess(
-        lang === "ar"
-          ? "تم تجهيز النموذج. عند النشر على Netlify سيتم إرسال الرسالة بنجاح."
-          : "Form is ready. On Netlify deployment, this message will submit successfully."
-      );
-      form.reset();
-      return;
-    }
-    try {
-      await submitNetlifyForm("contact", data);
-      setFormSuccess(
-        lang === "ar" ? "تم إرسال رسالتك بنجاح. سنعاود الاتصال بك قريباً." : "Message sent successfully. We'll get back to you shortly."
-      );
-      form.reset();
-    } catch {
-      setFormError(
-        lang === "ar"
-          ? "تعذر إرسال الرسالة حالياً. يرجى المحاولة لاحقاً أو التواصل عبر واتساب."
-          : "We couldn't submit your message right now. Please try again or contact us on WhatsApp."
-      );
-    }
+    const body = [
+      `${content.contact.formName}: ${data.get("name")}`,
+      `${content.contact.formPhone}: ${data.get("phone")}`,
+      `${content.contact.formEmail}: ${data.get("email")}`,
+      `${content.contact.formCity}: ${data.get("city")}`,
+      `${content.contact.formProperty}: ${data.get("property")}`,
+      `${content.contact.formCameraCount}: ${data.get("cameraCount")}`,
+      `${content.contact.formPreference}: ${data.get("preference")}`,
+      `${content.contact.formMessage}: ${data.get("message")}`,
+      `Language: ${data.get("lang") || lang}`,
+    ].join("\n");
+    sendMail(content.contact.formTitle, body);
+    setFormSuccess(
+      lang === "ar"
+        ? "تم فتح مسودة البريد الإلكتروني. يرجى الإرسال لإكمال الطلب."
+        : "Email draft opened. Please send it to complete your request."
+    );
+    form.reset();
   };
 
   const brandName = lang === "ar" ? "الظل للأمن والحماية" : "THE SHADOW";
@@ -870,14 +848,8 @@ export default function LandingPage() {
                   </div>
                   <form
                     className="grid gap-4 sm:grid-cols-2"
-                    name="quick-quote"
-                    method="POST"
-                    data-netlify="true"
-                    data-netlify-honeypot="company"
-                    data-netlify-recaptcha="true"
                     onSubmit={handleQuickQuoteSubmit}
                   >
-                    <input type="hidden" name="form-name" value="quick-quote" />
                     <input type="hidden" name="lang" value={lang} />
                     <input
                       type="text"
@@ -967,9 +939,6 @@ export default function LandingPage() {
                         ))}
                       </select>
                     </label>
-                    <div className="sm:col-span-2">
-                      <div data-netlify-recaptcha="true" className="mt-2" />
-                    </div>
                     {formContext === "quick-quote" && formError && (
                       <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
                         {formError}
@@ -1719,14 +1688,8 @@ export default function LandingPage() {
                   </h3>
                   <form
                     className="grid gap-4 sm:grid-cols-2"
-                    name="contact"
-                    method="POST"
-                    data-netlify="true"
-                    data-netlify-honeypot="company"
-                    data-netlify-recaptcha="true"
                     onSubmit={handleContactSubmit}
                   >
-                    <input type="hidden" name="form-name" value="contact" />
                     <input type="hidden" name="lang" value={lang} />
                     <input
                       type="text"
@@ -1835,9 +1798,6 @@ export default function LandingPage() {
                         placeholder={content.contact.formMessage}
                       />
                     </label>
-                    <div className="sm:col-span-2">
-                      <div data-netlify-recaptcha="true" className="mt-2" />
-                    </div>
                     {formContext === "contact" && formError && (
                       <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
                         {formError}
