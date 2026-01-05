@@ -653,7 +653,7 @@ export default function LandingPage() {
     <div className="relative">
       <header className="glass-header sticky top-0 z-50">
         <div
-          className={`${containerClass} flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between`}
+          className={`${containerClass} flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:justify-between sm:py-3`}
         >
           <div
             className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}
@@ -663,35 +663,35 @@ export default function LandingPage() {
               alt={logoAlt}
               width={40}
               height={40}
-              className="h-9 w-9 rounded-full object-cover sm:h-10 sm:w-10"
+              className="h-8 w-8 rounded-full object-cover sm:h-9 sm:w-9 md:h-10 md:w-10"
               priority
             />
             <div
               className={`flex flex-col ${rtl ? "items-end text-right" : "items-start text-left"}`}
             >
-              <p className="text-[0.6rem] uppercase tracking-[0.25em] text-white/60 sm:text-xs sm:tracking-[0.3em]">
+              <p className="text-[0.65rem] uppercase tracking-[0.25em] text-white/60 sm:text-xs sm:tracking-[0.3em] md:text-sm">
                 {brandName}
               </p>
-              <p className="text-[0.55rem] leading-tight text-white/40 sm:text-[0.65rem]">
+              <p className="text-[0.55rem] leading-tight text-white/40 sm:text-[0.65rem] md:text-xs">
                 {content.footer.tagline}
               </p>
             </div>
           </div>
 
           <div
-            className={`flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end ${
+            className={`flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:justify-end ${
               rtl ? "sm:flex-row-reverse" : ""
             }`}
           >
             <a
               href="#contact"
-              className="btn-primary w-full !px-5 !py-2 !text-xs sm:w-auto"
+              className="btn-primary w-full !px-4 !py-2 !text-xs sm:w-auto sm:!px-5 sm:!text-sm"
             >
               {content.hero.primaryCta}
             </a>
             <a
               href={CONTACT.whatsapp}
-              className={`icon-button !p-2 text-[color:var(--color-accent)] ${
+              className={`icon-button !p-2 sm:!p-2.5 text-[color:var(--color-accent)] ${
                 rtl ? "self-end sm:self-auto" : "self-start sm:self-auto"
               }`}
               aria-label={content.topBar.whatsappLabel}
@@ -779,7 +779,7 @@ export default function LandingPage() {
                 </motion.div>
               </div>
 
-              <motion.div className="card p-8" {...reveal(0.1)}>
+              <motion.div className="card p-6 sm:p-8" {...reveal(0.1)}>
                 <div
                   className={`flex flex-col gap-4 ${
                     rtl ? "text-right" : "text-left"
@@ -789,7 +789,7 @@ export default function LandingPage() {
                     <p className="text-xs uppercase tracking-[0.3em] text-white/60">
                       {content.hero.quickQuote.title}
                     </p>
-                    <h3 className="mt-2 text-2xl text-white">
+                    <h3 className="mt-2 text-xl text-white sm:text-2xl">
                       {content.hero.quickQuote.description}
                     </h3>
                   </div>
@@ -936,8 +936,8 @@ export default function LandingPage() {
                 {content.about.title}
               </p>
               <h2 className="section-title text-white">{content.about.short}</h2>
-              <p className="text-base text-white/70">{content.about.long}</p>
-              <ul className="grid gap-3 text-sm text-white/70">
+              <p className="text-base text-white/70 md:text-lg">{content.about.long}</p>
+              <ul className="grid gap-3 text-sm text-white/70 md:text-base">
                 {content.about.bullets.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[color:var(--color-accent)]" />
@@ -963,7 +963,7 @@ export default function LandingPage() {
                 {content.security.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {content.security.items.map((service, index) => (
                 <motion.div
                   key={service.title}
@@ -979,8 +979,8 @@ export default function LandingPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="text-lg text-white">{service.title}</h3>
-                  <p className="text-sm text-white/60">{service.description}</p>
+                  <h3 className="text-base text-white sm:text-lg">{service.title}</h3>
+                  <p className="text-sm text-white/60 md:text-base">{service.description}</p>
                   <a
                     href={service.href || "#contact"}
                     className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
@@ -1009,7 +1009,7 @@ export default function LandingPage() {
                           name={service.icon}
                           className="mt-0.5 h-8 w-8 text-[color:var(--color-accent)]"
                         />
-                        <h3 className="text-lg text-white">{detail.title}</h3>
+                        <h3 className="text-base text-white sm:text-lg">{detail.title}</h3>
                       </div>
                       <a
                         href="#contact"
@@ -1018,10 +1018,10 @@ export default function LandingPage() {
                         {lang === "ar" ? "اطلب استشارة" : "Request a Consultation"}
                       </a>
                     </div>
-                    <p className={`mt-4 text-sm text-white/70 ${rtl ? "text-right" : "text-left"}`}>
+                    <p className={`mt-4 text-sm text-white/70 md:text-base ${rtl ? "text-right" : "text-left"}`}>
                       {detail.summary}
                     </p>
-                    <ul className={`mt-4 grid gap-2 text-sm text-white/60 ${rtl ? "text-right" : "text-left"}`}>
+                    <ul className={`mt-4 grid gap-2 text-sm text-white/60 md:text-base ${rtl ? "text-right" : "text-left"}`}>
                       {detail.bullets.map((item) => (
                         <li key={item} className={`flex items-start gap-2 ${rtl ? "flex-row-reverse" : ""}`}>
                           <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
@@ -1047,7 +1047,7 @@ export default function LandingPage() {
               </p>
               <h2 className="section-title text-white">{content.cctvServices.subtitle}</h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {content.cctvServices.items.map((service, index) => (
                 <motion.div
                   key={service.id}
@@ -1063,8 +1063,8 @@ export default function LandingPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="text-lg text-white">{service.title}</h3>
-                  <p className="text-sm text-white/60">{service.description}</p>
+                  <h3 className="text-base text-white sm:text-lg">{service.title}</h3>
+                  <p className="text-sm text-white/60 md:text-base">{service.description}</p>
                   <a
                     href="#packages"
                     className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
@@ -1093,7 +1093,7 @@ export default function LandingPage() {
                 {content.packages.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {content.packages.items.map((pkg, index) => {
                 const featured = Boolean(pkg.badge);
                 return (
@@ -1111,9 +1111,9 @@ export default function LandingPage() {
                         {pkg.badge}
                       </span>
                     )}
-                    <h3 className="text-xl text-white">{pkg.title}</h3>
-                    <p className="text-sm text-white/70">{pkg.description}</p>
-                    <ul className="grid gap-2 text-sm text-white/60">
+                    <h3 className="text-lg text-white sm:text-xl">{pkg.title}</h3>
+                    <p className="text-sm text-white/70 md:text-base">{pkg.description}</p>
+                    <ul className="grid gap-2 text-sm text-white/60 md:text-base">
                       {pkg.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2">
                           <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
@@ -1150,7 +1150,7 @@ export default function LandingPage() {
                 {content.highlights.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {content.highlights.items.map((item, index) => (
                 <motion.div
                   key={item.title}
@@ -1161,8 +1161,8 @@ export default function LandingPage() {
                     name={item.icon}
                     className="h-9 w-9 text-[color:var(--color-accent)]"
                   />
-                  <h3 className="text-lg text-white">{item.title}</h3>
-                  <p className="text-sm text-white/60">{item.description}</p>
+                  <h3 className="text-base text-white sm:text-lg">{item.title}</h3>
+                  <p className="text-sm text-white/60 md:text-base">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -1184,15 +1184,15 @@ export default function LandingPage() {
                 {content.industries.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {content.industries.items.map((item, index) => (
                 <motion.div
                   key={item.title}
                   className="card flex h-full flex-col gap-3 p-6"
                   {...reveal(0.05 * index)}
                 >
-                  <h3 className="text-lg text-white">{item.title}</h3>
-                  <p className="text-sm text-white/60">{item.description}</p>
+                  <h3 className="text-base text-white sm:text-lg">{item.title}</h3>
+                  <p className="text-sm text-white/60 md:text-base">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -1211,7 +1211,7 @@ export default function LandingPage() {
                 {content.why.title}
               </p>
               <h2 className="section-title text-white">{content.why.subtitle}</h2>
-              <ul className="grid gap-3 text-sm text-white/70">
+              <ul className="grid gap-3 text-sm text-white/70 md:text-base">
                 {content.why.bullets.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[color:var(--color-accent)]" />
@@ -1220,11 +1220,11 @@ export default function LandingPage() {
                 ))}
               </ul>
             </motion.div>
-            <motion.div className="card p-8" {...reveal(0.1)}>
+            <motion.div className="card p-6 sm:p-8" {...reveal(0.1)}>
               <p className="text-xs uppercase tracking-[0.3em] text-white/50">
                 {content.why.promiseTitle}
               </p>
-              <h3 className="mt-4 text-2xl text-white">
+              <h3 className="mt-4 text-xl text-white sm:text-2xl">
                 {content.why.promiseText}
               </h3>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -1259,11 +1259,11 @@ export default function LandingPage() {
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-white/60">
+              <p className="text-sm text-white/60 md:text-base">
                 {content.coverage.responseNote}
               </p>
             </motion.div>
-            <motion.div className="card flex items-center justify-center p-8" {...reveal(0.1)}>
+            <motion.div className="card flex items-center justify-center p-6 sm:p-8" {...reveal(0.1)}>
               <MapGraphic lang={lang} />
             </motion.div>
           </div>
@@ -1282,7 +1282,7 @@ export default function LandingPage() {
                 </p>
                 <h2 className="section-title text-white">{content.stats.subtitle}</h2>
               </motion.div>
-              <div className="mt-10 grid gap-6 md:grid-cols-4">
+              <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {content.stats.items.map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -1323,7 +1323,7 @@ export default function LandingPage() {
                 {content.process.title}
               </p>
             </motion.div>
-            <div className="mt-8 grid gap-6 md:grid-cols-5">
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
               {content.process.steps.map((step, index) => (
                 <motion.div
                   key={step}
@@ -1333,7 +1333,7 @@ export default function LandingPage() {
                   <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-sm text-white">{step}</p>
+                  <p className="text-sm text-white md:text-base">{step}</p>
                 </motion.div>
               ))}
             </div>
@@ -1355,14 +1355,14 @@ export default function LandingPage() {
                 {content.testimonials.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {content.testimonials.items.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.quote}
                   className="card flex h-full flex-col gap-4 p-6"
                   {...reveal(0.05 * index)}
                 >
-                  <p className="text-sm text-white/70">“{testimonial.quote}”</p>
+                  <p className="text-sm text-white/70 md:text-base">"{testimonial.quote}"</p>
                   <div className="mt-auto">
                     <p className="text-sm text-white">{testimonial.name}</p>
                     <p className="text-xs text-white/50">{testimonial.role}</p>
@@ -1380,8 +1380,8 @@ export default function LandingPage() {
               <p className="text-xs uppercase tracking-[0.3em] text-white/50">
                 {content.brands.title}
               </p>
-              <p className="text-sm text-white/60">{content.brands.subtitle}</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-4">
+              <p className="text-sm text-white/60 md:text-base">{content.brands.subtitle}</p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {content.brands.items.map((brand) => (
                   <div key={brand} className="card p-5 text-center">
                     <p className="text-xs uppercase tracking-[0.3em] text-white/60">
@@ -1426,7 +1426,7 @@ export default function LandingPage() {
                       if (img.src.includes(galleryFallbackSrc)) return;
                       img.src = galleryFallbackSrc;
                     }}
-                    className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="h-48 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-56"
                   />
                   <div className="absolute inset-0 bg-black/10 opacity-0 transition group-hover:opacity-100" />
                 </motion.button>
@@ -1457,7 +1457,7 @@ export default function LandingPage() {
                   <summary className="cursor-pointer text-sm font-semibold text-white">
                     {faq.question}
                   </summary>
-                  <p className="mt-3 text-sm text-white/70">{faq.answer}</p>
+                  <p className="mt-3 text-sm text-white/70 md:text-base">{faq.answer}</p>
                 </motion.details>
               ))}
             </div>
@@ -1467,7 +1467,7 @@ export default function LandingPage() {
         <section className="section">
           <div className={containerClass}>
             <motion.div
-              className="card flex flex-col gap-6 border border-[color:rgba(223,128,99,0.3)] bg-[radial-gradient(circle_at_top,_rgba(223,128,99,0.25),_rgba(0,0,0,0.7))] p-10 md:flex-row md:items-center md:justify-between"
+              className="card flex flex-col gap-6 border border-[color:rgba(223,128,99,0.3)] bg-[radial-gradient(circle_at_top,_rgba(223,128,99,0.25),_rgba(0,0,0,0.7))] p-6 sm:p-10 md:flex-row md:items-center md:justify-between"
               {...reveal()}
             >
               <div
@@ -1475,8 +1475,8 @@ export default function LandingPage() {
                   rtl ? "text-right" : "text-left"
                 }`}
               >
-                <h2 className="text-2xl text-white">{content.cta.title}</h2>
-                <p className="text-sm text-white/70">{content.cta.description}</p>
+                <h2 className="text-xl text-white sm:text-2xl">{content.cta.title}</h2>
+                <p className="text-sm text-white/70 md:text-base">{content.cta.description}</p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <a href="#contact" className="btn-primary w-full sm:w-auto">
@@ -1504,7 +1504,7 @@ export default function LandingPage() {
               <h2 className="section-title text-white">
                 {content.contact.subtitle}
               </h2>
-              <div className="grid gap-4 text-sm text-white/70">
+              <div className="grid gap-4 text-sm text-white/70 md:text-base">
                 <div className="flex items-start gap-3">
                   <Icon name="map" className="mt-1 h-5 w-5 text-white/60" />
                   <div>
@@ -1611,10 +1611,10 @@ export default function LandingPage() {
                   <p className="text-xs uppercase tracking-[0.3em] text-white/50">
                     {content.contact.freeVisitTitle}
                   </p>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-white/70 md:text-base">
                     {content.contact.freeVisitDescription}
                   </p>
-                  <ul className="grid gap-2 text-sm text-white/60">
+                  <ul className="grid gap-2 text-sm text-white/60 md:text-base">
                     {content.contact.freeVisitItems.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
@@ -1624,13 +1624,13 @@ export default function LandingPage() {
                   </ul>
                 </div>
               </div>
-              <div className="card p-8">
+              <div className="card p-6 sm:p-8">
                 <div
                   className={`flex flex-col gap-4 ${
                     rtl ? "text-right" : "text-left"
                   }`}
                 >
-                  <h3 className="text-2xl text-white">
+                  <h3 className="text-xl text-white sm:text-2xl">
                     {content.contact.formTitle}
                   </h3>
                   <form
