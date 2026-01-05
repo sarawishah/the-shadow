@@ -404,7 +404,6 @@ function MapGraphic({ lang }: { lang: Language }) {
 
 export default function LandingPage() {
   const [lang, setLang] = useState<Language>("en");
-  const [menuOpen, setMenuOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
@@ -432,12 +431,12 @@ export default function LandingPage() {
   }, [lang, rtl]);
 
   useEffect(() => {
-    const shouldLock = menuOpen || lightboxIndex !== null;
+    const shouldLock = lightboxIndex !== null;
     document.body.style.overflow = shouldLock ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen, lightboxIndex]);
+  }, [lightboxIndex]);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -528,7 +527,6 @@ export default function LandingPage() {
 
   const brandName = lang === "ar" ? "الظل للأمن والحماية" : "THE SHADOW";
   const logoAlt = lang === "ar" ? "شعار الظل" : "THE SHADOW logo";
-  const menuLabel = lang === "ar" ? "القائمة" : "Menu";
   const closeLabel = lang === "ar" ? "إغلاق" : "Close";
 
   const serviceDetails = {
@@ -654,7 +652,9 @@ export default function LandingPage() {
   return (
     <div className="relative">
       <header className="glass-header sticky top-0 z-50">
-        <div className={`${containerClass} flex items-center justify-between py-3`}>
+        <div
+          className={`${containerClass} flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between`}
+        >
           <div
             className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}
           >
@@ -678,10 +678,14 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
+          <div
+            className={`flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end ${
+              rtl ? "sm:flex-row-reverse" : ""
+            }`}
+          >
             <a
               href="#contact"
-              className="btn-primary !px-5 !py-2 !text-xs"
+              className="btn-primary w-full !px-5 !py-2 !text-xs sm:w-auto"
             >
               {content.hero.primaryCta}
             </a>
@@ -692,67 +696,8 @@ export default function LandingPage() {
             >
               <Icon name="whatsapp" className="h-4 w-4" />
             </a>
-            <button
-              type="button"
-              className="btn-outline !px-4 !py-2 !text-xs"
-              aria-label={menuOpen ? closeLabel : menuLabel}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((prev) => !prev)}
-            >
-              {menuOpen ? closeLabel : menuLabel}
-            </button>
           </div>
         </div>
-
-        {menuOpen && (
-          <div className="fixed inset-0 z-[60]">
-            <button
-              type="button"
-              className="absolute inset-0 bg-black/70"
-              aria-label={closeLabel}
-              onClick={() => setMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: reduceMotion ? 0 : rtl ? -320 : 320 }}
-              animate={{ x: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.35 }}
-              className={`absolute top-0 h-full w-72 border-white/10 bg-black/90 p-6 ${
-                rtl ? "left-0 border-r" : "right-0 border-l"
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                  {menuLabel}
-                </p>
-                <button
-                  type="button"
-                  className="btn-outline"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {closeLabel}
-                </button>
-              </div>
-              <nav className="mt-8 flex flex-col gap-4 text-sm uppercase tracking-[0.3em] text-white/70">
-                {content.nav.map((item) => (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={() => setMenuOpen(false)}
-                    className="transition hover:text-white"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
-              <div className="mt-8 flex flex-col gap-4">
-                <LangToggle lang={lang} onChange={setLang} />
-                <a href="#contact" className="btn-primary w-full">
-                  {content.hero.primaryCta}
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
       </header>
 
       <main className="relative z-10">
