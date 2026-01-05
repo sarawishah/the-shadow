@@ -663,16 +663,16 @@ export default function LandingPage() {
               alt={logoAlt}
               width={40}
               height={40}
-              className="h-10 w-10 rounded-full object-cover"
+              className="h-9 w-9 rounded-full object-cover sm:h-10 sm:w-10"
               priority
             />
             <div
               className={`flex flex-col ${rtl ? "items-end text-right" : "items-start text-left"}`}
             >
-              <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+              <p className="text-[0.6rem] uppercase tracking-[0.25em] text-white/60 sm:text-xs sm:tracking-[0.3em]">
                 {brandName}
               </p>
-              <p className="text-[0.65rem] text-white/40">
+              <p className="text-[0.55rem] leading-tight text-white/40 sm:text-[0.65rem]">
                 {content.footer.tagline}
               </p>
             </div>
@@ -691,7 +691,9 @@ export default function LandingPage() {
             </a>
             <a
               href={CONTACT.whatsapp}
-              className="icon-button !p-2 text-[color:var(--color-accent)]"
+              className={`icon-button !p-2 text-[color:var(--color-accent)] ${
+                rtl ? "self-end sm:self-auto" : "self-start sm:self-auto"
+              }`}
               aria-label={content.topBar.whatsappLabel}
             >
               <Icon name="whatsapp" className="h-4 w-4" />
@@ -1001,7 +1003,7 @@ export default function LandingPage() {
                     className="card p-6"
                     {...reveal(0.03 * index)}
                   >
-                    <div className={`flex items-start justify-between gap-4 ${rtl ? "flex-row-reverse" : ""}`}>
+                    <div className={`flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between ${rtl ? "sm:flex-row-reverse" : ""}`}>
                       <div className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
                         <ServiceIcon
                           name={service.icon}
@@ -1011,7 +1013,7 @@ export default function LandingPage() {
                       </div>
                       <a
                         href="#contact"
-                        className="btn-outline shrink-0"
+                        className="btn-outline w-full sm:w-auto"
                       >
                         {lang === "ar" ? "اطلب استشارة" : "Request a Consultation"}
                       </a>

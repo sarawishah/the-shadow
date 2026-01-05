@@ -116,6 +116,7 @@ body::before {
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 600;
+  min-height: 44px;
   transition: all 0.25s ease;
 }
 
@@ -159,6 +160,7 @@ body::before {
   padding: 0.7rem;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.05);
+  min-width: 44px;
 }
 
 .icon-button:hover {
@@ -211,7 +213,9 @@ html[dir="rtl"] .tracking-\[0\.2em\] {
 }
 
 .section-title {
-  font-size: clamp(2rem, 2.5vw, 3rem);
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .input-field {
