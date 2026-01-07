@@ -134,18 +134,19 @@ export default function SimpleLandingPage() {
         <div className={`${containerClass} flex items-center justify-between gap-4 py-3`}>
           {/* Logo */}
           <a href="#home" className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
-            <div className="relative h-12 w-12 overflow-hidden rounded-lg transition-all hover:scale-105">
+            <div className="relative h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-xl bg-gradient-to-br from-black/40 to-black/20 p-1.5 shadow-lg ring-2 ring-[color:var(--color-accent)]/30 transition-all hover:scale-105 hover:ring-[color:var(--color-accent)]/60">
               <img 
                 src="/TheShadow.jpeg" 
                 alt={brandName}
-                className="h-full w-full object-contain"
+                className="h-full w-full object-cover object-center scale-150"
+                style={{ objectPosition: '50% 35%' }}
               />
             </div>
             <div className="hidden flex-col gap-0.5 sm:flex">
-              <p className="text-sm font-bold uppercase tracking-wider text-[color:var(--color-accent)]">
+              <p className="text-base font-bold uppercase tracking-wider text-[color:var(--color-accent)] sm:text-lg">
                 {brandName}
               </p>
-              <p className="text-[0.6rem] text-white/50">
+              <p className="text-xs text-white/60">
                 {content.footer.tagline}
               </p>
             </div>
