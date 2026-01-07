@@ -1,4 +1,6 @@
-import LandingPage from "@/components/LandingPage";
+"use client";
+
+import SimpleLandingPage from "@/components/SimpleLandingPage";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -38,7 +40,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LandingPage />
+      <SimpleLandingPage />
     </>
   );
 }

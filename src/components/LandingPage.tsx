@@ -449,11 +449,12 @@ export default function LandingPage() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [lightboxIndex]);
 
+  // Simplified animations for mobile performance
   const reveal = (delay = 0) => ({
-    initial: { opacity: 0, y: reduceMotion ? 0 : 24 },
+    initial: { opacity: 0, y: reduceMotion ? 0 : 16 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: reduceMotion ? 0 : 0.6, delay },
+    viewport: { once: true, amount: 0.15 },
+    transition: { duration: reduceMotion ? 0 : 0.4, delay: Math.min(delay, 0.15) },
   });
 
   const galleryItem =
@@ -679,21 +680,20 @@ export default function LandingPage() {
           </div>
 
           <div
-            className={`flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:justify-end ${
-              rtl ? "sm:flex-row-reverse" : ""
+            className={`flex w-full items-center gap-2 sm:w-auto sm:justify-end ${
+              rtl ? "flex-row-reverse" : ""
             }`}
           >
+            <LangToggle lang={lang} onChange={setLang} className="mr-2 sm:mr-3" />
             <a
               href="#contact"
-              className="btn-primary w-full !px-4 !py-2 !text-xs sm:w-auto sm:!px-5 sm:!text-sm"
+              className="btn-primary !px-3 !py-2 !text-xs sm:!px-4 sm:!text-sm"
             >
               {content.hero.primaryCta}
             </a>
             <a
               href={CONTACT.whatsapp}
-              className={`icon-button !p-2 sm:!p-2.5 text-[color:var(--color-accent)] ${
-                rtl ? "self-end sm:self-auto" : "self-start sm:self-auto"
-              }`}
+              className="icon-button !p-2 text-[color:var(--color-accent)]"
               aria-label={content.topBar.whatsappLabel}
             >
               <Icon name="whatsapp" className="h-4 w-4" />
@@ -705,14 +705,14 @@ export default function LandingPage() {
       <main className="relative z-10">
         <section
           id="home"
-          className="relative overflow-hidden pb-20 pt-28 lg:pb-28 lg:pt-36"
+          className="relative overflow-hidden pb-12 pt-20 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-28"
         >
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(223,128,99,0.18),_transparent_55%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(120deg,_rgba(255,255,255,0.04),_transparent_35%)]" />
           </div>
           <div className={`${containerClass} relative z-10`}>
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-12">
               <div
                 className={`flex flex-col gap-6 ${
                   rtl ? "text-right items-end" : "text-left items-start"
@@ -720,11 +720,10 @@ export default function LandingPage() {
               >
                 <span className="chip">{content.hero.badge}</span>
                 <motion.div
-                  className="relative h-32 w-32 sm:h-40 sm:w-40"
-                  initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.8 }}
-                  style={{ y: reduceMotion ? 0 : logoOffset }}
+                  className="relative h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.5 }}
                 >
                   <div className="absolute inset-0 rounded-full bg-black/40 blur-2xl glow-ring" />
                   <Image
