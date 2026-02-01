@@ -41,14 +41,7 @@ export const metadata: Metadata = {
   title: siteContent.en.meta.title,
   description: siteContent.en.meta.description,
   applicationName: "THE SHADOW",
-  keywords: [
-    "CCTV systems Jordan",
-    "camera installation Amman",
-    "surveillance systems Jordan",
-    "CCTV maintenance",
-    "security cameras",
-    "THE SHADOW",
-  ],
+  keywords: ["security consulting", "risk assessment", "facility security", "THE SHADOW"],
   openGraph: {
     title: siteContent.en.meta.title,
     description: siteContent.en.meta.description,
@@ -88,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <body
         className={`${headingFont.variable} ${bodyFont.variable} ${arabicHeadingFont.variable} ${arabicBodyFont.variable} antialiased`}
       >
