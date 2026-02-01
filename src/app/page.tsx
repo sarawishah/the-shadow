@@ -9,7 +9,7 @@ const jsonLd = {
   alternateName: "الظل للأمن والحماية",
   url: "https://shadowjo.com",
   description:
-    "Security consulting and risk assessment for facilities across Jordan.",
+    "CCTV system design, supply, installation, and maintenance across Jordan.",
   logo: "https://shadowjo.com/assets/logo-render-2.jpeg",
   image: "https://shadowjo.com/assets/logo-render-2.jpeg",
   telephone: "+962790000157",
