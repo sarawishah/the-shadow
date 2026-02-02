@@ -290,32 +290,28 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           id: "guarding",
           title: "Security & Protection for Facilities",
-          description:
-            "On-site guarding for residential and commercial properties with 24/7 operations options.",
+          description: "Guarding for residential complexes, homes, and commercial properties.",
           icon: "shield",
           href: "#service-guarding",
         },
         {
           id: "consultations",
           title: "Security Consultations",
-          description:
-            "Expert guidance on surveillance planning, procedures, and compliance.",
+          description: "Providing security consultations for your facilities with the highest standards.",
           icon: "command",
           href: "#service-consultations",
         },
         {
           id: "risk",
           title: "Risk Assessment Services",
-          description:
-            "Threat and vulnerability assessment with a practical mitigation plan.",
+          description: "Comprehensive assessment of threats and vulnerabilities with practical mitigation plan.",
           icon: "risk",
           href: "#service-risk",
         },
         {
           id: "alarms",
-          title: "Safety & 911-Linked Alarm Systems",
-          description:
-            "Design and installation of alarm systems connected to emergency response (911).",
+          title: "Safety & Alarm Systems Installation",
+          description: "Design and installation of alarm systems and linking them to response and emergency procedures.",
           icon: "alarm",
           href: "#service-alarms",
         },
@@ -336,12 +332,12 @@ export const siteContent: Record<Language, SiteContent> = {
       items: [
         {
           title: "Starter",
-          description: "A focused setup for small spaces and shops.",
+          description: "A practical solution for small spaces and shops.",
           features: [
-            "4 cameras (1080p / 2K options)",
+            "4 cameras (1080p / 2K)",
             "Up to 7 days recording (expandable)",
             "Remote viewing setup (mobile + desktop)",
-            "Professional installation + clean cabling",
+            "Professional installation and clean cabling",
             "User training + 1-year warranty",
           ],
           ctaLabel: "Choose Starter – 4 Cameras",
@@ -349,24 +345,24 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           title: "Business",
           badge: "Most Popular",
-          description: "Balanced coverage for offices and retail.",
+          description: "Balanced coverage for offices and shops.",
           features: [
-            "8 cameras (1080p / 2K / 4K options)",
+            "8 cameras (1080p / 2K / 4K)",
             "IP (NVR) or DVR options based on site",
             "Up to 14 days recording (expandable)",
-            "Mobile app setup + secure user permissions",
+            "App setup and secure user permissions",
             "Installation + training + 1-year warranty",
           ],
           ctaLabel: "Choose Business – 8 Cameras",
         },
         {
           title: "Pro",
-          description: "Large sites, warehouses, and multi-zone coverage.",
+          description: "For warehouses and large sites.",
           features: [
-            "16 cameras (2K / 4K options)",
+            "16 cameras (2K / 4K)",
             "Up to 30 days recording (expandable)",
-            "PTZ/specialty cameras for gates and perimeters",
-            "Central monitoring + health checks",
+            "PTZ options and specialty cameras for gates and fences",
+            "Central monitoring and periodic checks",
             "On-site training + 1-year warranty",
           ],
           ctaLabel: "Choose Pro – 16 Cameras",
@@ -595,8 +591,8 @@ export const siteContent: Record<Language, SiteContent> = {
       secondary: "WhatsApp Now",
     },
     contact: {
-      title: "Contact THE SHADOW",
-      subtitle: "CCTV design, installation, and maintenance across Jordan.",
+      title: "Contact  THE SHADOW for Security and Protection ",
+      subtitle: "",
       addressLabelEn: "Address (EN)",
       addressLabelAr: "Address (AR)",
       addressEn:
@@ -643,7 +639,7 @@ export const siteContent: Record<Language, SiteContent> = {
       ],
     },
     footer: {
-      tagline: "THE SHADOW: YOUR UNSEEN POWER",
+      tagline: " YOUR UNSEEN POWER",
       quickLinks: "Quick Links",
       followUs: "Follow",
       copyright: "(c) 2026 THE SHADOW. All rights reserved.",
