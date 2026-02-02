@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { siteContent, Language } from "@/content/siteContent";
 
 const CONTACT = {
@@ -84,7 +85,7 @@ function LangToggle({
 }
 
 export default function SimpleLandingPage() {
-  const [lang, setLang] = useState<Language>("en");
+  const [lang, setLang] = useState<Language>("ar");
   const reduceMotion = useReducedMotion();
   const content = siteContent[lang];
   const rtl = lang === "ar";
@@ -157,7 +158,6 @@ export default function SimpleLandingPage() {
             {[
               { id: "home", label: content.nav[0].label },
               { id: "services", label: content.nav[2].label },
-              { id: "highlights", label: content.nav[5].label },
               { id: "contact", label: content.nav[10].label },
             ].map((item) => (
               <a
@@ -173,12 +173,6 @@ export default function SimpleLandingPage() {
           {/* Right side actions */}
           <div className={`flex items-center gap-2 sm:gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
             <LangToggle lang={lang} onChange={setLang} />
-            <a
-              href={CONTACT.whatsapp}
-              className="btn-primary !px-3 !py-2 !text-xs sm:!px-5 sm:!py-2.5 sm:!text-sm"
-            >
-              {content.topBar.whatsappLabel}
-            </a>
           </div>
         </div>
       </header>
@@ -192,56 +186,109 @@ export default function SimpleLandingPage() {
           </div>
 
           <div className={`${containerClass} relative z-10`}>
-            <motion.div
-              className={`mx-auto max-w-4xl text-center ${rtl ? "text-right" : "text-left"} sm:text-center`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
+            <div className="flex flex-col items-center gap-8 text-center">
               <motion.div
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--color-accent)]/30 bg-[color:var(--color-accent)]/10 px-4 py-2 backdrop-blur-sm"
-                {...scaleIn(0.2)}
+                className="text-center relative"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
               >
-                <Icon name="shield" className="h-4 w-4 text-[color:var(--color-accent)]" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-[color:var(--color-accent)] sm:text-sm">
-                  {content.hero.badge}
-                </span>
-              </motion.div>
-
-              <motion.h1
-                className="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl"
-                {...fadeInUp(0.3)}
-              >
-                {content.hero.headline}
-              </motion.h1>
-
-              <motion.p
-                className="mb-10 text-base text-white/70 sm:text-lg lg:text-xl"
-                {...fadeInUp(0.4)}
-              >
-                {content.hero.subheadline}
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-                {...fadeInUp(0.5)}
-              >
-                <a
-                  href={CONTACT.whatsapp}
-                  className="btn-primary w-full sm:w-auto"
+                {/* Animated background glow */}
+                <motion.div
+                  className="absolute inset-0 -z-10"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1.2, opacity: 0.3 }}
+                  transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
                 >
-                  <Icon name="whatsapp" className="h-5 w-5" />
-                  {content.hero.secondaryCta}
-                </a>
-                <a
-                  href={`tel:${CONTACT.phone}`}
-                  className="btn-secondary w-full sm:w-auto"
-                >
-                  <Icon name="phone" className="h-5 w-5" />
-                  {content.topBar.phoneLabel}
-                </a>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#ff7a50]/20 via-transparent to-[#ff7a50]/20 blur-3xl" />
+                </motion.div>
+                
+                {/* Decorative elements */}
+                <motion.div
+                  className="absolute -top-4 -left-4 w-8 h-8 border-2 border-[#ff7a50]/30 rounded-full"
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{ scale: 1, rotate: 360 }}
+                  transition={{ duration: 3, delay: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                />
+                <motion.div
+                  className="absolute -top-2 -right-2 w-6 h-6 border-2 border-white/20 rounded-full"
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{ scale: 1, rotate: -360 }}
+                  transition={{ duration: 2.5, delay: 1, repeat: Infinity, repeatType: "reverse" }}
+                />
+                <motion.div
+                  className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 border border-[#ff7a50]/20 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 2, delay: 1.2 }}
+                />
+                
+                {/* Main text with enhanced animations */}
+                <motion.div className="relative z-10">
+                  <motion.h1
+                    className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl mb-2"
+                    style={{ 
+                      fontFamily: 'var(--font-heading), "Cinzel", serif',
+                      textShadow: '0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.1)'
+                    }}
+                    initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ 
+                      duration: 1, 
+                      delay: 0.3,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ scale: 1.05, textShadow: '0 0 40px rgba(255,255,255,0.5)' }}
+                  >
+                    {content.hero.headlinePart1}
+                  </motion.h1>
+                  
+                  <motion.h1
+                    className="text-4xl font-bold leading-tight text-[#ff7a50] sm:text-5xl lg:text-6xl"
+                    style={{ 
+                      fontFamily: 'var(--font-heading), "Cinzel", serif',
+                      textShadow: '0 0 30px rgba(255,122,80,0.5), 0 0 60px rgba(255,122,80,0.2)'
+                    }}
+                    initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ 
+                      duration: 1, 
+                      delay: 0.6,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ scale: 1.05, textShadow: '0 0 50px rgba(255,122,80,0.8)' }}
+                  >
+                    {content.hero.headlinePart2}
+                  </motion.h1>
+                </motion.div>
+                
+                {/* Floating particles */}
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-[#ff7a50] rounded-full"
+                    style={{
+                      top: `${20 + i * 15}%`,
+                      left: `${10 + i * 15}%`,
+                    }}
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ 
+                      opacity: [0, 1, 0],
+                      y: [-20, 20, -20],
+                      x: [-10, 10, -10]
+                    }}
+                    transition={{
+                      duration: 3 + i * 0.5,
+                      delay: i * 0.2,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                ))}
               </motion.div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -263,13 +310,13 @@ export default function SimpleLandingPage() {
             </motion.div>
 
             <motion.div
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
               variants={staggerContainer}
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true, amount: 0.1 }}
             >
-              {[...content.security.items, ...content.cctvServices.items].slice(0, 6).map((service, idx) => (
+              {content.security.items.map((service, idx) => (
                 <motion.div
                   key={service.title}
                   className="card group relative overflow-hidden p-6 transition-all duration-300 hover:border-[color:var(--color-accent)]/50"
@@ -291,51 +338,6 @@ export default function SimpleLandingPage() {
                       {service.description}
                     </p>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Why Choose Us */}
-        <section id="highlights" className="section relative overflow-hidden bg-[color:var(--color-surface)]">
-          <div className={`${containerClass} relative z-10`}>
-            <motion.div
-              className={`mb-16 text-center ${rtl ? "text-right" : "text-left"} sm:text-center`}
-              {...fadeInUp()}
-            >
-              <h2 className="section-title mb-4 text-white">
-                {content.highlights.title}
-              </h2>
-              <p className="mx-auto max-w-2xl text-base text-white/60 sm:text-lg">
-                {content.highlights.subtitle}
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              {content.highlights.items.map((highlight, idx) => (
-                <motion.div
-                  key={highlight.title}
-                  className="text-center"
-                  variants={scaleIn()}
-                >
-                  <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[color:var(--color-accent)] to-[color:var(--color-accent-strong)] shadow-[var(--shadow-accent)]">
-                    <Icon name={idx === 0 ? "clock" : idx === 1 ? "shield" : idx === 2 ? "users" : "chart"} className="h-8 w-8 text-white" />
-                  </div>
-                  
-                  <h3 className="mb-2 text-lg font-semibold text-white">
-                    {highlight.title}
-                  </h3>
-                  
-                  <p className="text-sm text-white/60">
-                    {highlight.description}
-                  </p>
                 </motion.div>
               ))}
             </motion.div>

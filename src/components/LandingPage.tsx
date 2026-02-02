@@ -403,7 +403,7 @@ function MapGraphic({ lang }: { lang: Language }) {
 }
 
 export default function LandingPage() {
-  const [lang, setLang] = useState<Language>("en");
+  const [lang, setLang] = useState<Language>("ar");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
@@ -680,24 +680,11 @@ export default function LandingPage() {
           </div>
 
           <div
-            className={`flex w-full items-center gap-2 sm:w-auto sm:justify-end ${
-              rtl ? "flex-row-reverse" : ""
+            className={`flex items-center gap-2 sm:gap-3 ${
+              rtl ? "flex-row-reverse ml-2 sm:ml-3" : "mr-2 sm:mr-3"
             }`}
           >
             <LangToggle lang={lang} onChange={setLang} className="mr-2 sm:mr-3" />
-            <a
-              href="#contact"
-              className="btn-primary !px-3 !py-2 !text-xs sm:!px-4 sm:!text-sm"
-            >
-              {content.hero.primaryCta}
-            </a>
-            <a
-              href={CONTACT.whatsapp}
-              className="icon-button !p-2 text-[color:var(--color-accent)]"
-              aria-label={content.topBar.whatsappLabel}
-            >
-              <Icon name="whatsapp" className="h-4 w-4" />
-            </a>
           </div>
         </div>
       </header>
@@ -712,195 +699,107 @@ export default function LandingPage() {
             <div className="absolute inset-0 bg-[linear-gradient(120deg,_rgba(255,255,255,0.04),_transparent_35%)]" />
           </div>
           <div className={`${containerClass} relative z-10`}>
-            <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-12">
-              <div
-                className={`flex flex-col gap-6 ${
-                  rtl ? "text-right items-end" : "text-left items-start"
-                }`}
+            <div className="flex flex-col items-center gap-8 text-center">
+              <motion.div
+                className="text-center relative"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
               >
-                <span className="chip">{content.hero.badge}</span>
+                {/* Animated background glow */}
                 <motion.div
-                  className="relative h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.5 }}
+                  className="absolute inset-0 -z-10"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1.2, opacity: 0.3 }}
+                  transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
                 >
-                  <div className="absolute inset-0 rounded-full bg-black/40 blur-2xl glow-ring" />
-                  <Image
-                    src="/assets/logo-render-2.jpeg"
-                    alt={logoAlt}
-                    fill
-                    className="rounded-full object-cover shadow-2xl"
-                    sizes="(min-width: 1024px) 160px, 128px"
-                    priority
-                  />
-                  <div className="spotlight-sweep" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#ff7a50]/20 via-transparent to-[#ff7a50]/20 blur-3xl" />
                 </motion.div>
-                <motion.h1
-                  className="section-title text-white"
-                  {...reveal()}
-                >
-                  {content.hero.headline}
-                </motion.h1>
-                <motion.p
-                  className="max-w-xl text-base text-white/70 md:text-lg"
-                  {...reveal(0.1)}
-                >
-                  {content.hero.subheadline}
-                </motion.p>
+                
+                {/* Decorative elements */}
                 <motion.div
-                  className={`flex flex-col gap-4 sm:flex-row ${
-                    rtl ? "items-end sm:justify-end" : "items-start sm:justify-start"
-                  }`}
-                  {...reveal(0.2)}
-                >
-                  <a href="#contact" className="btn-primary w-full sm:w-auto">
-                    {content.hero.primaryCta}
-                  </a>
-                  <a href={CONTACT.whatsapp} className="btn-secondary w-full sm:w-auto">
-                    {content.hero.secondaryCta}
-                  </a>
-                  <a href="#packages" className="btn-outline w-full sm:w-auto">
-                    {content.hero.tertiaryCta}
-                  </a>
-                </motion.div>
+                  className="absolute -top-4 -left-4 w-8 h-8 border-2 border-[#ff7a50]/30 rounded-full"
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{ scale: 1, rotate: 360 }}
+                  transition={{ duration: 3, delay: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                />
                 <motion.div
-                  className={`flex flex-wrap gap-3 ${
-                    rtl ? "justify-end" : "justify-start"
-                  }`}
-                  {...reveal(0.3)}
-                >
-                  {content.hero.chips.map((chip) => (
-                    <span key={chip} className="chip">
-                      {chip}
-                    </span>
-                  ))}
-                </motion.div>
-              </div>
-
-              <motion.div className="card p-6 sm:p-8" {...reveal(0.1)}>
-                <div
-                  className={`flex flex-col gap-4 ${
-                    rtl ? "text-right" : "text-left"
-                  }`}
-                >
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-                      {content.hero.quickQuote.title}
-                    </p>
-                    <h3 className="mt-2 text-xl text-white sm:text-2xl">
-                      {content.hero.quickQuote.description}
-                    </h3>
-                  </div>
-                  <form
-                    className="grid gap-4 sm:grid-cols-2"
-                    onSubmit={handleQuickQuoteSubmit}
+                  className="absolute -top-2 -right-2 w-6 h-6 border-2 border-white/20 rounded-full"
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{ scale: 1, rotate: -360 }}
+                  transition={{ duration: 2.5, delay: 1, repeat: Infinity, repeatType: "reverse" }}
+                />
+                <motion.div
+                  className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 border border-[#ff7a50]/20 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 2, delay: 1.2 }}
+                />
+                
+                {/* Main text with enhanced animations */}
+                <motion.div className="relative z-10">
+                  <motion.h1
+                    className="section-title text-white mb-2"
+                    style={{ 
+                      fontFamily: 'var(--font-heading), "Cinzel", serif',
+                      textShadow: '0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.1)'
+                    }}
+                    initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ 
+                      duration: 1, 
+                      delay: 0.3,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ scale: 1.05, textShadow: '0 0 40px rgba(255,255,255,0.5)' }}
                   >
-                    <input type="hidden" name="lang" value={lang} />
-                    <input
-                      type="text"
-                      name="company"
-                      className="hidden"
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.nameLabel}
-                      <input
-                        name="name"
-                        required
-                        className="input-field mt-2"
-                        placeholder={content.hero.quickQuote.nameLabel}
-                      />
-                    </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.phoneLabel}
-                      <input
-                        name="phone"
-                        required
-                        className="input-field mt-2"
-                        placeholder={content.hero.quickQuote.phoneLabel}
-                      />
-                    </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.cityLabel}
-                      <input
-                        name="city"
-                        required
-                        className="input-field mt-2"
-                        placeholder={content.hero.quickQuote.cityLabel}
-                      />
-                    </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.propertyLabel}
-                      <select
-                        name="property"
-                        className="input-field mt-2"
-                        defaultValue=""
-                        required
-                      >
-                        <option value="" disabled>
-                          {content.hero.quickQuote.propertyLabel}
-                        </option>
-                        {content.hero.quickQuote.propertyOptions.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.cameraLabel}
-                      <select
-                        name="cameraCount"
-                        className="input-field mt-2"
-                        defaultValue=""
-                        required
-                      >
-                        <option value="" disabled>
-                          {content.hero.quickQuote.cameraLabel}
-                        </option>
-                        {content.hero.quickQuote.cameraOptions.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <label className="text-xs uppercase tracking-[0.2em] text-white/50">
-                      {content.hero.quickQuote.preferenceLabel}
-                      <select
-                        name="preference"
-                        className="input-field mt-2"
-                        defaultValue=""
-                        required
-                      >
-                        <option value="" disabled>
-                          {content.hero.quickQuote.preferenceLabel}
-                        </option>
-                        {content.hero.quickQuote.preferenceOptions.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    {formContext === "quick-quote" && formError && (
-                      <p className="text-xs text-[color:var(--color-accent)] sm:col-span-2">
-                        {formError}
-                      </p>
-                    )}
-                    {formContext === "quick-quote" && formSuccess && (
-                      <p className="text-xs text-white/70 sm:col-span-2">{formSuccess}</p>
-                    )}
-                    <button type="submit" className="btn-primary w-full sm:col-span-2">
-                      {content.hero.quickQuote.button}
-                    </button>
-                    <p className="text-xs text-white/50 sm:col-span-2">
-                      {content.hero.quickQuote.note}
-                    </p>
-                  </form>
-                </div>
+                    {content.hero.headlinePart1}
+                  </motion.h1>
+                  
+                  <motion.h1
+                    className="section-title text-[#ff7a50]"
+                    style={{ 
+                      fontFamily: 'var(--font-heading), "Cinzel", serif',
+                      textShadow: '0 0 30px rgba(255,122,80,0.5), 0 0 60px rgba(255,122,80,0.2)'
+                    }}
+                    initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ 
+                      duration: 1, 
+                      delay: 0.6,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ scale: 1.05, textShadow: '0 0 50px rgba(255,122,80,0.8)' }}
+                  >
+                    {content.hero.headlinePart2}
+                  </motion.h1>
+                </motion.div>
+                
+                {/* Floating particles */}
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-[#ff7a50] rounded-full"
+                    style={{
+                      top: `${20 + i * 15}%`,
+                      left: `${10 + i * 15}%`,
+                    }}
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ 
+                      opacity: [0, 1, 0],
+                      y: [-20, 20, -20],
+                      x: [-10, 10, -10]
+                    }}
+                    transition={{
+                      duration: 3 + i * 0.5,
+                      delay: i * 0.2,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                ))}
               </motion.div>
             </div>
           </div>
@@ -962,7 +861,7 @@ export default function LandingPage() {
                 {content.security.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
               {content.security.items.map((service, index) => (
                 <motion.div
                   key={service.title}
@@ -1035,48 +934,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="cctv" className="section">
-          <div className={containerClass}>
-            <motion.div
-              className={`flex flex-col gap-4 ${rtl ? "text-right items-end" : "text-left items-start"}`}
-              {...reveal()}
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {content.cctvServices.title}
-              </p>
-              <h2 className="section-title text-white">{content.cctvServices.subtitle}</h2>
-            </motion.div>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {content.cctvServices.items.map((service, index) => (
-                <motion.div
-                  key={service.id}
-                  className="card card-hover group flex h-full flex-col gap-4 p-6"
-                  {...reveal(0.05 * index)}
-                >
-                  <div className="flex items-center justify-between">
-                    <ServiceIcon
-                      name={service.icon}
-                      className="h-9 w-9 text-[color:var(--color-accent)] transition group-hover:drop-shadow-[0_0_12px_rgba(223,128,99,0.6)]"
-                    />
-                    <span className="text-xs uppercase tracking-[0.3em] text-white/40">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="text-base text-white sm:text-lg">{service.title}</h3>
-                  <p className="text-sm text-white/60 md:text-base">{service.description}</p>
-                  <a
-                    href="#packages"
-                    className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
-                  >
-                    {lang === "ar" ? "عرض الباقات" : "View Packages"}
-                    <span aria-hidden="true">-&gt;</span>
-                  </a>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+        
         <section id="packages" className="section">
           <div className={containerClass}>
             <motion.div
@@ -1131,40 +989,6 @@ export default function LandingPage() {
               })}
             </div>
             <p className="mt-6 text-xs text-white/40">{content.packages.note}</p>
-          </div>
-        </section>
-
-        <section id="highlights" className="section">
-          <div className={containerClass}>
-            <motion.div
-              className={`flex flex-col gap-4 ${
-                rtl ? "text-right items-end" : "text-left items-start"
-              }`}
-              {...reveal()}
-            >
-              <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {content.highlights.title}
-              </p>
-              <h2 className="section-title text-white">
-                {content.highlights.subtitle}
-              </h2>
-            </motion.div>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {content.highlights.items.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  className="card card-hover flex h-full flex-col gap-4 p-6"
-                  {...reveal(0.05 * index)}
-                >
-                  <HighlightIcon
-                    name={item.icon}
-                    className="h-9 w-9 text-[color:var(--color-accent)]"
-                  />
-                  <h3 className="text-base text-white sm:text-lg">{item.title}</h3>
-                  <p className="text-sm text-white/60 md:text-base">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 

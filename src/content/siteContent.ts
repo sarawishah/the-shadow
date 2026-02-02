@@ -71,6 +71,8 @@ type SiteContent = {
   hero: {
     badge: string;
     headline: string;
+    headlinePart1: string;
+    headlinePart2: string;
     subheadline: string;
     primaryCta: string;
     secondaryCta: string;
@@ -104,21 +106,11 @@ type SiteContent = {
     subtitle: string;
     items: ServiceItem[];
   };
-  cctvServices: {
-    title: string;
-    subtitle: string;
-    items: ServiceItem[];
-  };
   packages: {
     title: string;
     subtitle: string;
     note: string;
     items: PackageItem[];
-  };
-  highlights: {
-    title: string;
-    subtitle: string;
-    items: HighlightItem[];
   };
   industries: {
     title: string;
@@ -245,11 +237,12 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "Contact" },
     ],
     hero: {
-      badge: "Security & Surveillance Solutions in Jordan",
-      headline: "Security Systems and Guarding That Protect Your Facility.",
-      subheadline:
-        "CCTV systems, 911-linked alarms, risk assessment, and trained on-site protection for homes, businesses, warehouses, offices, and compounds.",
-      primaryCta: "Get a Free Site Visit",
+      badge: "",
+      headline: "THE SHADOW<br>YOUR UNSEEN POWER",
+      headlinePart1: "THE SHADOW",
+      headlinePart2: "YOUR UNSEEN POWER",
+      subheadline: "",
+      primaryCta: "",
       secondaryCta: "WhatsApp Now",
       tertiaryCta: "View Packages",
       chips: ["HD/4K Options", "Remote Viewing", "Fast Installation"],
@@ -334,61 +327,7 @@ export const siteContent: Record<Language, SiteContent> = {
           icon: "camera",
           href: "#service-cctv",
         },
-      ],
-    },
-    cctvServices: {
-      title: "CCTV Solutions",
-      subtitle: "Professional design and installation with clean cabling, reliable recording, and secure remote access.",
-      items: [
-        {
-          id: "install",
-          title: "CCTV Installation (Home/Business)",
-          description: "Indoor and outdoor camera placement planned for full coverage.",
-          icon: "install",
-        },
-        {
-          id: "ip",
-          title: "IP Cameras & NVR Systems",
-          description: "HD/2K/4K IP systems with flexible management and scalability.",
-          icon: "ip",
-        },
-        {
-          id: "dvr",
-          title: "Analog (DVR) Systems",
-          description: "Cost-effective DVR setups with dependable recording.",
-          icon: "dvr",
-        },
-        {
-          id: "ptz",
-          title: "PTZ Cameras (Zoom/Tracking)",
-          description: "Zoom and tracking for critical zones, gates, and perimeters.",
-          icon: "ptz",
-        },
-        {
-          id: "access",
-          title: "Access Control (Door/Gate)",
-          description: "Secure entry integration for doors and gates.",
-          icon: "access",
-        },
-        {
-          id: "intercom",
-          title: "Video Intercom",
-          description: "Visual door communication for buildings and villas.",
-          icon: "intercom",
-        },
-        {
-          id: "network",
-          title: "Network & Cabling",
-          description: "Structured wiring, trunking, and clean cable routes.",
-          icon: "network",
-        },
-        {
-          id: "maintenance",
-          title: "Maintenance & Upgrades",
-          description: "Health checks, firmware updates, and system upgrades.",
-          icon: "maintenance",
-        },
-      ],
+              ],
     },
     packages: {
       title: "CCTV Packages",
@@ -444,43 +383,6 @@ export const siteContent: Record<Language, SiteContent> = {
             "Training, warranty, and support plans",
           ],
           ctaLabel: "Request Custom Design",
-        },
-      ],
-    },
-    highlights: {
-      title: "What You Get",
-      subtitle:
-        "Practical features that keep your footage clear and accessible.",
-      items: [
-        {
-          title: "Mobile Remote View",
-          description: "Secure iOS and Android access with live view.",
-          icon: "mobile",
-        },
-        {
-          title: "Motion Alerts",
-          description: "Smart motion alerts with zone-based detection for key areas.",
-          icon: "motion",
-        },
-        {
-          title: "Night Vision",
-          description: "Reliable coverage in low-light conditions.",
-          icon: "night",
-        },
-        {
-          title: "Smart Playback & Export",
-          description: "Quick search, playback, and exporting clips.",
-          icon: "playback",
-        },
-        {
-          title: "Secure System Configuration",
-          description: "Hardened setup with user permissions.",
-          icon: "secure",
-        },
-        {
-          title: "Cloud/Backup Options",
-          description: "Optional backup workflows when required.",
-          icon: "cloud",
         },
       ],
     },
@@ -741,7 +643,7 @@ export const siteContent: Record<Language, SiteContent> = {
       ],
     },
     footer: {
-      tagline: "YOUR UNSEEN POWER",
+      tagline: "THE SHADOW: YOUR UNSEEN POWER",
       quickLinks: "Quick Links",
       followUs: "Follow",
       copyright: "(c) 2026 THE SHADOW. All rights reserved.",
@@ -751,7 +653,7 @@ export const siteContent: Record<Language, SiteContent> = {
     meta: {
       title: "خدمات الأمن وCCTV في الأردن | تركيب وحراسة وصيانة",
       description:
-        "خدمات أمنية في الأردن تشمل: كاميرات CCTV، حراسة المنشآت، تقدير المخاطر، الاستشارات الأمنية، وأنظمة الإنذار المرتبطة بـ 911. تركيب مرتب وتخزين موثوق ودعم سريع.",
+        "خدمات أمنية في الأردن تشمل: كاميرات CCTV، حراسة المنشآت، تقديم المخاطر، الاستشارات الأمنية، وأنظمة الإنذار المرتبطة بـ 911. تركيب مرتب وتخزين موثوق ودعم سريع.",
     },
     topBar: {
       phoneLabel: "اتصل",
@@ -773,11 +675,12 @@ export const siteContent: Record<Language, SiteContent> = {
       { id: "contact", label: "تواصل" },
     ],
     hero: {
-      badge: "حلول أمن ومراقبة في الأردن",
-      headline: "أنظمة أمن وحراسة تحمي منشأتك بفعالية.",
-      subheadline:
-        "كاميرات CCTV، أنظمة إنذار مرتبطة بـ 911، تقدير مخاطر، واستشارات أمنية وحراسة منشآت.",
-      primaryCta: "زيارة موقع مجانية",
+      badge: "",
+      headline: "THE SHADOW<br>YOUR UNSEEN POWER",
+      headlinePart1: "شركة الظل",
+      headlinePart2: " للأمن والحماية",
+      subheadline: "",
+      primaryCta: "",
       secondaryCta: "واتساب الآن",
       tertiaryCta: "عرض الباقات",
       chips: ["خيارات HD/4K", "مشاهدة عن بُعد", "تركيب سريع"],
@@ -817,27 +720,27 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           id: "guarding",
           title: "خدمات الأمن والحماية وحراسة المنشآت",
-          description: "حراسة للمجمعات والمنازل والمنشآت التجارية مع خيارات تشغيل 24/7.",
+          description: "حراسة للمجمعات والمنازل والمنشآت التجارية .",
           icon: "shield",
           href: "#service-guarding",
         },
         {
           id: "consultations",
           title: "الاستشارات الأمنية",
-          description: "إرشاد مهني لتخطيط المراقبة والإجراءات والالتزام باللوائح.",
+          description: "تقديم الاستشارات الأمنية لمنشآتكم باعلى المعايير",
           icon: "command",
           href: "#service-consultations",
         },
         {
           id: "risk",
-          title: "تقديم خدمة تقدير المخاطر",
+          title: "تقديم خدمة تقييم المخاطر",
           description: "تقييم شامل للتهديدات ونقاط الضعف مع خطة معالجة عملية.",
           icon: "risk",
           href: "#service-risk",
         },
         {
           id: "alarms",
-          title: "تركيب أجهزة الأمان والإنذار المرتبطة ب٩١١",
+          title: "تركيب أجهزة الأمان والإنذار",
           description: "تصميم وتركيب أنظمة إنذار وربطها بإجراءات الاستجابة والطوارئ.",
           icon: "alarm",
           href: "#service-alarms",
@@ -845,65 +748,11 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           id: "cctv",
           title: "كاميرات المراقبة",
-          description: "تصميم وتوريد وتركيب وتهيئة وصيانة أنظمة CCTV.",
+          description: "تركيب كاميرات المراقبة عالية الجودة.",
           icon: "camera",
           href: "#service-cctv",
         },
-      ],
-    },
-    cctvServices: {
-      title: "حلول كاميرات CCTV",
-      subtitle: "تصميم وتركيب احترافي بتمديدات نظيفة وتسجيل موثوق ومشاهدة آمنة عن بُعد.",
-      items: [
-        {
-          id: "install",
-          title: "تركيب CCTV (منزل/أعمال)",
-          description: "تركيب كاميرات داخلية وخارجية وفق خطة تغطية واضحة.",
-          icon: "install",
-        },
-        {
-          id: "ip",
-          title: "كاميرات IP وأنظمة NVR",
-          description: "حلول رقمية بدقة HD/2K/4K وإدارة مرنة للتسجيل.",
-          icon: "ip",
-        },
-        {
-          id: "dvr",
-          title: "أنظمة تناظرية (DVR)",
-          description: "أنظمة DVR اقتصادية مع تسجيل موثوق.",
-          icon: "dvr",
-        },
-        {
-          id: "ptz",
-          title: "كاميرات PTZ (تكبير وتتبع)",
-          description: "تكبير بصري وتتبع للمناطق الحساسة والبوابات.",
-          icon: "ptz",
-        },
-        {
-          id: "access",
-          title: "التحكم بالدخول (أبواب/بوابات)",
-          description: "دمج آمن للتحكم في الدخول.",
-          icon: "access",
-        },
-        {
-          id: "intercom",
-          title: "انتركم فيديو",
-          description: "اتصال مرئي آمن للمداخل والأبواب.",
-          icon: "intercom",
-        },
-        {
-          id: "network",
-          title: "شبكات وتمديدات",
-          description: "تمديدات منظمة ومسارات كابلات نظيفة.",
-          icon: "network",
-        },
-        {
-          id: "maintenance",
-          title: "صيانة وترقيات",
-          description: "فحص دوري وتحديثات وتحسينات للنظام.",
-          icon: "maintenance",
-        },
-      ],
+              ],
     },
     packages: {
       title: "باقات CCTV",
@@ -959,42 +808,6 @@ export const siteContent: Record<Language, SiteContent> = {
             "تدريب وضمان وخيارات دعم وصيانة",
           ],
           ctaLabel: "طلب تصميم مخصص",
-        },
-      ],
-    },
-    highlights: {
-      title: "ماذا تحصل عليه",
-      subtitle: "مزايا عملية تساعدك على متابعة موقعك بثقة.",
-      items: [
-        {
-          title: "مشاهدة عن بُعد",
-          description: "وصول آمن عبر iOS وAndroid.",
-          icon: "mobile",
-        },
-        {
-          title: "تنبيهات حركة",
-          description: "تنبيهات حركة ذكية مع تحديد مناطق المراقبة حسب الحاجة.",
-          icon: "motion",
-        },
-        {
-          title: "رؤية ليلية",
-          description: "تغطية واضحة في الإضاءة المنخفضة.",
-          icon: "night",
-        },
-        {
-          title: "تشغيل وتصدير ذكي",
-          description: "بحث سريع وتصدير مقاطع الفيديو.",
-          icon: "playback",
-        },
-        {
-          title: "تهيئة آمنة للنظام",
-          description: "إعداد محمي مع صلاحيات مستخدمين.",
-          icon: "secure",
-        },
-        {
-          title: "خيارات سحابة/نسخ احتياطي",
-          description: "خيارات إضافية عند الحاجة.",
-          icon: "cloud",
         },
       ],
     },
@@ -1199,8 +1012,8 @@ export const siteContent: Record<Language, SiteContent> = {
       secondary: "واتساب الآن",
     },
     contact: {
-      title: "تواصل مع الظل",
-      subtitle: "تصميم وتركيب وصيانة CCTV في الأردن.",
+      title: "تواصل  مع الظل للأمن والحماية ",
+      subtitle: "",
       addressLabelEn: "Address (EN)",
       addressLabelAr: "العنوان (AR)",
       addressEn:
@@ -1237,7 +1050,7 @@ export const siteContent: Record<Language, SiteContent> = {
       freeVisitItems: ["معاينة الموقع", "خطة تغطية", "عرض سعر مفصل"],
     },
     footer: {
-      tagline: "قوتك غير المرئية",
+      tagline: " YOUR UNSEEN POWER",
       quickLinks: "روابط سريعة",
       followUs: "تابعنا",
       copyright: "(c) 2026 الظل. جميع الحقوق محفوظة.",
