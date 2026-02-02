@@ -213,7 +213,7 @@ type SiteContent = {
 export const siteContent: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "Security & CCTV Services in Jordan | Installation, Guarding & Maintenance",
+      title: "THE SHADOW",
       description:
         "Security services across Jordan: CCTV design & installation, guarding for facilities, risk assessment, security consultations, and 911-linked alarm systems. Clean cabling, reliable recording, and rapid support.",
     },
@@ -647,7 +647,7 @@ export const siteContent: Record<Language, SiteContent> = {
   },
   ar: {
     meta: {
-      title: "خدمات الأمن وCCTV في الأردن | تركيب وحراسة وصيانة",
+      title: "THE SHADOW",
       description:
         "خدمات أمنية في الأردن تشمل: كاميرات CCTV، حراسة المنشآت، تقديم المخاطر، الاستشارات الأمنية، وأنظمة الإنذار المرتبطة بـ 911. تركيب مرتب وتخزين موثوق ودعم سريع.",
     },

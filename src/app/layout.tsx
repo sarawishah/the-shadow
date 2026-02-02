@@ -40,6 +40,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://shadowjo.com"),
   title: siteContent.en.meta.title,
   description: siteContent.en.meta.description,
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   applicationName: "THE SHADOW",
   keywords: [
     "CCTV systems Jordan",

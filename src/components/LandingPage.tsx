@@ -652,7 +652,7 @@ export default function LandingPage() {
 
   return (
     <div className="relative">
-      <header className="glass-header sticky top-0 z-50">
+      <header className="glass-header sticky top-0 z-50 shadow-2xl shadow-[color:var(--color-accent)]/20 backdrop-blur-xl">
         <div
           className={`${containerClass} flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:justify-between sm:py-3`}
         >
@@ -861,8 +861,10 @@ export default function LandingPage() {
                 {content.security.subtitle}
               </h2>
             </motion.div>
-            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-              {content.security.items.map((service, index) => (
+            <div className="mt-10 space-y-6 max-w-4xl mx-auto">
+              {/* First row - 3 cards */}
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {content.security.items.slice(0, 3).map((service, index) => (
                 <motion.div
                   key={service.title}
                   className="card card-hover group flex h-full flex-col gap-4 p-6"
@@ -888,6 +890,37 @@ export default function LandingPage() {
                   </a>
                 </motion.div>
               ))}
+              </div>
+              
+              {/* Second row - 2 centered cards */}
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-2xl mx-auto">
+                {content.security.items.slice(3, 5).map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  className="card card-hover group flex h-full flex-col gap-4 p-6"
+                  {...reveal(0.05 * (index + 3))}
+                >
+                  <div className="flex items-center justify-between">
+                    <ServiceIcon
+                      name={service.icon}
+                      className="h-9 w-9 text-[color:var(--color-accent)] transition group-hover:drop-shadow-[0_0_12px_rgba(223,128,99,0.6)]"
+                    />
+                    <span className="text-xs uppercase tracking-[0.3em] text-white/40">
+                      {String(index + 4).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="text-base text-white sm:text-lg">{service.title}</h3>
+                  <p className="text-sm text-white/60 md:text-base">{service.description}</p>
+                  <a
+                    href={service.href || "#contact"}
+                    className="mt-auto inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[color:var(--color-accent)] transition group-hover:translate-x-1"
+                  >
+                    {lang === "ar" ? "اعرف المزيد" : "Learn More"}
+                    <span aria-hidden="true">-&gt;</span>
+                  </a>
+                </motion.div>
+              ))}
+              </div>
             </div>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">

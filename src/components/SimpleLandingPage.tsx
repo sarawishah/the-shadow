@@ -131,11 +131,11 @@ export default function SimpleLandingPage() {
   return (
     <div key={lang} className="relative min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       {/* Header */}
-      <header className="glass-header fixed left-0 right-0 top-0 z-50">
+      <header className="glass-header fixed left-0 right-0 top-0 z-50 shadow-2xl shadow-[color:var(--color-accent)]/20 backdrop-blur-xl">
         <div className={`${containerClass} flex items-center justify-between gap-4 py-3`}>
           {/* Logo */}
           <a href="#home" className={`flex items-center gap-3 ${rtl ? "flex-row-reverse" : ""}`}>
-            <div className="relative h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-xl bg-gradient-to-br from-black/40 to-black/20 p-1.5 shadow-lg ring-2 ring-[color:var(--color-accent)]/30 transition-all hover:scale-105 hover:ring-[color:var(--color-accent)]/60">
+            <div className="relative h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-xl bg-gradient-to-br from-black/60 to-black/30 p-1.5 shadow-2xl ring-4 ring-[color:var(--color-accent)]/50 transition-all hover:scale-110 hover:ring-[color:var(--color-accent)]/80 hover:shadow-[0_0_30px_rgba(255,122,80,0.6)]">
               <img 
                 src="/TheShadow.jpeg" 
                 alt={brandName}
@@ -310,13 +310,15 @@ export default function SimpleLandingPage() {
             </motion.div>
 
             <motion.div
-              className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
+              className="space-y-6 max-w-4xl mx-auto"
               variants={staggerContainer}
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true, amount: 0.1 }}
             >
-              {content.security.items.map((service, idx) => (
+              {/* First row - 3 cards */}
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {content.security.items.slice(0, 3).map((service, idx) => (
                 <motion.div
                   key={service.title}
                   className="card group relative overflow-hidden p-6 transition-all duration-300 hover:border-[color:var(--color-accent)]/50"
@@ -340,6 +342,35 @@ export default function SimpleLandingPage() {
                   </div>
                 </motion.div>
               ))}
+              </div>
+              
+              {/* Second row - 2 centered cards */}
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-2xl mx-auto">
+                {content.security.items.slice(3, 5).map((service, idx) => (
+                <motion.div
+                  key={service.title}
+                  className="card group relative overflow-hidden p-6 transition-all duration-300 hover:border-[color:var(--color-accent)]/50"
+                  variants={fadeInUp()}
+                  whileHover={{ y: reduceMotion ? 0 : -8 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--color-accent)]/0 to-[color:var(--color-accent)]/0 opacity-0 transition-opacity duration-300 group-hover:from-[color:var(--color-accent)]/5 group-hover:to-transparent group-hover:opacity-100" />
+                  
+                  <div className="relative z-10">
+                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[color:var(--color-accent)]/10 text-[color:var(--color-accent)] transition-all duration-300 group-hover:scale-110 group-hover:bg-[color:var(--color-accent)]/20">
+                      <Icon name={idx === 0 ? "chart" : "clock"} className="h-6 w-6" />
+                    </div>
+                    
+                    <h3 className="mb-3 text-xl font-semibold text-white">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-sm leading-relaxed text-white/60">
+                      {service.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+              </div>
             </motion.div>
           </div>
         </section>
