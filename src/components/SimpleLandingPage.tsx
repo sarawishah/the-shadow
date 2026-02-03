@@ -183,17 +183,41 @@ export default function SimpleLandingPage() {
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,122,80,0.25),_transparent_60%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(255,122,80,0.15),_transparent_50%)]" />
+            {/* Simplified background elements for performance */}
+            <motion.div
+              className="absolute top-0 left-0 w-96 h-96 bg-[#ff7a50]/10 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            <motion.div
+              className="absolute bottom-0 right-0 w-80 h-80 bg-[#ff7a50]/8 rounded-full blur-2xl"
+              animate={{
+                scale: [1.2, 0.9, 1.2],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2
+              }}
+            />
           </div>
 
           <div className={`${containerClass} relative z-10`}>
             <div className="flex flex-col items-center gap-8 text-center">
               <motion.div
                 className="text-center relative"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
               >
-                {/* Animated background glow */}
+                {/* Simplified background glow */}
                 <motion.div
                   className="absolute inset-0 -z-10"
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -203,87 +227,149 @@ export default function SimpleLandingPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-[#ff7a50]/20 via-transparent to-[#ff7a50]/20 blur-3xl" />
                 </motion.div>
                 
-                {/* Decorative elements */}
+                {/* Simplified decorative elements */}
                 <motion.div
                   className="absolute -top-4 -left-4 w-8 h-8 border-2 border-[#ff7a50]/30 rounded-full"
-                  initial={{ scale: 0, rotate: 0 }}
-                  animate={{ scale: 1, rotate: 360 }}
-                  transition={{ duration: 3, delay: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
                 />
                 <motion.div
                   className="absolute -top-2 -right-2 w-6 h-6 border-2 border-white/20 rounded-full"
-                  initial={{ scale: 0, rotate: 0 }}
-                  animate={{ scale: 1, rotate: -360 }}
-                  transition={{ duration: 2.5, delay: 1, repeat: Infinity, repeatType: "reverse" }}
-                />
-                <motion.div
-                  className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 border border-[#ff7a50]/20 rounded-full"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 2, delay: 1.2 }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1, delay: 1 }}
                 />
                 
-                {/* Main text with enhanced animations */}
-                <motion.div className="relative z-10">
-                  <motion.h1
-                    className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl mb-2"
-                    style={{ 
-                      fontFamily: 'var(--font-heading), "Cinzel", serif',
-                      textShadow: '0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.1)'
-                    }}
-                    initial={{ opacity: 0, x: -50, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ 
-                      duration: 1, 
-                      delay: 0.3,
-                      type: "spring",
-                      stiffness: 100
-                    }}
-                    whileHover={{ scale: 1.05, textShadow: '0 0 40px rgba(255,255,255,0.5)' }}
-                  >
-                    {content.hero.headlinePart1}
-                  </motion.h1>
-                  
-                  <motion.h1
-                    className="text-4xl font-bold leading-tight text-[#ff7a50] sm:text-5xl lg:text-6xl"
-                    style={{ 
-                      fontFamily: 'var(--font-heading), "Cinzel", serif',
-                      textShadow: '0 0 30px rgba(255,122,80,0.5), 0 0 60px rgba(255,122,80,0.2)'
-                    }}
-                    initial={{ opacity: 0, x: 50, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    transition={{ 
-                      duration: 1, 
-                      delay: 0.6,
-                      type: "spring",
-                      stiffness: 100
-                    }}
-                    whileHover={{ scale: 1.05, textShadow: '0 0 50px rgba(255,122,80,0.8)' }}
-                  >
-                    {content.hero.headlinePart2}
-                  </motion.h1>
+                {/* Main hero content with logo and text */}
+                <motion.div className="relative z-10 flex flex-col items-center gap-8">
+                  {/* Logo and text container with better spacing */}
+                  <div className={`flex items-center gap-12 ${rtl ? "flex-row-reverse" : ""}`}>
+                    {/* Larger Animated Logo */}
+                    <motion.div
+                      className="relative"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ 
+                        duration: 0.8, 
+                        delay: 0.2,
+                        type: "spring",
+                        stiffness: 120
+                      }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <div className="relative h-28 w-28 sm:h-32 sm:w-32 overflow-hidden rounded-xl bg-gradient-to-br from-black/80 to-black/40 p-2 shadow-2xl ring-4 ring-[color:var(--color-accent)]/60">
+                        <img 
+                          src="/TheShadow.jpeg" 
+                          alt={brandName}
+                          className="h-full w-full object-cover object-center scale-150"
+                          style={{ objectPosition: '50% 35%' }}
+                        />
+                        {/* Simplified logo glow */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-t from-[#ff7a50]/15 to-transparent"
+                          animate={{
+                            opacity: [0.3, 0.6, 0.3]
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                                ease: "easeInOut"
+                          }}
+                        />
+                      </div>
+                    </motion.div>
+
+                    {/* Smaller animated text with better margins */}
+                    <div className={`flex flex-col ${rtl ? "text-right" : "text-left"}`}>
+                      <motion.h1
+                        className="text-3xl font-black leading-tight sm:text-4xl lg:text-5xl mb-3"
+                        style={{ 
+                          fontFamily: 'var(--font-heading), "Cinzel", serif',
+                          textShadow: '0 0 30px rgba(255,255,255,0.4), 0 0 60px rgba(255,122,80,0.3)'
+                        }}
+                        initial={{ opacity: 0, x: rtl ? 30 : -30, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        transition={{ 
+                          duration: 0.6, 
+                          delay: 0.4,
+                          type: "spring",
+                          stiffness: 100
+                        }}
+                        whileHover={{ 
+                          scale: 1.05, 
+                          textShadow: '0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,122,80,0.5)',
+                          transition: { duration: 0.3 }
+                        }}
+                      >
+                        <motion.span
+                          className="inline-block"
+                          whileHover={{
+                            y: -3,
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          {content.hero.headlinePart1}
+                        </motion.span>
+                      </motion.h1>
+                      
+                      <motion.h1
+                        className="text-3xl font-black leading-tight text-[#ff7a50] sm:text-4xl lg:text-5xl"
+                        style={{ 
+                          fontFamily: 'var(--font-heading), "Cinzel", serif',
+                          textShadow: '0 0 40px rgba(255,122,80,0.6), 0 0 80px rgba(255,122,80,0.3)'
+                        }}
+                        initial={{ opacity: 0, x: rtl ? -30 : 30, scale: 0.9 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        transition={{ 
+                          duration: 0.6, 
+                          delay: 0.6,
+                          type: "spring",
+                          stiffness: 100
+                        }}
+                        whileHover={{ 
+                          scale: 1.05, 
+                          textShadow: '0 0 50px rgba(255,122,80,0.8), 0 0 100px rgba(255,122,80,0.6)',
+                          transition: { duration: 0.3 }
+                        }}
+                      >
+                        <motion.span
+                          className="inline-block"
+                          whileHover={{
+                            y: -3,
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          {content.hero.headlinePart2}
+                        </motion.span>
+                      </motion.h1>
+                    </div>
+                  </div>
                 </motion.div>
                 
-                {/* Floating particles */}
-                {[...Array(6)].map((_, i) => (
+                {/* Simplified floating particles */}
+                {[...Array(4)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-[#ff7a50] rounded-full"
+                    className="absolute w-1.5 h-1.5 bg-[#ff7a50] rounded-full"
                     style={{
-                      top: `${20 + i * 15}%`,
-                      left: `${10 + i * 15}%`,
+                      top: `${20 + i * 20}%`,
+                      left: `${10 + i * 20}%`,
                     }}
-                    initial={{ opacity: 0, y: 0 }}
+                    initial={{ opacity: 0 }}
                     animate={{ 
-                      opacity: [0, 1, 0],
-                      y: [-20, 20, -20],
-                      x: [-10, 10, -10]
+                      opacity: [0, 0.8, 0],
+                      y: [-15, 15, -15],
                     }}
                     transition={{
                       duration: 3 + i * 0.5,
-                      delay: i * 0.2,
+                      delay: i * 0.4,
                       repeat: Infinity,
-                      repeatType: "reverse"
+                      repeatType: "reverse",
+                      ease: "easeInOut"
                     }}
                   />
                 ))}
